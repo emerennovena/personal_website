@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://emerentianovena.vercel.app/sitemap.xml
