@@ -15,7 +15,7 @@ body {
     display:flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 30px;
+    padding: 10px 30px;
     position: fixed;
     background: #F0D2DA;
     color: black;
@@ -78,3 +78,87 @@ body {
 .social-icons a:hover {
   color: #0077b5; /* LinkedIn blue */
 }
+
+.word-color{
+    color:#ff964f;
+}
+
+.skill-icons{
+    display:flex;
+    gap:38px;
+    font-size:2.5rem;
+}
+
+.skill-icon{
+    cursor:pointer;
+    transition: transform 0.2;
+    align-items: center;
+    justify-content: center;
+}
+
+.skill-icon:hover{
+    color: #0077b5;
+}
+
+.footer {
+  background-color: #F0D2DA; /* same as navbar background */
+  color: black;
+  text-align: center;
+  padding: 2.5px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  font-family: 'Coming Soon', cursive;
+  font-weight: bold;
+}
+
+.projects-slider {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 10px 0;
+  scroll-behavior: smooth;
+}
+
+.projects-slider::-webkit-scrollbar {
+  height: 8px;
+}
+
+.projects-slider::-webkit-scrollbar-thumb {
+  background-color: #ff964f;
+  border-radius: 4px;
+}
+
+.project-box {
+  min-width: 250px;
+  background-color: #F0D2DA;
+  border-radius: 12px;
+  padding: 20px;
+  text-decoration: none;
+  color: black;
+  flex-shrink: 0;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Coming Soon', cursive;
+}
+
+.project-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+}
+
+.project-box h3 {
+  margin-top: 0;
+  margin-bottom: 3px;
+}
+
+.project-box p {
+  margin: 0;
+}
+
+.projects-slider {
+  margin-top: -40px; /* moves the whole projects slider up */
+}
+
+
+

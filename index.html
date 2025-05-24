@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Emerentia Novena</title>
+    <title>Emerentia Novena - Personal Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="index.css">
@@ -17,13 +17,12 @@
         <div class="nav-links">
             <a href="#">About</a>
             <a href="#">Projects</a>
-            <a href="#">Exploration</a>
             <a href="#">Skills</a>
             <a href="#">Language</a>
         </div>
     </div>
 
-    <div class="container">
+    <div class="container flexbox">
         <img src="img.png" class="circle-image">
         <div class="social-icons">
             <a href="https://github.com/emerennovena" target="_blank"><i class="fab fa-github"></i></a>
@@ -33,10 +32,11 @@
 
     <div class="content">
         <h2>About</h2>
-            <p class="fontsize">Hi, I'm Emerentia Novena. <br />
+            <p class="fontsize">Hi, I'm <span class="word-color">Emerentia Novena </span>😊<br />
                 I've always been driven by curiosity and a love for learning, which has taken me across disciplines and continents —
-                from studying Business Marketing in Canada, to exploring Languages and Literature in Taiwan, and now diving into
-                Information Technology in Scotland. I’ve taught Indonesian for almost two years, and in that time, I discovered how
+                from studying <span class="word-color">Business Marketing </span> in Canada, to exploring <span class="word-color">
+                Languages and Literature </span> in Taiwan, and now diving into <span class="word-color"> Information Technology </span>
+                in Scotland. I’ve taught Indonesian for almost two years, and in that time, I discovered how
                 much I enjoy making ideas clear and engaging — a skill that also led me to an interest in UX/UI design.
                 While my current studies are in IT, I’m passionate about combining my background in communication, culture,
                 and technology to create user-centered digital experiences. I don’t fit neatly into one box — and that’s my strength.
@@ -44,16 +44,45 @@
                 I’m still exploring exactly where I’ll land, but I know I want to build things that help people connect,
                 learn, and feel understood.
             </p>
-        <h2>Projects</h2><br />
-        <h2>Exploration Projects</h2><br />
-        <h2>Skills</h2>
+        <h2>Projects</h2>
+
+        <h3><u>Software</u></h3><br />
+        <div class="projects-slider">
+        <a href="https://github.com/emerennovena/cinematown" target="_blank" class="project-box">
+        <h3>CinemaTown</h3>
+        <p>A movie booking web app</p>
+        </a>
+        <a href="https://github.com/emerennovena/duelyst2game" target="_blank" class="project-box">
+        <h3>Duelyst 2</h3>
+        <p>A simplified card game</p>
+        </a>
+        <!-- Add more projects as needed -->
+        </div>
+
+
+        <h3><u>Design</u></h3><br />
+        <h2>Skills</h2><br />
+        <div class="skill-icons">
+          <span class="skill-icon" title="Java"><i class="fab fa-java"></i></span>
+          <span class="skill-icon" title="Python"><i class="fab fa-python"></i></span>
+          <span class="skill-icon" title="SQL"><i class="fas fa-database"></i></span>
+        </div>
+
         <h2>Language Proficiency</h2>
             <p class="fontsize">
-                I have native fluency in English and Bahasa Indonesia (Indonesian), and can speak in conversational Chinese. I
-                speak a little bit of Korean as well.
+                I have native fluency in <span class="word-color">English </span> and <span class="word-color">Bahasa Indonesia (Indonesian)</span>,
+                and I am proficient in <span class="word-color"> Chinese</span>. I speak conversational <span class="word-color"> Korean
+                </span> as well. <br/>
+                <strong> Fun fact: </strong> During my time studying in Taiwan,
+                I took a variety of language courses — including Japanese, Thai, Vietnamese, Spanish, French, German, and Malay.
+                My skills in these languages are still at a very beginner (think pre-elementary school) level,
+                but I genuinely enjoy the process of learning languages and discovering different cultures through words :)
             </p>
     </div>
 
 </body>
+        <footer class="footer">
+          <p>© 2025 Emerentia Novena. All rights reserved.</p>
+        </footer>
 
 </html>
