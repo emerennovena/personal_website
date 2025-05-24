@@ -7,23 +7,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="index.css">
+    <style>
+      /* Add smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
 </head>
 
 <body>
     <div class="navbar">
         <div class="header">
-             <h2>Emerentia Novena</h2>
+             <h2 class="text-color">Emerentia Novena</h2>
         </div>
         <div class="nav-links">
-            <a href="#">About</a>
-            <a href="#">Projects</a>
-            <a href="#">Skills</a>
-            <a href="#">Language</a>
+            <!-- Updated hrefs for navigation -->
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#language">Language</a>
         </div>
     </div>
 
     <div class="container flexbox">
-        <img src="img.png" class="circle-image">
+        <img src="img.png" class="circle-image" alt="Emerentia Novena">
         <div class="social-icons">
             <a href="https://github.com/emerennovena" target="_blank"><i class="fab fa-github"></i></a>
             <a href="https://linkedin.com/in/emerennovena" target="_blank"><i class="fab fa-linkedin"></i></a>
@@ -31,7 +38,8 @@
     </div>
 
     <div class="content">
-        <h2>About</h2>
+        <!-- Added id attributes here -->
+        <h2 id="about">About</h2>
             <p class="fontsize">Hi, I'm <span class="word-color">Emerentia Novena </span>😊<br />
                 I've always been driven by curiosity and a love for learning, which has taken me across disciplines and continents —
                 from studying <span class="word-color">Business Marketing </span> in Canada, to exploring <span class="word-color">
@@ -44,7 +52,7 @@
                 I’m still exploring exactly where I’ll land, but I know I want to build things that help people connect,
                 learn, and feel understood.
             </p>
-        <h2>Projects</h2>
+        <h2 id="projects">Projects</h2>
 
         <h3><u>Software</u></h3><br />
         <div class="projects-slider">
@@ -63,14 +71,14 @@
 <!--        <h3><u>Design</u></h3><br />-->
 
 
-        <h2>Skills</h2><br />
+        <h2 id="skills">Skills</h2><br />
         <div class="skill-icons">
           <span class="skill-icon" title="Java"><i class="fab fa-java"></i></span>
           <span class="skill-icon" title="Python"><i class="fab fa-python"></i></span>
           <span class="skill-icon" title="SQL"><i class="fas fa-database"></i></span>
         </div>
 
-        <h2>Language Proficiency</h2>
+        <h2 id="language">Language Proficiency</h2>
             <p class="fontsize">
                 I have native fluency in <span class="word-color">English </span> and <span class="word-color">Bahasa Indonesia (Indonesian)</span>,
                 and I am proficient in <span class="word-color"> Chinese</span>. I speak conversational <span class="word-color"> Korean
