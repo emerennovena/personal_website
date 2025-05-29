@@ -2,92 +2,209 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Emerentia Novena - Personal Website</title>
-    <meta name="google-site-verification" content="iuCY-Tp3eBDKhDHFGTaLGYUt13Z0qce4T_uIkaF-jng" />
-    <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="index.css">
-    <style>
-      /* Add smooth scrolling */
-      html {
-        scroll-behavior: smooth;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emerentia Novena</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg: #fffafc;
+      --primary: #ffb6c1;
+      --accent: #a48dff;
+      --text: #333;
+      --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(135deg, #ffe4e1, #ffe4f1, #e0f7fa);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 95%;
+      max-width: 700px;
+      background: #fff;
+      border-radius: 25px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      position: relative;
+    }
+
+    .icon-nav {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 1.5rem;
+    }
+
+    .icon-nav button {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--accent);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .icon-nav button:hover {
+      color: var(--primary);
+      transform: scale(1.2);
+    }
+
+    .card-content {
+      min-height: 300px;
+    }
+
+    .section {
+      display: none;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .profile-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid var(--accent);
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 1rem;
+    }
+
+    h1,
+    h2 {
+      text-align: center;
+      color: var(--accent);
+    }
+
+    p,
+    ul {
+      text-align: center;
+      color: var(--text);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      margin: 0.5rem 0;
+    }
+
+    ul li a {
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    ul li a:hover {
+      color: var(--primary);
+    }
+
+    .socials {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .socials a {
+      color: var(--text);
+      font-size: 1.4rem;
+      margin: 0 8px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .skill {
+      background: #fff4f8;
+      border-radius: 12px;
+      padding: 0.8rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
       }
-    </style>
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <div class="navbar">
-        <div class="header">
-             <h2 class="text-color">Emerentia Novena</h2>
+  <div class="container">
+    <nav class="icon-nav">
+      <button onclick="showSection('about')" title="About"><i class="fas fa-user"></i></button>
+      <button onclick="showSection('projects')" title="Projects"><i class="fas fa-folder-open"></i></button>
+      <button onclick="showSection('skills')" title="Skills"><i class="fas fa-tools"></i></button>
+      <button onclick="showSection('languages')" title="Languages"><i class="fas fa-language"></i></button>
+    </nav>
+
+    <div class="card-content">
+      <section id="about" class="section active">
+        <img src="img.png" alt="Emerentia Novena" class="profile-img" />
+        <h1>Emerentia Novena</h1>
+        <p>Hi! I'm a student of Information Technology at the University of Glasgow.</p>
+        <div class="socials">
+          <a href="https://github.com/emerennovena" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://linkedin.com/in/emerennovena" target="_blank"><i class="fab fa-linkedin"></i></a>
         </div>
-        <div class="nav-links">
-            <!-- Updated hrefs for navigation -->
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#skills">Skills</a>
-            <a href="#language">Language</a>
+      </section>
+
+      <section id="projects" class="section">
+        <h2>✨ Projects</h2>
+        <ul>
+          <li><a href="https://github.com/emerennovena/cinematown" target="_blank">🎬 CinemaTown</a> — Movie booking app</li>
+          <li><a href="https://github.com/emerennovena/duelyst2game" target="_blank">🃏 Duelyst 2</a> — Card game</li>
+          <li><a href="https://www.figma.com/proto/..." target="_blank">🎵 MusicMind</a> — Music review prototype</li>
+        </ul>
+      </section>
+
+      <section id="skills" class="section">
+        <h2>🛠 Skills</h2>
+        <div class="skills-grid">
+          <div class="skill"><i class="fab fa-java"></i><br>Java</div>
+          <div class="skill"><i class="fab fa-python"></i><br>Python</div>
+          <div class="skill"><i class="fas fa-database"></i><br>SQL</div>
+          <div class="skill"><img src="https://www.djangoproject.com/m/img/logos/django-logo-negative.png" alt="Django" width="30"><br>Django</div>
+          <div class="skill"><i class="fab fa-figma"></i><br>Figma</div>
+          <div class="skill"><img src="https://www.postgresql.org/media/img/about/press/elephant.png" width="30"><br>PostgreSQL</div>
         </div>
+      </section>
+
+      <section id="languages" class="section">
+        <h2>🌍 Languages</h2>
+        <p>I speak <strong>English</strong> and <strong>Bahasa Indonesia</strong> fluently.<br>Also proficient in <strong>Chinese</strong> 🇨🇳 and conversational in <strong>Korean</strong> 🇰🇷.</p>
+      </section>
     </div>
+  </div>
 
-    <div class="container flexbox">
-        <img src="img.png" class="circle-image" alt="Emerentia Novena">
-        <div class="social-icons">
-            <a href="https://github.com/emerennovena" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://linkedin.com/in/emerennovena" target="_blank"><i class="fab fa-linkedin"></i></a>
-        </div>
-    </div>
-
-    <div class="content">
-        <!-- Added id attributes here -->
-        <h2 id="about">About</h2>
-            <p class="fontsize">Hi, I'm <span class="word-color">Emerentia Novena </span>😊<br />
-                I'm currently studying Information Technology at the University of Glasgow.
-            </p>
-        <h2 id="projects">Projects</h2>
-
-        <h3><u>Software</u></h3><br />
-        <div class="projects-slider">
-        <a href="https://github.com/emerennovena/cinematown" target="_blank" class="project-box">
-        <h3>CinemaTown</h3>
-        <p>A movie booking web app</p>
-        </a>
-        <a href="https://github.com/emerennovena/duelyst2game" target="_blank" class="project-box">
-        <h3>Duelyst 2</h3>
-        <p>A simplified card game</p>
-        </a>
-        <!-- Add more projects as needed -->
-        </div>
-
-        <div class="projects-section">
-        <h3><u>Design</u></h3><br />
-        <div class="projects-slider">
-        <a href="https://www.figma.com/proto/56v3Jf2eEOeDV8ENrTahmt/MusicMind-Demo?page-id=0%3A1&node-id=1-663&p=f&viewport=-160%2C-246%2C0.48&t=fJLvowTaDN9QadEZ-1&scaling=min-zoom&content-scaling=fixed
-        " target="_blank" class="project-box">
-        <h3>MusicMind</h3>
-        <p>A music review web app prototype</p>
-        </a>
-        </div>
-        </div>
-
-        <h2 id="skills">Skills</h2><br />
-        <div class="skill-icons">
-          <span class="skill-icon" title="Java"><i class="fab fa-java"></i></span>
-          <span class="skill-icon" title="Python"><i class="fab fa-python"></i></span>
-          <span class="skill-icon" title="SQL"><i class="fas fa-database"></i></span>
-        </div>
-
-        <h2 id="language">Language Proficiency</h2>
-            <p class="fontsize">
-                I have native fluency in <span class="word-color">English </span> and <span class="word-color">Bahasa Indonesia (Indonesian)</span>,
-                and I am proficient in <span class="word-color"> Chinese</span>. <br/> I speak conversational <span class="word-color"> Korean
-                </span> as well :) <br/>
-            </p>
-    </div>
-
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
 </body>
-        <footer class="footer">
-          <p>© 2025 Emerentia Novena. All rights reserved.</p>
-        </footer>
 
 </html>
