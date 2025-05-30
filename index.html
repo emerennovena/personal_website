@@ -552,7 +552,7 @@ const clickSound = document.getElementById('clickSound');
 // Play sound function with volume control and reset
 function playClickSound() {
   const soundClone = clickSound.cloneNode();
-  soundClone.volume = 0.2;
+  soundClone.volume = 0.5;
   soundClone.play();
 }
 
@@ -581,7 +581,7 @@ soundToggle.addEventListener('click', () => {
 function playClickSound() {
   if (isMuted) return; // don't play sound if muted
   const soundClone = clickSound.cloneNode();
-  soundClone.volume = 0.1;
+  soundClone.volume = 0.5;
   soundClone.play();
 }
 
