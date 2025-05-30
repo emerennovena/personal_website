@@ -111,6 +111,20 @@
       color: var(--dark-accent);
     }
 
+    body.dark-mode p,
+body.dark-mode ul li {
+  color: var(--dark-text-light); /* Slightly brighter than default */
+}
+
+body.dark-mode ul li a {
+  color: var(--dark-primary); /* Stronger highlight for links */
+}
+
+body.dark-mode h2 {
+  color: var(--dark-accent); /* Brighter section titles */
+}
+
+
     /* Container and layout styles */
     .hill-bg {
       position: absolute;
@@ -344,7 +358,7 @@
 
     .cat-icon {
       position: absolute;
-      bottom: 110px;
+      bottom: 90px;
       right: 60px;
       font-size: 2.7rem;
       color: var(--accent);
