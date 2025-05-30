@@ -5,22 +5,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Emerentia Novena</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     :root {
-      --bg: #fffafc;
-      --primary: #ffb6c1;
-      --accent: #a48dff;
-      --text: #333;
-      --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      --bg: #f9f8f6;
+      --primary: #305473;
+      --accent: #6a4e42;
+      --text: #2f2f2f;
+      --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
     }
 
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(135deg, #ffe4e1, #ffe4f1, #e0f7fa);
+      font-family: 'Merriweather', serif;
+      background: linear-gradient(135deg, #f3f1ed, #fafaf9, #fdfdfc);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -124,17 +124,25 @@
 
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 1rem;
       margin-top: 1rem;
       text-align: center;
     }
 
     .skill {
-      background: #fff4f8;
+      background: #f4f1ee;
       border-radius: 12px;
-      padding: 0.8rem;
+      padding: 1rem;
       box-shadow: var(--card-shadow);
+      font-weight: 600;
+      color: var(--accent);
+      word-wrap: break-word;
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
     }
 
     @keyframes fadeIn {
@@ -155,7 +163,7 @@
   <div class="container">
     <nav class="icon-nav">
       <button onclick="showSection('about')" title="About"><i class="fas fa-user"></i></button>
-      <button onclick="showSection('projects')" title="Projects"><i class="fas fa-folder-open"></i></button>
+      <button onclick="showSection('writing')" title="Writing"><i class="fas fa-pen-nib"></i></button>
       <button onclick="showSection('skills')" title="Skills"><i class="fas fa-tools"></i></button>
       <button onclick="showSection('languages')" title="Languages"><i class="fas fa-language"></i></button>
     </nav>
@@ -164,37 +172,39 @@
       <section id="about" class="section active">
         <img src="img.png" alt="Emerentia Novena" class="profile-img" />
         <h1>Emerentia Novena</h1>
-        <p>Hi! I'm a student of Information Technology at the University of Glasgow.</p>
+        <p>
+          Hi! I'm Emerentia, a multilingual communicator with a love for books, language, and digital storytelling.
+        </p>
         <div class="socials">
-          <a href="https://github.com/emerennovena" target="_blank"><i class="fab fa-github"></i></a>
           <a href="https://linkedin.com/in/emerennovena" target="_blank"><i class="fab fa-linkedin"></i></a>
         </div>
       </section>
 
-      <section id="projects" class="section">
-        <h2>Projects</h2>
+      <section id="writing" class="section">
+        <h2>Writing & Reflections</h2>
         <ul>
-          <li><a href="https://github.com/emerennovena/cinematown" target="_blank">🎬 CinemaTown</a> — Movie booking app</li>
-          <li><a href="https://github.com/emerennovena/duelyst2game" target="_blank">🃏 Duelyst 2</a> — Card game</li>
-          <li><a href="https://www.figma.com/proto/..." target="_blank">🎵 MusicMind</a> — Music review prototype</li>
+          <li><a href="#">📝 Learning Languages Through Literature</a></li>
+          <li><a href="#">📚 Title</a></li>
         </ul>
       </section>
 
       <section id="skills" class="section">
         <h2>Skills</h2>
         <div class="skills-grid">
-          <div class="skill"><i class="fab fa-java"></i><br>Java</div>
-          <div class="skill"><i class="fab fa-python"></i><br>Python</div>
-          <div class="skill"><i class="fas fa-database"></i><br>SQL</div>
-          <div class="skill"><img src="https://www.djangoproject.com/m/img/logos/django-logo-negative.png" alt="Django" width="30"><br>Django</div>
-          <div class="skill"><i class="fab fa-figma"></i><br>Figma</div>
-          <div class="skill"><img src="https://www.postgresql.org/media/img/about/press/elephant.png" width="30"><br>PostgreSQL</div>
+          <div class="skill">Research & Information Gathering</div>
+          <div class="skill">Organization & Time Management</div>
+          <div class="skill">Editing & Proofreading</div>
+          <div class="skill">Digital Literacy (MS Office, Google Docs)</div>
+          <div class="skill">Teamwork & Collaboration</div>
         </div>
       </section>
 
       <section id="languages" class="section">
         <h2>Languages</h2>
-        <p>I speak <strong>English</strong> and <strong>Bahasa Indonesia</strong> fluently.<br>Also proficient in <strong>Chinese</strong> 🇨🇳 and conversational in <strong>Korean</strong> 🇰🇷.</p>
+        <p>
+          I speak <strong>English</strong> and <strong>Bahasa Indonesia</strong> fluently.<br />
+          Also proficient in <strong>Chinese</strong> 🇨🇳 and conversational in <strong>Korean</strong> 🇰🇷.
+        </p>
       </section>
     </div>
   </div>
