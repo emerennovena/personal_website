@@ -35,6 +35,23 @@
       min-height: 100vh;
       padding: 2rem 1rem;
       color: var(--text-dark);
+      position: relative;
+    }
+
+    .hill-bg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .hill-bg svg {
+      display: block;
+      width: 100%;
+      height: 100%;
     }
 
     .container {
@@ -45,6 +62,7 @@
       padding: 2rem 2.5rem;
       box-shadow: var(--shadow-light);
       position: relative;
+      z-index: 1;
     }
 
     .icon-nav {
@@ -194,6 +212,14 @@
       display: block;
     }
 
+    .section:focus {
+      outline: none;
+    }
+
+    .section:focus:not(:focus-visible) {
+      outline: none;
+    }
+
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -235,20 +261,67 @@
         transform: translateY(0);
       }
     }
+
+    /* ========== CAT ICON ON THE HILL ========== */
+
+    .cat-icon {
+      position: absolute;
+      bottom: 110px; /* Adjust so cat is on the hill */
+      right: 60px; /* Right side on the hill */
+      font-size: 2.7rem;
+      color: var(--accent);
+      z-index: 2;
+      animation: walk 3s infinite linear;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    @keyframes walk {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      25% {
+        transform: translateY(-2px);
+      }
+
+      50% {
+        transform: translateY(1px);
+      }
+
+      75% {
+        transform: translateY(-1px);
+      }
+    }
   </style>
 </head>
 
 <body>
+  <!-- SVG Hill Background -->
+  <div class="hill-bg" aria-hidden="true">
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path fill="#c8dadf" fill-opacity="1"
+        d="M0,256L80,245.3C160,235,320,213,480,186.7C640,160,800,128,960,122.7C1120,117,1280,139,1360,149.3L1440,160L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z">
+      </path>
+    </svg>
+  </div>
+
+  <!-- Cat icon on hill -->
+  <div class="cat-icon" aria-hidden="true" title="Walking Cat">
+    <i class="fas fa-cat"></i>
+  </div>
+
   <div class="container" role="main">
     <nav class="icon-nav" role="navigation" aria-label="Section navigation">
-      <button onclick="showSection('about')" title="About" aria-controls="about" aria-selected="true" class="active"><i
-          class="fas fa-user"></i></button>
+      <button onclick="showSection('about')" title="About" aria-controls="about" aria-selected="true"
+        class="active"><i class="fas fa-user"></i></button>
       <button onclick="showSection('writing')" title="Writing" aria-controls="writing" aria-selected="false"><i
           class="fas fa-pen-nib"></i></button>
       <button onclick="showSection('skills')" title="Skills" aria-controls="skills" aria-selected="false"><i
           class="fas fa-tools"></i></button>
-      <button onclick="showSection('languages')" title="Languages" aria-controls="languages" aria-selected="false"><i
-          class="fas fa-language"></i></button>
+      <button onclick="showSection('languages')" title="Languages" aria-controls="languages"
+        aria-selected="false"><i class="fas fa-language"></i></button>
     </nav>
 
     <div class="card-content">
