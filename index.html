@@ -581,7 +581,7 @@ soundToggle.addEventListener('click', () => {
 function playClickSound() {
   if (isMuted) return; // don't play sound if muted
   const soundClone = clickSound.cloneNode();
-  soundClone.volume = 0.2;
+  soundClone.volume = 0.1;
   soundClone.play();
 }
 
