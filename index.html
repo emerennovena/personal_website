@@ -578,12 +578,15 @@ soundToggle.addEventListener('click', () => {
   }
 });
 
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
 function playClickSound() {
-  if (isMuted) return; // don't play sound if muted
-  const soundClone = clickSound.cloneNode();
-  soundClone.volume = 0.2;
-  soundClone.play();
+  if (isMuted) return;
+  clickSound.volume = isMobile ? 0.4 : 0.2;
+  clickSound.currentTime = 0;  // rewind to start
+  clickSound.play();
 }
+
 
 
   </script>
