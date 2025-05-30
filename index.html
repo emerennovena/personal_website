@@ -3,62 +3,186 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Emerentia Novena</title>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     :root {
-      --bg: #f9f8f6;
-      --primary: #305473;
-      --accent: #6a4e42;
-      --text: #2f2f2f;
-      --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      --bg-light: #e9f0f4;
+      --bg-accent: #f9f8f6;
+      --primary: #2b5d68;
+      --accent: #7b5e58;
+      --text-dark: #2f2f2f;
+      --text-light: #5a5a5a;
+      --shadow-light: 0 8px 24px rgba(43, 93, 104, 0.15);
+      --border-radius: 18px;
+      --transition: 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
       margin: 0;
       padding: 0;
       font-family: 'Merriweather', serif;
-      background: linear-gradient(135deg, #f3f1ed, #fafaf9, #fdfdfc);
+      background: linear-gradient(135deg, var(--bg-light), var(--bg-accent));
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      color: var(--text-dark);
     }
 
     .container {
-      width: 95%;
-      max-width: 700px;
-      background: #fff;
-      border-radius: 25px;
-      padding: 2rem;
-      box-shadow: var(--card-shadow);
+      width: 100%;
+      max-width: 830px;
+      background: white;
+      border-radius: var(--border-radius);
+      padding: 2rem 2.5rem;
+      box-shadow: var(--shadow-light);
       position: relative;
     }
 
     .icon-nav {
+      position: sticky;
+      top: 0;
+      background: white;
+      padding: 1rem 0;
       display: flex;
       justify-content: space-around;
-      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--bg-accent);
+      margin-bottom: 2rem;
+      z-index: 10;
     }
 
     .icon-nav button {
       background: none;
       border: none;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       color: var(--accent);
       cursor: pointer;
-      transition: 0.3s;
+      padding: 0.3rem 0.5rem;
+      border-radius: 12px;
+      transition: var(--transition);
+      position: relative;
     }
 
-    .icon-nav button:hover {
+    .icon-nav button:hover,
+    .icon-nav button.active {
       color: var(--primary);
-      transform: scale(1.2);
+      transform: scale(1.25);
+      font-weight: 700;
+    }
+
+    .icon-nav button.active::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50%;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 3px;
+    }
+
+    .profile-img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 4px solid var(--accent);
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .profile-img:hover {
+      transform: scale(1.05);
+    }
+
+    h1,
+    h2 {
+      text-align: center;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-top: 0;
+    }
+
+    p,
+    ul {
+      text-align: center;
+      color: var(--text-light);
+      line-height: 1.5;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      font-weight: 400;
+      font-size: 1.05rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+    }
+
+    ul li {
+      margin: 0.7rem 0;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+      cursor: pointer;
+      padding: 0.3rem 0.5rem;
+      border-radius: 10px;
+    }
+
+    ul li:hover,
+    ul li a:hover {
+      color: var(--primary);
+      background: #d6e6eb;
+    }
+
+    ul li a {
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 700;
+      transition: color 0.3s ease;
+    }
+
+    .socials {
+      text-align: center;
+      margin-top: 1.8rem;
+    }
+
+    .socials a {
+      color: var(--accent);
+      font-size: 1.7rem;
+      margin: 0 10px;
+      transition: color 0.3s ease;
+    }
+
+    .socials a:hover {
+      color: var(--primary);
     }
 
     .card-content {
-      min-height: 300px;
+      min-height: 320px;
+      position: relative;
     }
 
     .section {
@@ -70,79 +194,34 @@
       display: block;
     }
 
-    .profile-img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 4px solid var(--accent);
-      object-fit: cover;
-      display: block;
-      margin: 0 auto 1rem;
-    }
-
-    h1,
-    h2 {
-      text-align: center;
-      color: var(--accent);
-    }
-
-    p,
-    ul {
-      text-align: center;
-      color: var(--text);
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    ul li {
-      margin: 0.5rem 0;
-    }
-
-    ul li a {
-      text-decoration: none;
-      color: var(--accent);
-      font-weight: bold;
-    }
-
-    ul li a:hover {
-      color: var(--primary);
-    }
-
-    .socials {
-      text-align: center;
-      margin-top: 1rem;
-    }
-
-    .socials a {
-      color: var(--text);
-      font-size: 1.4rem;
-      margin: 0 8px;
-    }
-
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1rem;
+      gap: 1.2rem;
       margin-top: 1rem;
       text-align: center;
     }
 
     .skill {
-      background: #f4f1ee;
-      border-radius: 12px;
-      padding: 1rem;
-      box-shadow: var(--card-shadow);
+      background: #e6f1f4;
+      border-radius: 15px;
+      padding: 1rem 1.2rem;
+      box-shadow: 0 6px 16px rgba(43, 93, 104, 0.15);
       font-weight: 600;
-      color: var(--accent);
-      word-wrap: break-word;
+      color: var(--primary);
       min-height: 70px;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
+      font-size: 1.05rem;
+      line-height: 1.2;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    .skill:hover {
+      background-color: #d1e3e8;
+      cursor: default;
     }
 
     @keyframes fadeIn {
@@ -160,46 +239,47 @@
 </head>
 
 <body>
-  <div class="container">
-    <nav class="icon-nav">
-      <button onclick="showSection('about')" title="About"><i class="fas fa-user"></i></button>
-      <button onclick="showSection('writing')" title="Writing"><i class="fas fa-pen-nib"></i></button>
-      <button onclick="showSection('skills')" title="Skills"><i class="fas fa-tools"></i></button>
-      <button onclick="showSection('languages')" title="Languages"><i class="fas fa-language"></i></button>
+  <div class="container" role="main">
+    <nav class="icon-nav" role="navigation" aria-label="Section navigation">
+      <button onclick="showSection('about')" title="About" aria-controls="about" aria-selected="true" class="active"><i
+          class="fas fa-user"></i></button>
+      <button onclick="showSection('writing')" title="Writing" aria-controls="writing" aria-selected="false"><i
+          class="fas fa-pen-nib"></i></button>
+      <button onclick="showSection('skills')" title="Skills" aria-controls="skills" aria-selected="false"><i
+          class="fas fa-tools"></i></button>
+      <button onclick="showSection('languages')" title="Languages" aria-controls="languages" aria-selected="false"><i
+          class="fas fa-language"></i></button>
     </nav>
 
     <div class="card-content">
-      <section id="about" class="section active">
+      <section id="about" class="section active" tabindex="0">
         <img src="img.png" alt="Emerentia Novena" class="profile-img" />
         <h1>Emerentia Novena</h1>
         <p>
           Hi! I'm Emerentia, a multilingual communicator with a love for books, language, and digital storytelling.
         </p>
-<!--        <div class="socials">-->
-<!--          <a href="https://linkedin.com/in/emerennovena" target="_blank"><i class="fab fa-linkedin"></i></a>-->
-<!--        </div>-->
       </section>
 
-      <section id="writing" class="section">
+      <section id="writing" class="section" tabindex="0">
         <h2>Writing & Reflections</h2>
         <ul>
-          <li><a href="#">📝 Learning Languages Through Literature</a></li>
+          <li><a href="#">📝 Title</a></li>
           <li><a href="#">📚 Title</a></li>
         </ul>
       </section>
 
-      <section id="skills" class="section">
+      <section id="skills" class="section" tabindex="0">
         <h2>Skills</h2>
         <div class="skills-grid">
-          <div class="skill">Research & Information Gathering</div>
-          <div class="skill">Organization & Time Management</div>
-          <div class="skill">Editing & Proofreading</div>
-          <div class="skill">Digital Literacy (MS Office, Google Docs)</div>
-          <div class="skill">Teamwork & Collaboration</div>
+          <div class="skill"><i class="fas fa-search"></i> Research & Information Gathering</div>
+          <div class="skill"><i class="fas fa-clock"></i> Organization & Time Management</div>
+          <div class="skill"><i class="fas fa-edit"></i> Editing & Proofreading</div>
+          <div class="skill"><i class="fas fa-laptop"></i> Digital Literacy (MS Office, Google Docs)</div>
+          <div class="skill"><i class="fas fa-users"></i> Teamwork & Collaboration</div>
         </div>
       </section>
 
-      <section id="languages" class="section">
+      <section id="languages" class="section" tabindex="0">
         <h2>Languages</h2>
         <p>
           I speak <strong>English</strong> and <strong>Bahasa Indonesia</strong> fluently.<br />
@@ -211,8 +291,17 @@
 
   <script>
     function showSection(id) {
+      const buttons = document.querySelectorAll('.icon-nav button');
+      buttons.forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
+      });
+      document.querySelector(`.icon-nav button[aria-controls="${id}"]`).classList.add('active');
+      document.querySelector(`.icon-nav button[aria-controls="${id}"]`).setAttribute('aria-selected', 'true');
+
       document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
       document.getElementById(id).classList.add('active');
+      document.getElementById(id).focus();
     }
   </script>
 </body>
