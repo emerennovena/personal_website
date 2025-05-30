@@ -375,6 +375,28 @@
       color: white;
     }
 
+    #soundToggle {
+  position: fixed;
+  top: 12px;
+  left: 60px; /* space it right from the dark mode toggle */
+  background: var(--bg-accent);
+  border: none;
+  border-radius: 12px;
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--accent);
+  box-shadow: 0 4px 10px rgba(43, 93, 104, 0.15);
+  z-index: 10;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+#soundToggle:hover {
+  background: var(--primary);
+  color: white;
+}
+
+
     #journey {
   max-height: 300px; /* or any fixed height you prefer */
   overflow-y: auto;
@@ -409,6 +431,10 @@
 <body>
 <audio id="clickSound" src="Sonic_Soundfx_TOYMisc_Building_Blocks_Detach_Single_Block_Base_01.mp3" preload="auto"></audio>
   <button id="darkModeToggle" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+<button id="soundToggle" title="Toggle Sound" aria-pressed="true">
+  <i class="fas fa-volume-up"></i>
+</button>
+
 
   <div class="hill-bg" aria-hidden="true">
     <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
@@ -537,6 +563,28 @@ document.querySelectorAll('.icon-nav button').forEach(button => {
     playClickSound();
   });
 });
+
+let isMuted = false;  // keep track of mute state
+
+soundToggle.addEventListener('click', () => {
+  isMuted = !isMuted;  // toggle mute state
+
+  if (isMuted) {
+    soundToggle.querySelector('i').classList.replace('fa-volume-up', 'fa-volume-mute');
+    soundToggle.setAttribute('aria-pressed', 'false');
+  } else {
+    soundToggle.querySelector('i').classList.replace('fa-volume-mute', 'fa-volume-up');
+    soundToggle.setAttribute('aria-pressed', 'true');
+  }
+});
+
+function playClickSound() {
+  if (isMuted) return; // don't play sound if muted
+  const soundClone = clickSound.cloneNode();
+  soundClone.volume = 0.2;
+  soundClone.play();
+}
+
 
   </script>
 </body>
