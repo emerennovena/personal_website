@@ -18,6 +18,15 @@
       --shadow-light: 0 8px 24px rgba(43, 93, 104, 0.15);
       --border-radius: 18px;
       --transition: 0.3s ease;
+
+      /* Dark mode variables */
+      --dark-bg-light: #121212;
+      --dark-bg-accent: #1f1f1f;
+      --dark-primary: #88c0d0;
+      --dark-accent: #a3be8c;
+      --dark-text-dark: #e0e0e0;
+      --dark-text-light: #b0b0b0;
+      --dark-shadow-light: 0 8px 24px rgba(136, 192, 208, 0.3);
     }
 
     * {
@@ -36,8 +45,73 @@
       padding: 2rem 1rem;
       color: var(--text-dark);
       position: relative;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
+    body.dark-mode {
+      background: linear-gradient(135deg, var(--dark-bg-light), var(--dark-bg-accent));
+      color: var(--dark-text-dark);
+    }
+
+    /* Dark mode overrides */
+    body.dark-mode .container {
+      background: #222;
+      box-shadow: var(--dark-shadow-light);
+      color: var(--dark-text-dark);
+    }
+
+    body.dark-mode .icon-nav {
+      background: #222;
+      border-bottom-color: #333;
+    }
+
+    body.dark-mode .icon-nav button {
+      color: var(--dark-accent);
+    }
+
+    body.dark-mode .icon-nav button:hover,
+    body.dark-mode .icon-nav button.active {
+      color: var(--dark-primary);
+    }
+
+    body.dark-mode .profile-img {
+      border-color: var(--dark-accent);
+      box-shadow: 0 4px 12px rgba(255 255 255 / 0.15);
+    }
+
+    body.dark-mode ul li:hover,
+    body.dark-mode ul li a:hover {
+      color: var(--dark-primary);
+      background: #333;
+    }
+
+    body.dark-mode ul li a {
+      color: var(--dark-accent);
+    }
+
+    body.dark-mode .socials a {
+      color: var(--dark-accent);
+    }
+
+    body.dark-mode .socials a:hover {
+      color: var(--dark-primary);
+    }
+
+    body.dark-mode .skill {
+      background: #2a2a2a;
+      color: var(--dark-primary);
+      box-shadow: 0 6px 16px rgba(136, 192, 208, 0.15);
+    }
+
+    body.dark-mode .skill:hover {
+      background-color: #3a3a3a;
+    }
+
+    body.dark-mode .cat-icon {
+      color: var(--dark-accent);
+    }
+
+    /* Container and layout styles */
     .hill-bg {
       position: absolute;
       bottom: 0;
@@ -63,6 +137,7 @@
       box-shadow: var(--shadow-light);
       position: relative;
       z-index: 1;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     .icon-nav {
@@ -75,6 +150,7 @@
       border-bottom: 2px solid var(--bg-accent);
       margin-bottom: 2rem;
       z-index: 10;
+      transition: background 0.3s ease, border-color 0.3s ease;
     }
 
     .icon-nav button {
@@ -117,7 +193,7 @@
       display: block;
       margin: 0 auto 1.5rem;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .profile-img:hover {
@@ -130,6 +206,7 @@
       color: var(--accent);
       margin-bottom: 1rem;
       letter-spacing: 1px;
+      transition: color 0.3s ease;
     }
 
     h1 {
@@ -151,6 +228,7 @@
       margin-right: auto;
       font-weight: 400;
       font-size: 1.05rem;
+      transition: color 0.3s ease;
     }
 
     ul {
@@ -241,7 +319,7 @@
       justify-content: center;
       font-size: 1.05rem;
       line-height: 1.2;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, color 0.3s ease;
       user-select: none;
     }
 
@@ -266,14 +344,15 @@
 
     .cat-icon {
       position: absolute;
-      bottom: 110px; /* Adjust so cat is on the hill */
-      right: 60px; /* Right side on the hill */
+      bottom: 110px;
+      right: 60px;
       font-size: 2.7rem;
       color: var(--accent);
       z-index: 2;
       animation: walk 3s infinite linear;
       user-select: none;
       pointer-events: none;
+      transition: color 0.3s ease;
     }
 
     @keyframes walk {
@@ -294,10 +373,49 @@
         transform: translateY(-1px);
       }
     }
+
+    /* ========== DARK MODE TOGGLE BUTTON ========== */
+
+    #darkModeToggle {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      background: var(--bg-accent);
+      border: none;
+      border-radius: 12px;
+      padding: 0.5rem 0.7rem;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--accent);
+      box-shadow: var(--shadow-light);
+      z-index: 9999;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    #darkModeToggle:hover {
+      color: var(--primary);
+      background: #d6e6eb;
+    }
+
+    body.dark-mode #darkModeToggle {
+      background: var(--dark-bg-accent);
+      color: var(--dark-accent);
+      box-shadow: var(--dark-shadow-light);
+    }
+
+    body.dark-mode #darkModeToggle:hover {
+      color: var(--dark-primary);
+      background: #333;
+    }
   </style>
 </head>
 
 <body>
+  <!-- Dark Mode Toggle Button fixed top-left -->
+  <button id="darkModeToggle" title="Toggle Dark Mode" aria-label="Toggle Dark Mode">
+    <i class="fas fa-moon"></i>
+  </button>
+
   <!-- SVG Hill Background -->
   <div class="hill-bg" aria-hidden="true">
     <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
@@ -314,68 +432,116 @@
 
   <div class="container" role="main">
     <nav class="icon-nav" role="navigation" aria-label="Section navigation">
-      <button onclick="showSection('about')" title="About" aria-controls="about" aria-selected="true"
-        class="active"><i class="fas fa-user"></i></button>
+      <button onclick="showSection('about')" title="About" aria-controls="about" aria-selected="true" class="active"><i
+          class="fas fa-user"></i></button>
       <button onclick="showSection('writing')" title="Writing" aria-controls="writing" aria-selected="false"><i
           class="fas fa-pen-nib"></i></button>
       <button onclick="showSection('skills')" title="Skills" aria-controls="skills" aria-selected="false"><i
           class="fas fa-tools"></i></button>
-      <button onclick="showSection('languages')" title="Languages" aria-controls="languages"
-        aria-selected="false"><i class="fas fa-language"></i></button>
+      <button onclick="showSection('languages')" title="Languages" aria-controls="languages" aria-selected="false"><i
+          class="fas fa-language"></i></button>
     </nav>
 
     <div class="card-content">
       <section id="about" class="section active" tabindex="0">
-        <img src="img.png" alt="Emerentia Novena" class="profile-img" />
+        <img src="img.png" alt="Profile Picture" class="profile-img" />
         <h1>Emerentia Novena</h1>
         <p>
-          Hi! I'm Emerentia, a multilingual communicator with a love for books, language, and digital storytelling.
+          Language Teacher & Translator
         </p>
-      </section>
-
-      <section id="writing" class="section" tabindex="0">
-        <h2>Writing & Reflections</h2>
         <ul>
-          <li><a href="#">📝 Title</a></li>
-          <li><a href="#">📚 Title</a></li>
+          <li>Contact: <a href="mailto:emerennovena@gmail.com">emerennovena@gmail.com</a></li>
         </ul>
-      </section>
-
-      <section id="skills" class="section" tabindex="0">
-        <h2>Skills</h2>
-        <div class="skills-grid">
-          <div class="skill"><i class="fas fa-search"></i> Research & Information Gathering</div>
-          <div class="skill"><i class="fas fa-clock"></i> Organization & Time Management</div>
-          <div class="skill"><i class="fas fa-edit"></i> Editing & Proofreading</div>
-          <div class="skill"><i class="fas fa-laptop"></i> Digital Literacy (MS Office, Google Docs)</div>
-          <div class="skill"><i class="fas fa-users"></i> Teamwork & Collaboration</div>
+        <div class="socials" aria-label="Social media links">
+          <a href="https://linkedin.com/in/emerennovena" target="_blank" rel="noopener" aria-label="LinkedIn"><i
+              class="fab fa-linkedin"></i></a>
         </div>
       </section>
 
-      <section id="languages" class="section" tabindex="0">
-        <h2>Languages</h2>
+      <section id="writing" class="section" tabindex="0" aria-hidden="true">
+        <h2>Writing</h2>
         <p>
-          I speak <strong>English</strong> and <strong>Bahasa Indonesia</strong> fluently.<br />
-          Also proficient in <strong>Chinese</strong> 🇨🇳 and conversational in <strong>Korean</strong> 🇰🇷.
+          I enjoy sharing knowledge on cultural insights.
         </p>
+        <ul>
+          <li><a href="#" target="_blank" rel="noopener">Glasgow in Winter</a></li>
+          <li><a href="#" target="_blank" rel="noopener">Taiwan in a Foreigner's Eyes</a></li>
+        </ul>
+      </section>
+
+      <section id="skills" class="section" tabindex="0" aria-hidden="true">
+        <h2>Skills</h2>
+        <div class="skills-grid" aria-label="Skills list">
+          <div class="skill">Language Teaching</div>
+          <div class="skill">English Chinese Translation</div>
+          <div class="skill">Cross-cultural Communication</div>
+          <div class="skill">Linguistic</div>
+          <div class="skill">Literature</div>
+        </div>
+      </section>
+
+      <section id="languages" class="section" tabindex="0" aria-hidden="true">
+        <h2>Languages</h2>
+        <ul>
+          <li>English - Native</li>
+          <li>Indonesian - Native</li>
+          <li>Chinese - Advanced</li>
+          <li>Korean - Intermediate</li>
+        </ul>
       </section>
     </div>
   </div>
 
   <script>
+    // Section navigation
     function showSection(id) {
+      const sections = document.querySelectorAll('.section');
       const buttons = document.querySelectorAll('.icon-nav button');
-      buttons.forEach(btn => {
-        btn.classList.remove('active');
-        btn.setAttribute('aria-selected', 'false');
-      });
-      document.querySelector(`.icon-nav button[aria-controls="${id}"]`).classList.add('active');
-      document.querySelector(`.icon-nav button[aria-controls="${id}"]`).setAttribute('aria-selected', 'true');
 
-      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      document.getElementById(id).focus();
+      sections.forEach(section => {
+        if (section.id === id) {
+          section.classList.add('active');
+          section.removeAttribute('aria-hidden');
+          section.focus();
+        } else {
+          section.classList.remove('active');
+          section.setAttribute('aria-hidden', 'true');
+        }
+      });
+
+      buttons.forEach(button => {
+        if (button.getAttribute('aria-controls') === id) {
+          button.classList.add('active');
+          button.setAttribute('aria-selected', 'true');
+        } else {
+          button.classList.remove('active');
+          button.setAttribute('aria-selected', 'false');
+        }
+      });
     }
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+    const darkModeIcon = darkModeToggle.querySelector('i');
+
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      body.classList.add('dark-mode');
+      darkModeIcon.classList.replace('fa-moon', 'fa-sun');
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      const enabled = body.classList.contains('dark-mode');
+
+      if (enabled) {
+        darkModeIcon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('darkMode', 'enabled');
+      } else {
+        darkModeIcon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('darkMode', 'disabled');
+      }
+    });
   </script>
 </body>
 
