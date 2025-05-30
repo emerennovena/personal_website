@@ -19,7 +19,6 @@
       --border-radius: 18px;
       --transition: 0.3s ease;
 
-      /* Dark mode variables */
       --dark-bg-light: #121212;
       --dark-bg-accent: #1f1f1f;
       --dark-primary: #88c0d0;
@@ -53,7 +52,6 @@
       color: var(--dark-text-dark);
     }
 
-    /* Dark mode overrides */
     body.dark-mode .container {
       background: #222;
       box-shadow: var(--dark-shadow-light);
@@ -112,20 +110,18 @@
     }
 
     body.dark-mode p,
-body.dark-mode ul li {
-  color: var(--dark-text-light); /* Slightly brighter than default */
-}
+    body.dark-mode ul li {
+      color: var(--dark-text-light);
+    }
 
-body.dark-mode ul li a {
-  color: var(--dark-primary); /* Stronger highlight for links */
-}
+    body.dark-mode ul li a {
+      color: var(--dark-primary);
+    }
 
-body.dark-mode h2 {
-  color: var(--dark-accent); /* Brighter section titles */
-}
+    body.dark-mode h2 {
+      color: var(--dark-accent);
+    }
 
-
-    /* Container and layout styles */
     .hill-bg {
       position: absolute;
       bottom: 0;
@@ -151,7 +147,6 @@ body.dark-mode h2 {
       box-shadow: var(--shadow-light);
       position: relative;
       z-index: 1;
-      transition: background 0.3s ease, color 0.3s ease;
     }
 
     .icon-nav {
@@ -164,7 +159,6 @@ body.dark-mode h2 {
       border-bottom: 2px solid var(--bg-accent);
       margin-bottom: 2rem;
       z-index: 10;
-      transition: background 0.3s ease, border-color 0.3s ease;
     }
 
     .icon-nav button {
@@ -207,7 +201,7 @@ body.dark-mode h2 {
       display: block;
       margin: 0 auto 1.5rem;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s ease;
     }
 
     .profile-img:hover {
@@ -219,8 +213,6 @@ body.dark-mode h2 {
       text-align: center;
       color: var(--accent);
       margin-bottom: 1rem;
-      letter-spacing: 1px;
-      transition: color 0.3s ease;
     }
 
     h1 {
@@ -229,7 +221,6 @@ body.dark-mode h2 {
 
     h2 {
       font-size: 1.8rem;
-      margin-top: 0;
     }
 
     p,
@@ -238,24 +229,19 @@ body.dark-mode h2 {
       color: var(--text-light);
       line-height: 1.5;
       max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      font-weight: 400;
+      margin: 0 auto;
       font-size: 1.05rem;
-      transition: color 0.3s ease;
     }
 
     ul {
       list-style: none;
       padding: 0;
-      margin: 0 auto;
     }
 
     ul li {
       margin: 0.7rem 0;
       font-weight: 500;
       font-size: 1.1rem;
-      transition: color 0.3s ease;
       cursor: pointer;
       padding: 0.3rem 0.5rem;
       border-radius: 10px;
@@ -271,7 +257,6 @@ body.dark-mode h2 {
       text-decoration: none;
       color: var(--accent);
       font-weight: 700;
-      transition: color 0.3s ease;
     }
 
     .socials {
@@ -283,7 +268,6 @@ body.dark-mode h2 {
       color: var(--accent);
       font-size: 1.7rem;
       margin: 0 10px;
-      transition: color 0.3s ease;
     }
 
     .socials a:hover {
@@ -292,7 +276,6 @@ body.dark-mode h2 {
 
     .card-content {
       min-height: 320px;
-      position: relative;
     }
 
     .section {
@@ -302,14 +285,6 @@ body.dark-mode h2 {
 
     .section.active {
       display: block;
-    }
-
-    .section:focus {
-      outline: none;
-    }
-
-    .section:focus:not(:focus-visible) {
-      outline: none;
     }
 
     .skills-grid {
@@ -332,14 +307,10 @@ body.dark-mode h2 {
       align-items: center;
       justify-content: center;
       font-size: 1.05rem;
-      line-height: 1.2;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      user-select: none;
     }
 
     .skill:hover {
       background-color: #d1e3e8;
-      cursor: default;
     }
 
     @keyframes fadeIn {
@@ -354,8 +325,6 @@ body.dark-mode h2 {
       }
     }
 
-    /* ========== CAT ICON ON THE HILL ========== */
-
     .cat-icon {
       position: absolute;
       bottom: 90px;
@@ -364,9 +333,6 @@ body.dark-mode h2 {
       color: var(--accent);
       z-index: 2;
       animation: walk 3s infinite linear;
-      user-select: none;
-      pointer-events: none;
-      transition: color 0.3s ease;
     }
 
     @keyframes walk {
@@ -388,8 +354,6 @@ body.dark-mode h2 {
       }
     }
 
-    /* ========== DARK MODE TOGGLE BUTTON ========== */
-
     #darkModeToggle {
       position: fixed;
       top: 12px;
@@ -401,36 +365,51 @@ body.dark-mode h2 {
       cursor: pointer;
       font-size: 1.5rem;
       color: var(--accent);
-      box-shadow: var(--shadow-light);
-      z-index: 9999;
+      box-shadow: 0 4px 10px rgba(43, 93, 104, 0.15);
+      z-index: 10;
       transition: background 0.3s ease, color 0.3s ease;
     }
 
     #darkModeToggle:hover {
-      color: var(--primary);
-      background: #d6e6eb;
+      background: var(--primary);
+      color: white;
     }
 
-    body.dark-mode #darkModeToggle {
-      background: var(--dark-bg-accent);
-      color: var(--dark-accent);
-      box-shadow: var(--dark-shadow-light);
-    }
+    #journey {
+  max-height: 300px; /* or any fixed height you prefer */
+  overflow-y: auto;
+  padding-right: 1rem; /* optional: to avoid content hidden under scrollbar */
+  /* optional for better UX */
+  scrollbar-width: thin; /* Firefox */
+}
 
-    body.dark-mode #darkModeToggle:hover {
-      color: var(--dark-primary);
-      background: #333;
-    }
+/* Optional: Customize scrollbar for WebKit browsers */
+#journey::-webkit-scrollbar {
+  width: 8px;
+}
+
+#journey::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 4px;
+}
+
+    #journey,
+#journey ul,
+#journey p,
+#journey h3 {
+  text-align: left;
+  max-width: none;
+  margin-left: 0;
+}
+
+
   </style>
 </head>
 
 <body>
-  <!-- Dark Mode Toggle Button fixed top-left -->
-  <button id="darkModeToggle" title="Toggle Dark Mode" aria-label="Toggle Dark Mode">
-    <i class="fas fa-moon"></i>
-  </button>
+<audio id="clickSound" src="Sonic_Soundfx_TOYMisc_Building_Blocks_Detach_Single_Block_Base_01.mp3" preload="auto"></audio>
+  <button id="darkModeToggle" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
 
-  <!-- SVG Hill Background -->
   <div class="hill-bg" aria-hidden="true">
     <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
       <path fill="#c8dadf" fill-opacity="1"
@@ -439,53 +418,33 @@ body.dark-mode h2 {
     </svg>
   </div>
 
-  <!-- Cat icon on hill -->
-  <div class="cat-icon" aria-hidden="true" title="Walking Cat">
-    <i class="fas fa-cat"></i>
-  </div>
+  <div class="cat-icon"><i class="fas fa-cat"></i></div>
 
-  <div class="container" role="main">
-    <nav class="icon-nav" role="navigation" aria-label="Section navigation">
-      <button onclick="showSection('about')" title="About" aria-controls="about" aria-selected="true" class="active"><i
-          class="fas fa-user"></i></button>
-      <button onclick="showSection('writing')" title="Writing" aria-controls="writing" aria-selected="false"><i
-          class="fas fa-pen-nib"></i></button>
-      <button onclick="showSection('skills')" title="Skills" aria-controls="skills" aria-selected="false"><i
-          class="fas fa-tools"></i></button>
-      <button onclick="showSection('languages')" title="Languages" aria-controls="languages" aria-selected="false"><i
-          class="fas fa-language"></i></button>
+  <div class="container">
+    <nav class="icon-nav" role="tablist" aria-label="Main Navigation">
+      <button onclick="showSection('about')" class="active" aria-selected="true" role="tab" aria-controls="about"><i
+          class="fas fa-user"></i><span class="sr-only">About</span></button>
+      <button onclick="showSection('skills')" role="tab" aria-selected="false" aria-controls="skills"><i
+          class="fas fa-tools"></i><span class="sr-only">Skills</span></button>
+      <button onclick="showSection('languages')" role="tab" aria-selected="false" aria-controls="languages"><i
+          class="fas fa-language"></i><span class="sr-only">Languages</span></button>
+      <button onclick="showSection('journey')" role="tab" aria-selected="false" aria-controls="journey"><i
+          class="fas fa-route"></i><span class="sr-only">Journey</span></button>
     </nav>
 
     <div class="card-content">
-      <section id="about" class="section active" tabindex="0">
+      <section id="about" class="section active" role="tabpanel" aria-labelledby="about-tab">
         <img src="img.png" alt="Profile Picture" class="profile-img" />
         <h1>Emerentia Novena</h1>
-        <p>
-          Language Teacher & Translator
-        </p>
+        <p>Language Teacher & Translator</p>
         <ul>
           <li>Contact: <a href="mailto:emerennovena@gmail.com">emerennovena@gmail.com</a></li>
         </ul>
-        <div class="socials" aria-label="Social media links">
-          <a href="https://linkedin.com/in/emerennovena" target="_blank" rel="noopener" aria-label="LinkedIn"><i
-              class="fab fa-linkedin"></i></a>
-        </div>
       </section>
 
-      <section id="writing" class="section" tabindex="0" aria-hidden="true">
-        <h2>Writing</h2>
-        <p>
-          I enjoy sharing knowledge on cultural insights.
-        </p>
-        <ul>
-          <li><a href="#" target="_blank" rel="noopener">Glasgow in Winter</a></li>
-          <li><a href="#" target="_blank" rel="noopener">Taiwan in a Foreigner's Eyes</a></li>
-        </ul>
-      </section>
-
-      <section id="skills" class="section" tabindex="0" aria-hidden="true">
+      <section id="skills" class="section" role="tabpanel" aria-labelledby="skills-tab" tabindex="0">
         <h2>Skills</h2>
-        <div class="skills-grid" aria-label="Skills list">
+        <div class="skills-grid">
           <div class="skill">Language Teaching</div>
           <div class="skill">English Chinese Translation</div>
           <div class="skill">Cross-cultural Communication</div>
@@ -494,7 +453,7 @@ body.dark-mode h2 {
         </div>
       </section>
 
-      <section id="languages" class="section" tabindex="0" aria-hidden="true">
+      <section id="languages" class="section" role="tabpanel" aria-labelledby="languages-tab" tabindex="0">
         <h2>Languages</h2>
         <ul>
           <li>English - Native</li>
@@ -503,59 +462,82 @@ body.dark-mode h2 {
           <li>Korean - Intermediate</li>
         </ul>
       </section>
+
+<section id="journey" class="section" role="tabpanel" aria-labelledby="journey-tab" tabindex="0">
+  <h2>Timeline</h2>
+
+  <h3>Education</h3>
+  <ul>
+    <li><strong>Apr 2020:</strong> Graduated College, Humber College</li>
+    <li><strong>Jun 2024:</strong> B.A. Foreign Languages & Literature, Feng Chia University</li>
+    <li><strong>Dec 2025:</strong> M.Sc. Information Technology, University of Glasgow</li>
+  </ul>
+
+  <h3>Experience</h3>
+  <ul>
+    <li><strong>Sep 2022 - Jun 2024:</strong> Indonesian Language Teacher, Taiwan</li>
+  </ul>
+
+  <h3>Volunteer</h3>
+  <ul>
+    <li><strong>Apr 2021:</strong> Cultural Exchange Ambassador, Taichung Wen Hua Senior High School</li>
+    <li><strong>Oct 2023:</strong> Event Staff, The 19th Graduation Play, Feng Chia University</li>
+  </ul>
+</section>
+
     </div>
   </div>
 
   <script>
-    // Section navigation
     function showSection(id) {
       const sections = document.querySelectorAll('.section');
       const buttons = document.querySelectorAll('.icon-nav button');
 
       sections.forEach(section => {
-        if (section.id === id) {
-          section.classList.add('active');
-          section.removeAttribute('aria-hidden');
-          section.focus();
-        } else {
-          section.classList.remove('active');
-          section.setAttribute('aria-hidden', 'true');
-        }
+        section.classList.toggle('active', section.id === id);
+        section.setAttribute('aria-hidden', section.id !== id);
       });
 
       buttons.forEach(button => {
-        if (button.getAttribute('aria-controls') === id) {
-          button.classList.add('active');
-          button.setAttribute('aria-selected', 'true');
-        } else {
-          button.classList.remove('active');
-          button.setAttribute('aria-selected', 'false');
-        }
+        const isActive = button.getAttribute('onclick').includes(id);
+        button.classList.toggle('active', isActive);
+        button.setAttribute('aria-selected', isActive);
       });
     }
 
-    // Dark mode toggle
     const darkModeToggle = document.getElementById('darkModeToggle');
     const body = document.body;
-    const darkModeIcon = darkModeToggle.querySelector('i');
+    const icon = darkModeToggle.querySelector('i');
 
     if (localStorage.getItem('darkMode') === 'enabled') {
       body.classList.add('dark-mode');
-      darkModeIcon.classList.replace('fa-moon', 'fa-sun');
+      icon.classList.replace('fa-moon', 'fa-sun');
     }
 
     darkModeToggle.addEventListener('click', () => {
       body.classList.toggle('dark-mode');
       const enabled = body.classList.contains('dark-mode');
-
-      if (enabled) {
-        darkModeIcon.classList.replace('fa-moon', 'fa-sun');
-        localStorage.setItem('darkMode', 'enabled');
-      } else {
-        darkModeIcon.classList.replace('fa-sun', 'fa-moon');
-        localStorage.setItem('darkMode', 'disabled');
-      }
+      icon.classList.replace(enabled ? 'fa-moon' : 'fa-sun', enabled ? 'fa-sun' : 'fa-moon');
+      localStorage.setItem('darkMode', enabled ? 'enabled' : 'disabled');
     });
+    // Get the audio element
+const clickSound = document.getElementById('clickSound');
+
+// Play sound function with volume control and reset
+function playClickSound() {
+  const soundClone = clickSound.cloneNode();
+  soundClone.volume = 0.2;
+  soundClone.play();
+}
+
+
+// Add click sound to all icon-nav buttons (top menu icons)
+document.querySelectorAll('.icon-nav button').forEach(button => {
+  button.addEventListener('click', () => {
+    playClickSound();
+  });
+});
+
   </script>
 </body>
 
