@@ -143,7 +143,7 @@
       max-width: 830px;
       background: white;
       border-radius: var(--border-radius);
-      padding: 2rem 2.5rem;
+      padding: 1.5rem 2rem;
       box-shadow: var(--shadow-light);
       position: relative;
       z-index: 1;
@@ -152,7 +152,7 @@
     .icon-nav {
       position: sticky;
       top: 0;
-      background: white;
+      background: transparent;
       padding: 1rem 0;
       display: flex;
       justify-content: space-around;
@@ -261,13 +261,14 @@
 
     .socials {
       text-align: center;
-      margin-top: 1.8rem;
+      margin-top: 0.5rem;
     }
 
     .socials a {
       color: var(--accent);
       font-size: 1.7rem;
       margin: 0 10px;
+      text-decoration: none;
     }
 
     .socials a:hover {
@@ -278,10 +279,14 @@
       min-height: 320px;
     }
 
-    .section {
-      display: none;
-      animation: fadeIn 0.4s ease-in-out;
-    }
+.section {
+  display: none;
+  animation: fadeIn 0.4s ease-in-out;
+  max-height: 320px;       /* fixed height matching your timeline */
+  overflow-y: auto;        /* make it scrollable if content is bigger */
+  padding-right: 1rem;     /* avoid content hiding behind scrollbar */
+}
+
 
     .section.active {
       display: block;
@@ -424,6 +429,7 @@
   margin-left: 0;
 }
 
+
     #journey ul li i {
   margin-right: 8px;
   color: var(--primary);
@@ -456,6 +462,64 @@
   border: 3px solid var(--bg-accent);
   border-radius: 50%;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+    .skills-group {
+  background: #e6f1f4;
+  border-radius: 15px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 6px 16px rgba(43, 93, 104, 0.15);
+  margin-bottom: 1.5rem;
+}
+
+.skills-group h3 {
+  margin-bottom: 0.75rem;
+  color: var(--primary);
+}
+
+.skills-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.skills-list li {
+  background-color: #2b5d68;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: center;
+
+}
+
+
+#about,
+#skills {
+  max-height: 300px;       /* same fixed height as #journey */
+  overflow-y: auto;        /* enable vertical scrolling */
+  padding-right: 1rem;     /* avoid content hidden under scrollbar */
+  scrollbar-width: thin;   /* Firefox */
+}
+
+/* Scrollbar styling for WebKit browsers */
+#about::-webkit-scrollbar,
+#skills::-webkit-scrollbar {
+  width: 8px;
+}
+
+#about::-webkit-scrollbar-thumb,
+#skills::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 4px;
+}
+
+.language-skills li.language-teaching {
+  padding-top: 19px; /* Moves only this specific item down */
 }
 
 
@@ -493,25 +557,46 @@
     </nav>
 
     <div class="card-content">
-      <section id="about" class="section active" role="tabpanel" aria-labelledby="about-tab">
+      <section id="about" class="section active" role="tabpanel" aria-labelledby="journey-tab">
         <img src="img.png" alt="Profile Picture" class="profile-img" />
         <h1>Emerentia Novena</h1>
-        <p>Language Teacher & Translator</p>
+        <p>Language Teacher</p>
         <ul>
           <li>Contact: <a href="mailto:emerennovena@gmail.com">emerennovena@gmail.com</a></li>
+
+          <div class="socials">
+        <a href="https://github.com/emerennovena" target="blank" rel="noopener noreferrer" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://linkedin.com/in/emerennovena" target="blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </div>
+
         </ul>
       </section>
 
-      <section id="skills" class="section" role="tabpanel" aria-labelledby="skills-tab" tabindex="0">
-        <h2>Skills</h2>
-        <div class="skills-grid">
-          <div class="skill">Language Teaching</div>
-          <div class="skill">English Chinese Translation</div>
-          <div class="skill">Cross-cultural Communication</div>
-          <div class="skill">Linguistic</div>
-          <div class="skill">Literature</div>
-        </div>
-      </section>
+
+<section id="skills" class="section" role="tabpanel" aria-labelledby="journey-tab" tabindex="0">
+  <h2>Skills</h2>
+
+    <h3>Technical Skills</h3>
+    <ul class="skills-list">
+      <li>Java</li>
+      <li>Python</li>
+      <li>JavaScript</li>
+      <li>HTML/CSS</li>
+    </ul>
+
+    <h3>Language Skills</h3>
+      <ul class="skills-list language-skills">
+      <li class="language-teaching">Language Teaching</li>
+      <li>Chinese-English Translation</li>
+      <li>Cross-cultural Communication</li>
+    </ul>
+
+</section>
+
 
       <section id="languages" class="section" role="tabpanel" aria-labelledby="languages-tab" tabindex="0">
         <h2>Languages</h2>
@@ -531,18 +616,6 @@
     <li><strong>2020–2024:</strong> BA in Foreign Languages and Literature - Feng Chia University</li>
   </ul>
 
-    <h3><i class="fas fa-certificate"></i> Certifications</h3>
-  <ul class="timeline">
-    <li>
-      <strong>Udemy</strong> – Librarian: Principles of Library Management
-      <br />
-      <em>Issued: June 2025</em>
-      <br />
-      <a href="https://www.udemy.com/certificate/UC-68886e7a-705a-40f5-b436-6c25da3a92a0/?trk=public_profile_certification-title" target="_blank" rel="noopener noreferrer">
-        View Certificate
-      </a>
-    </li>
-  </ul>
 
   <h3><i class="fas fa-briefcase"></i> Experience</h3>
   <ul class="timeline">
@@ -554,7 +627,22 @@
     <li><strong>Oct 2023:</strong> Event Staff, Graduation Play — Feng Chia University</li>
     <li><strong>Apr 2021:</strong> Cultural Exchange Ambassador — Taichung Wen Hua Senior High School</li>
   </ul>
+
+   <h3><i class="fas fa-certificate"></i> Certifications</h3>
+  <ul class="timeline">
+    <li>
+      <strong>Udemy</strong> – Librarian: Principles of Library Management
+      <br />
+      <em>Issued: June 2025</em>
+      <br />
+      <a href="https://www.udemy.com/certificate/UC-68886e7a-705a-40f5-b436-6c25da3a92a0/?trk=public_profile_certification-title" target="_blank" rel="noopener noreferrer">
+        View Certificate
+      </a>
+    </li>
+  </ul>
 </section>
+
+
 
 
 
