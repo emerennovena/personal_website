@@ -522,11 +522,51 @@
   padding-top: 19px; /* Moves only this specific item down */
 }
 
+#snow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* So it doesn't block clicks */
+  z-index: 0.5; /* between background(0) and container(1) */
+  overflow: hidden;
+}
+
+.snowflake {
+  position: absolute;
+  top: -10px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 2px #eef);
+  animation-name: fall, sway;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+  }
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(15px);
+  }
+}
+
+
 
   </style>
 </head>
 
 <body>
+<div id="snow-container" aria-hidden="true"></div>
 <audio id="clickSound" src="Sonic_Soundfx_TOYMisc_Building_Blocks_Detach_Single_Block_Base_01.wav" preload="auto"></audio>
   <button id="darkModeToggle" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
 <button id="soundToggle" title="Toggle Sound" aria-pressed="true">
@@ -535,6 +575,7 @@
 
 
   <div class="hill-bg" aria-hidden="true">
+    <div id="snow" aria-hidden="true"></div>
     <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
       <path fill="#c8dadf" fill-opacity="1"
         d="M0,256L80,245.3C160,235,320,213,480,186.7C640,160,800,128,960,122.7C1120,117,1280,139,1360,149.3L1440,160L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z">
@@ -650,21 +691,24 @@
   </div>
 
   <script>
-    function showSection(id) {
-      const sections = document.querySelectorAll('.section');
-      const buttons = document.querySelectorAll('.icon-nav button');
+function showSection(id) {
+  const sections = document.querySelectorAll('.section');
+  const buttons = document.querySelectorAll('.icon-nav button');
 
-      sections.forEach(section => {
-        section.classList.toggle('active', section.id === id);
-        section.setAttribute('aria-hidden', section.id !== id);
-      });
+  sections.forEach(section => {
+    const isActive = section.id === id;
+    section.classList.toggle('active', isActive);
+    section.setAttribute('aria-hidden', !isActive);
+  });
 
-      buttons.forEach(button => {
-        const isActive = button.getAttribute('onclick').includes(id);
-        button.classList.toggle('active', isActive);
-        button.setAttribute('aria-selected', isActive);
-      });
-    }
+  buttons.forEach(button => {
+    const controls = button.getAttribute('aria-controls');
+    const isActive = controls === id;
+    button.classList.toggle('active', isActive);
+    button.setAttribute('aria-selected', isActive);
+  });
+}
+
 
     const darkModeToggle = document.getElementById('darkModeToggle');
     const body = document.body;
@@ -719,6 +763,35 @@ function playClickSound() {
   soundClone.volume = 0.5;
   soundClone.play();
 }
+
+ const snowContainer = document.getElementById('snow');
+const snowflakeCount = 60;
+
+for (let i = 0; i < snowflakeCount; i++) {
+  const snowflake = document.createElement('div');
+  snowflake.classList.add('snowflake');
+
+  // Random size between 3 and 7 px
+  const size = Math.random() * 4 + 3;
+  snowflake.style.width = `${size}px`;
+  snowflake.style.height = `${size}px`;
+
+  // Random horizontal start position (0 to viewport width)
+  snowflake.style.left = `${Math.random() * 100}vw`;
+
+  // Random animation duration between 5 and 15 seconds
+  const fallDuration = Math.random() * 10 + 5;
+  snowflake.style.animationDuration = `${fallDuration}s, ${fallDuration / 2}s`;
+
+  // Random animation delay so snowflakes start at different times
+  snowflake.style.animationDelay = `${Math.random() * 15}s, ${Math.random() * 15}s`;
+
+  snowContainer.appendChild(snowflake);
+}
+
+
+
+
 
   </script>
 </body>
