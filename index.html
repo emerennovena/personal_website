@@ -27,7 +27,22 @@
       --dark-text-dark: #e0e0e0;
       --dark-text-light: #b0b0b0;
       --dark-shadow-light: 0 8px 24px rgba(136, 192, 208, 0.3);
+
     }
+
+
+    :body.dark-mode {
+  --bg-light: #121212;
+  --bg-accent: #1f1f1f;
+  --primary: #88c0d0;
+  --accent: #a3be8c;
+  --text-dark: #e0e0e0;
+  --text-light: #b0b0b0;
+  --shadow-light: 0 8px 24px rgba(136, 192, 208, 0.3);
+}
+
+
+
 
     * {
       box-sizing: border-box;
@@ -49,10 +64,7 @@
       transition: background 0.3s ease, color 0.3s ease;
     }
 
-    body.dark-mode {
-      background: linear-gradient(135deg, var(--dark-bg-light), var(--dark-bg-accent));
-      color: var(--dark-text-dark);
-    }
+
 
     body.dark-mode .container {
       background: #222;
@@ -684,18 +696,18 @@
     <li><strong>Apr 2021:</strong> Cultural Exchange Ambassador — Taichung Wen Hua Senior High School</li>
   </ul>
 
-<!--   <h3><i class="fas fa-certificate"></i> Certifications</h3>-->
-<!--  <ul class="timeline">-->
-<!--    <li>-->
-<!--      <strong>Udemy</strong> – Librarian: Principles of Library Management-->
-<!--      <br />-->
-<!--      <em>Issued: June 2025</em>-->
-<!--      <br />-->
-<!--      <a href="https://www.udemy.com/certificate/UC-68886e7a-705a-40f5-b436-6c25da3a92a0/?trk=public_profile_certification-title" target="_blank" rel="noopener noreferrer">-->
-<!--        View Certificate-->
-<!--      </a>-->
-<!--    </li>-->
-<!--  </ul>-->
+   <h3><i class="fas fa-certificate"></i> Certifications</h3>
+  <ul class="timeline">
+    <li>
+      <strong>Udemy</strong> – Librarian: Principles of Library Management
+      <br />
+      <em>Issued: June 2025</em>
+      <br />
+      <a href="https://www.udemy.com/certificate/UC-68886e7a-705a-40f5-b436-6c25da3a92a0/?trk=public_profile_certification-title" target="_blank" rel="noopener noreferrer">
+        View Certificate
+      </a>
+    </li>
+  </ul>
 </section>
 
 
@@ -722,27 +734,59 @@ function showSection(id) {
     button.classList.toggle('active', isActive);
     button.setAttribute('aria-selected', isActive);
   });
+
+  // Save active section in localStorage
+  localStorage.setItem('activeSection', id);
 }
 
 
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    const body = document.body;
-    const icon = darkModeToggle.querySelector('i');
 
-if (localStorage.getItem('darkMode') === 'enabled') {
+window.addEventListener('DOMContentLoaded', () => {
+// Get elements
+const darkModeToggle = document.getElementById('darkModeToggle');
+const html = document.documentElement; // <html>
+const body = document.body;
+const icon = darkModeToggle.querySelector('i');
+
+// Enable dark mode (add class to html and body, update localStorage, update icon)
+function enableDarkMode() {
+  html.classList.add('dark-mode');
   body.classList.add('dark-mode');
+  localStorage.setItem('darkMode', 'enabled');
   if (icon) icon.classList.replace('fa-moon', 'fa-sun');
-} else {
+}
+
+// Disable dark mode (remove class from html and body, update localStorage, update icon)
+function disableDarkMode() {
+  html.classList.remove('dark-mode');
+  body.classList.remove('dark-mode');
+  localStorage.setItem('darkMode', 'disabled');
   if (icon) icon.classList.replace('fa-sun', 'fa-moon');
 }
 
+// On page load, apply saved dark mode state
+if (localStorage.getItem('darkMode') === 'enabled') {
+  enableDarkMode();
+} else {
+  disableDarkMode();
+}
 
-    darkModeToggle.addEventListener('click', () => {
-      body.classList.toggle('dark-mode');
-      const enabled = body.classList.contains('dark-mode');
-      icon.classList.replace(enabled ? 'fa-moon' : 'fa-sun', enabled ? 'fa-sun' : 'fa-moon');
-      localStorage.setItem('darkMode', enabled ? 'enabled' : 'disabled');
-    });
+// Dark mode toggle button click
+darkModeToggle.addEventListener('click', () => {
+  if (document.documentElement.classList.contains('dark-mode')) {
+    document.documentElement.classList.remove('dark-mode');
+    document.body.classList.remove('dark-mode');
+    localStorage.setItem('darkMode', 'disabled');
+    darkModeToggle.querySelector('i').classList.replace('fa-sun', 'fa-moon');
+  } else {
+    document.documentElement.classList.add('dark-mode');
+    document.body.classList.add('dark-mode');
+    localStorage.setItem('darkMode', 'enabled');
+    darkModeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+  }
+});
+
+});
 
 
     // Get the audio element
