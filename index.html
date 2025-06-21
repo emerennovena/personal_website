@@ -9,10 +9,25 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <script>
-    // IMPORTANT: This script runs BEFORE the CSS and body load.
-    // It applies the dark-mode class immediately if saved in localStorage.
-    if (localStorage.getItem('darkMode') === 'enabled') {
+    // Define gradient colors directly here for early access
+    const lightModeGradient = 'linear-gradient(135deg, #e9f0f4, #f9f8f6)';
+    const darkModeGradient = 'linear-gradient(135deg, #121212, #1f1f1f)';
+
+    // Immediately check localStorage and set the class on <html>
+    const isDarkModeEnabledOnLoad = localStorage.getItem('darkMode') === 'enabled';
+    if (isDarkModeEnabledOnLoad) {
       document.documentElement.classList.add('dark-mode');
+    }
+
+    // Attempt to set body background as early as possible
+    // This runs synchronously when the script is parsed
+    if (document.body) {
+      document.body.style.setProperty('background', isDarkModeEnabledOnLoad ? darkModeGradient : lightModeGradient, 'important');
+    } else {
+      // Fallback if body isn't available yet (unlikely with script in head)
+      document.addEventListener('DOMContentLoaded', () => {
+        document.body.style.setProperty('background', isDarkModeEnabledOnLoad ? darkModeGradient : lightModeGradient, 'important');
+      });
     }
   </script>
 
@@ -76,8 +91,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Merriweather', serif;
-      /* Define the background using the current variables */
-      background: linear-gradient(135deg, var(--current-bg-light), var(--current-bg-accent));
+      /* Background is now set ONLY by JavaScript on initial load */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -85,8 +99,8 @@
       padding: 2rem 1rem;
       color: var(--current-text-dark);
       position: relative;
-      /* Add transition for smooth background change */
-      transition: background 0.3s ease, color 0.3s ease;
+      /* Only keep transition for color, background is handled by JS instantly on load */
+      transition: color 0.3s ease;
       overflow-x: hidden;
       box-sizing: border-box;
     }
@@ -180,7 +194,7 @@
     }
 
     html.dark-mode .profile-img {
-       box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
     }
 
     .profile-img:hover {
@@ -774,8 +788,7 @@
 
         <h3><i class="fas fa-heart"></i> Personal Interests</h3>
         <ul class="timeline">
-          <li><strong>Books & Literature:</strong> Reading Classic/ English Literature</li>
-          <li><strong>Music:</strong> Classical/ Playing Piano</li>
+          <li><strong>Books & Literature:</strong> Reading Classic/ Playing Piano</li>
         </ul>
       </section>
     </div>
@@ -807,7 +820,6 @@
       const darkModeToggle = document.getElementById('darkModeToggle');
       const html = document.documentElement; // <html> element
       const icon = darkModeToggle.querySelector('i');
-      const body = document.body; // Get the body element
 
       // Function to update the icon based on dark mode state
       function updateDarkModeIcon() {
@@ -823,9 +835,6 @@
 
       // Dark mode toggle button click
       darkModeToggle.addEventListener('click', () => {
-        // Temporarily disable transitions on the body for an instant change
-        body.style.transition = 'none';
-
         if (html.classList.contains('dark-mode')) {
           html.classList.remove('dark-mode');
           localStorage.setItem('darkMode', 'disabled');
@@ -834,14 +843,8 @@
           localStorage.setItem('darkMode', 'enabled');
         }
 
-        // Force a reflow/re-render to ensure the background updates immediately
-        // This is a common trick. Accessing offsetHeight forces the browser to calculate layout.
-        body.offsetHeight; // Do not remove this line!
-
-        // Re-enable transitions after a very short delay (allowing the render to happen)
-        setTimeout(() => {
-          body.style.transition = 'background 0.3s ease, color 0.3s ease';
-        }, 10); // A small delay, 10ms is usually enough.
+        // IMPORTANT: We are NOT calling applyBodyBackground(newDarkModeState) here.
+        // The background will only change on next page load based on localStorage.
 
         updateDarkModeIcon(); // Update icon immediately after toggle
       });
