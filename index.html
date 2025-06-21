@@ -8,8 +8,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
+  <script>
+    // IMPORTANT: This script runs BEFORE the CSS and body load.
+    // It applies the dark-mode class immediately if saved in localStorage.
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      document.documentElement.classList.add('dark-mode');
+    }
+  </script>
+
   <style>
+    /*
+    Define all color variables in :root.
+    The 'dark-' prefixed variables are the dark mode alternatives.
+    */
     :root {
+      /* Light mode palette */
       --bg-light: #e9f0f4;
       --bg-accent: #f9f8f6;
       --primary: #2b5d68;
@@ -20,6 +33,7 @@
       --border-radius: 18px;
       --transition: 0.3s ease;
 
+      /* Dark mode specific color palette */
       --dark-bg-light: #121212;
       --dark-bg-accent: #1f1f1f;
       --dark-primary: #88c0d0;
@@ -28,21 +42,30 @@
       --dark-text-light: #b0b0b0;
       --dark-shadow-light: 0 8px 24px rgba(136, 192, 208, 0.3);
 
+      /* Variables to control the current theme colors - These are what your CSS references */
+      --current-bg-light: var(--bg-light);
+      --current-bg-accent: var(--bg-accent);
+      --current-primary: var(--primary);
+      --current-accent: var(--accent);
+      --current-text-dark: var(--text-dark);
+      --current-text-light: var(--text-light);
+      --current-shadow-light: var(--shadow-light);
     }
 
-
-    :body.dark-mode {
-  --bg-light: #121212;
-  --bg-accent: #1f1f1f;
-  --primary: #88c0d0;
-  --accent: #a3be8c;
-  --text-dark: #e0e0e0;
-  --text-light: #b0b0b0;
-  --shadow-light: 0 8px 24px rgba(136, 192, 208, 0.3);
-}
-
-
-
+    /*
+    When the 'dark-mode' class is applied to the html element,
+    redefine the 'current-' variables to use their dark mode counterparts.
+    This is the core of the theme switching mechanism.
+    */
+    html.dark-mode {
+      --current-bg-light: var(--dark-bg-light);
+      --current-bg-accent: var(--dark-bg-accent);
+      --current-primary: var(--dark-primary);
+      --current-accent: var(--dark-accent);
+      --current-text-dark: var(--dark-text-dark);
+      --current-text-light: var(--dark-text-light);
+      --current-shadow-light: var(--dark-shadow-light);
+    }
 
     * {
       box-sizing: border-box;
@@ -53,89 +76,23 @@
       margin: 0;
       padding: 0;
       font-family: 'Merriweather', serif;
-      background: linear-gradient(135deg, var(--bg-light), var(--bg-accent));
+      /* Define the background using the current variables */
+      background: linear-gradient(135deg, var(--current-bg-light), var(--current-bg-accent));
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       padding: 2rem 1rem;
-      color: var(--text-dark);
+      color: var(--current-text-dark);
       position: relative;
+      /* Add transition for smooth background change */
       transition: background 0.3s ease, color 0.3s ease;
       overflow-x: hidden;
-      box-sizing:border box;
+      box-sizing: border-box;
     }
 
-
-
-    body.dark-mode .container {
-      background: #222;
-      box-shadow: var(--dark-shadow-light);
-      color: var(--dark-text-dark);
-    }
-
-    body.dark-mode .icon-nav {
-      background: #222;
-      border-bottom-color: #333;
-    }
-
-    body.dark-mode .icon-nav button {
-      color: var(--dark-accent);
-    }
-
-    body.dark-mode .icon-nav button:hover,
-    body.dark-mode .icon-nav button.active {
-      color: var(--dark-primary);
-    }
-
-    body.dark-mode .profile-img {
-      border-color: var(--dark-accent);
-      box-shadow: 0 4px 12px rgba(255 255 255 / 0.15);
-    }
-
-    body.dark-mode ul li:hover,
-    body.dark-mode ul li a:hover {
-      color: var(--dark-primary);
-      background: #333;
-    }
-
-    body.dark-mode ul li a {
-      color: var(--dark-accent);
-    }
-
-    body.dark-mode .socials a {
-      color: var(--dark-accent);
-    }
-
-    body.dark-mode .socials a:hover {
-      color: var(--dark-primary);
-    }
-
-    body.dark-mode .skill {
-      background: #2a2a2a;
-      color: var(--dark-primary);
-      box-shadow: 0 6px 16px rgba(136, 192, 208, 0.15);
-    }
-
-    body.dark-mode .skill:hover {
-      background-color: #3a3a3a;
-    }
-
-    body.dark-mode .cat-icon {
-      color: var(--dark-accent);
-    }
-
-    body.dark-mode p,
-    body.dark-mode ul li {
-      color: var(--dark-text-light);
-    }
-
-    body.dark-mode ul li a {
-      color: var(--dark-primary);
-    }
-
-    body.dark-mode h2 {
-      color: var(--dark-accent);
+    html.dark-mode .hill-bg svg path {
+      fill: #2a3d45;
     }
 
     .hill-bg {
@@ -158,14 +115,13 @@
     .container {
       width: 100%;
       max-width: 830px;
-      background: white;
+      background: var(--current-bg-accent);
       border-radius: var(--border-radius);
       padding: 1.5rem 2rem;
-      box-shadow: var(--shadow-light);
+      box-shadow: var(--current-shadow-light);
       position: relative;
       z-index: 1;
-      overflow-x: hidden; /* Avoid horizontal overflow */
-
+      overflow-x: hidden;
     }
 
     .icon-nav {
@@ -175,7 +131,7 @@
       padding: 1rem 0;
       display: flex;
       justify-content: space-around;
-      border-bottom: 2px solid var(--bg-accent);
+      border-bottom: 2px solid var(--current-bg-accent);
       margin-bottom: 2rem;
       z-index: 10;
     }
@@ -184,7 +140,7 @@
       background: none;
       border: none;
       font-size: 1.8rem;
-      color: var(--accent);
+      color: var(--current-accent);
       cursor: pointer;
       padding: 0.3rem 0.5rem;
       border-radius: 12px;
@@ -194,7 +150,7 @@
 
     .icon-nav button:hover,
     .icon-nav button.active {
-      color: var(--primary);
+      color: var(--current-primary);
       transform: scale(1.25);
       font-weight: 700;
     }
@@ -207,7 +163,7 @@
       transform: translateX(-50%);
       width: 50%;
       height: 3px;
-      background: var(--primary);
+      background: var(--current-primary);
       border-radius: 3px;
     }
 
@@ -215,12 +171,16 @@
       width: 130px;
       height: 130px;
       border-radius: 50%;
-      border: 4px solid var(--accent);
+      border: 4px solid var(--current-accent);
       object-fit: cover;
       display: block;
       margin: 0 auto 1.5rem;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease;
+    }
+
+    html.dark-mode .profile-img {
+       box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
     }
 
     .profile-img:hover {
@@ -230,7 +190,7 @@
     h1,
     h2 {
       text-align: center;
-      color: var(--accent);
+      color: var(--current-accent);
       margin-bottom: 1rem;
     }
 
@@ -245,7 +205,7 @@
     p,
     ul {
       text-align: center;
-      color: var(--text-light);
+      color: var(--current-text-light);
       line-height: 1.5;
       max-width: 600px;
       margin: 0 auto;
@@ -268,13 +228,13 @@
 
     ul li:hover,
     ul li a:hover {
-      color: var(--primary);
-      background: #d6e6eb;
+      color: var(--current-primary);
+      background: var(--current-bg-light);
     }
 
     ul li a {
       text-decoration: none;
-      color: var(--accent);
+      color: var(--current-accent);
       font-weight: 700;
     }
 
@@ -284,32 +244,32 @@
     }
 
     .socials a {
-      color: var(--accent);
+      color: var(--current-accent);
       font-size: 1.7rem;
       margin: 0 10px;
       text-decoration: none;
     }
 
     .socials a:hover {
-      color: var(--primary);
+      color: var(--current-primary);
     }
 
     .card-content {
       min-height: 320px;
     }
 
-    section{
+    section {
       margin: 0;
-  padding:0;
+      padding: 0;
     }
 
-.section {
-  display: none;
-  animation: fadeIn 0.4s ease-in-out;
-  max-height: 320px;       /* fixed height matching your timeline */
-  overflow-y: auto;        /* make it scrollable if content is bigger */
-  padding-right: 1rem;     /* avoid content hiding behind scrollbar */
-}
+    .section {
+      display: none;
+      animation: fadeIn 0.4s ease-in-out;
+      max-height: 320px;
+      overflow-y: auto;
+      padding-right: 1rem;
+    }
 
 
     .section.active {
@@ -322,16 +282,16 @@
       gap: 1.2rem;
       margin-top: 1rem;
       text-align: center;
-      max:100%;
+      max: 100%;
     }
 
     .skill {
-      background: #e6f1f4;
+      background: var(--current-bg-accent);
       border-radius: 15px;
       padding: 1rem 1.2rem;
-      box-shadow: 0 6px 16px rgba(43, 93, 104, 0.15);
+      box-shadow: var(--current-shadow-light);
       font-weight: 600;
-      color: var(--primary);
+      color: var(--current-primary);
       min-height: 70px;
       display: flex;
       align-items: center;
@@ -340,7 +300,7 @@
     }
 
     .skill:hover {
-      background-color: #d1e3e8;
+      background-color: var(--current-bg-light);
     }
 
     @keyframes fadeIn {
@@ -360,7 +320,7 @@
       bottom: 90px;
       right: 60px;
       font-size: 2.7rem;
-      color: var(--accent);
+      color: var(--current-accent);
       z-index: 2;
       animation: walk 3s infinite linear;
     }
@@ -382,306 +342,307 @@
       75% {
         transform: translateY(-1px);
       }
+
+      100% {
+        transform: translateY(0);
+      }
     }
 
     #darkModeToggle {
       position: fixed;
       top: 12px;
       left: 12px;
-      background: var(--bg-accent);
+      background: var(--current-bg-accent);
       border: none;
       border-radius: 12px;
       padding: 0.5rem 0.7rem;
       cursor: pointer;
       font-size: 1.5rem;
-      color: var(--accent);
+      color: var(--current-accent);
       box-shadow: 0 4px 10px rgba(43, 93, 104, 0.15);
       z-index: 10;
       transition: background 0.3s ease, color 0.3s ease;
     }
+    html.dark-mode #darkModeToggle {
+      box-shadow: 0 4px 10px rgba(136, 192, 208, 0.15);
+    }
+
 
     #darkModeToggle:hover {
-      background: var(--primary);
+      background: var(--current-primary);
       color: white;
     }
 
     #soundToggle {
-  position: fixed;
-  top: 12px;
-  left: 60px; /* space it right from the dark mode toggle */
-  background: var(--bg-accent);
-  border: none;
-  border-radius: 12px;
-  padding: 0.5rem 0.7rem;
-  cursor: pointer;
-  font-size: 1.5rem;
-  color: var(--accent);
-  box-shadow: 0 4px 10px rgba(43, 93, 104, 0.15);
-  z-index: 10;
-  transition: background 0.3s ease, color 0.3s ease;
-}
+      position: fixed;
+      top: 12px;
+      left: 60px;
+      background: var(--current-bg-accent);
+      border: none;
+      border-radius: 12px;
+      padding: 0.5rem 0.7rem;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--current-accent);
+      box-shadow: 0 4px 10px rgba(43, 93, 104, 0.15);
+      z-index: 10;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    html.dark-mode #soundToggle {
+        box-shadow: 0 4px 10px rgba(136, 192, 208, 0.15);
+    }
 
-#soundToggle:hover {
-  background: var(--primary);
-  color: white;
-}
+    #soundToggle:hover {
+      background: var(--current-primary);
+      color: white;
+    }
 
 
     #journey {
-  max-height: 300px; /* or any fixed height you prefer */
-  overflow-y: auto;
-  padding-right: 1rem; /* optional: to avoid content hidden under scrollbar */
-  /* optional for better UX */
-  scrollbar-width: thin; /* Firefox */
-}
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 1rem;
+      scrollbar-width: thin;
+    }
 
-/* Optional: Customize scrollbar for WebKit browsers */
-#journey::-webkit-scrollbar {
-  width: 8px;
-}
+    #journey::-webkit-scrollbar {
+      width: 8px;
+    }
 
-#journey::-webkit-scrollbar-thumb {
-  background-color: var(--primary);
-  border-radius: 4px;
-}
+    #journey::-webkit-scrollbar-thumb {
+      background-color: var(--current-primary);
+      border-radius: 4px;
+    }
 
     #journey,
-#journey ul,
-#journey p,
-#journey h3 {
-  text-align: left;
-  max-width: none;
-  margin-left: 0;
-}
+    #journey ul,
+    #journey p,
+    #journey h3 {
+      text-align: left;
+      max-width: none;
+      margin-left: 0;
+    }
 
 
     #journey ul li i {
-  margin-right: 8px;
-  color: var(--primary);
-}
+      margin-right: 8px;
+      color: var(--current-primary);
+    }
 
     .timeline {
-  position: relative;
-  padding-left: 30px;
-  margin-left: 0;
-  list-style: none;
-  border-left: 3px solid var(--primary);
-}
+      position: relative;
+      padding-left: 30px;
+      margin-left: 0;
+      list-style: none;
+      border-left: 3px solid var(--current-primary);
+    }
 
-.timeline li {
-  position: relative;
-  margin-bottom: 1.5rem;
-  padding-left: 20px;
-  font-weight: 500;
-  cursor: default;
-}
+    .timeline li {
+      position: relative;
+      margin-bottom: 1.5rem;
+      padding-left: 20px;
+      font-weight: 500;
+      cursor: default;
+    }
 
-.timeline li::before {
-  content: '';
-  position: absolute;
-  left: -11px; /* places the dot on the line */
-  top: 6px;
-  width: 14px;
-  height: 14px;
-  background-color: var(--primary);
-  border: 3px solid var(--bg-accent);
-  border-radius: 50%;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-}
+    .timeline li::before {
+      content: '';
+      position: absolute;
+      left: -11px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      background-color: var(--current-primary);
+      border: 3px solid var(--current-bg-accent);
+      border-radius: 50%;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    }
 
     .skills-group {
-  background: #e6f1f4;
-  border-radius: 15px;
-  padding: 1rem 1.5rem;
-  box-shadow: 0 6px 16px rgba(43, 93, 104, 0.15);
-  margin-bottom: 1.5rem;
-}
+      background: var(--current-bg-accent);
+      border-radius: 15px;
+      padding: 1rem 1.5rem;
+      box-shadow: var(--current-shadow-light);
+      margin-bottom: 1.5rem;
+    }
 
-.skills-group h3 {
-  margin-bottom: 0.75rem;
-  color: var(--primary);
-}
+    .skills-group h3 {
+      margin-bottom: 0.75rem;
+      color: var(--current-primary);
+    }
 
-.skills-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 1rem;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
+    .skills-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
 
-.skills-list li {
-  background-color: #2b5d68;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 30px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  text-align: center;
+    .skills-list li {
+      background-color: var(--current-primary);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-align: center;
 
-}
-
-
-#about,
-#skills {
-  max-height: 300px;       /* same fixed height as #journey */
-  overflow-y: auto;        /* enable vertical scrolling */
-  padding-right: 1rem;     /* avoid content hidden under scrollbar */
-  scrollbar-width: thin;   /* Firefox */
-}
-
-/* Scrollbar styling for WebKit browsers */
-#about::-webkit-scrollbar,
-#skills::-webkit-scrollbar {
-  width: 8px;
-}
-
-#about::-webkit-scrollbar-thumb,
-#skills::-webkit-scrollbar-thumb {
-  background-color: var(--primary);
-  border-radius: 4px;
-}
-
-.language-skills li.language-teaching {
-  padding-top: 19px; /* Moves only this specific item down */
-}
-
-#snow {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none; /* So it doesn't block clicks */
-  z-index: 0.5; /* between background(0) and container(1) */
-  overflow: hidden;
-}
-
-#snow-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: -1;
-}
-
-.snowflake {
-  position: absolute;
-  top: -10px;
-  background: white;
-  border-radius: 50%;
-  opacity: 0.8;
-  filter: drop-shadow(0 0 2px #eef);
-  animation: fallAndSway linear infinite;
-}
-
-@keyframes fallAndSway {
-  0% {
-    transform: translate(0, 0);
-  }
-  25% {
-    transform: translate(5px, 25vh);
-  }
-  50% {
-    transform: translate(-5px, 50vh);
-  }
-  75% {
-    transform: translate(5px, 75vh);
-  }
-  100% {
-    transform: translate(0, 100vh);
-  }
-}
+    }
 
 
-    * {
-  box-sizing: border-box;
-}
+    #about,
+    #skills {
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 1rem;
+      scrollbar-width: thin;
+    }
+
+    #about::-webkit-scrollbar,
+    #skills::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #about::-webkit-scrollbar-thumb,
+    #skills::-webkit-scrollbar-thumb {
+      background-color: var(--current-primary);
+      border-radius: 4px;
+    }
+
+    .language-skills li.language-teaching {
+      padding-top: 19px;
+    }
+
+    #snow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0.5;
+      overflow: hidden;
+    }
+
+    #snow-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      filter: drop-shadow(0 0 2px #eef);
+      animation: fallAndSway linear infinite;
+    }
+
+    @keyframes fallAndSway {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      25% {
+        transform: translate(5px, 25vh);
+      }
+
+      50% {
+        transform: translate(-5px, 50vh);
+      }
+
+      75% {
+        transform: translate(5px, 75vh);
+      }
+
+      100% {
+        transform: translate(0, 100vh);
+      }
+    }
+
 
     .text-container {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden; /* To make sure the content doesn't overflow */
-}
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
 
-/* Align the certification and personal interest items to the left */
-#interests-certifications .timeline li {
-  text-align: left;  /* Ensure text is left-aligned */
-}
+    #interests-certifications .timeline li {
+      text-align: left;
+    }
 
-/* Ensure proper spacing and alignment for the 'View Certificate' section */
-#interests-certifications .timeline li .text-container p,
-#interests-certifications .timeline li .text-container a {
-  text-align: left;  /* Align the description text and link */
-  display: block;  /* Ensure block display for better control */
-  margin-left: 0; /* Remove any left margin */
-}
+    #interests-certifications .timeline li .text-container p,
+    #interests-certifications .timeline li .text-container a {
+      text-align: left;
+      display: block;
+      margin-left: 0;
+    }
 
-/* Make sure icons are still aligned properly next to text */
-#interests-certifications .timeline li i {
-  margin-right: 10px; /* Space between icon and text */
-}
+    #interests-certifications .timeline li i {
+      margin-right: 10px;
+    }
 
-#interests-certifications {
-  max-height: 300px; /* or any fixed height you prefer */
-  overflow-y: auto;
-  padding-right: 1rem; /* optional: to avoid content hidden under scrollbar */
-  /* optional for better UX */
-  scrollbar-width: thin; /* Firefox */
-}
+    #interests-certifications {
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 1rem;
+      scrollbar-width: thin;
+    }
 
-#interests-certifications .text-container {
-  max-width: 100%; /* Ensure text container stretches too */
-}
+    #interests-certifications .text-container {
+      max-width: 100%;
+    }
 
 
-#interests-certifications::-webkit-scrollbar {
-  width: 8px;
-}
+    #interests-certifications::-webkit-scrollbar {
+      width: 8px;
+    }
 
-#interests-certifications::-webkit-scrollbar-thumb {
-  background-color: var(--primary);
-  border-radius: 4px;
-}
+    #interests-certifications::-webkit-scrollbar-thumb {
+      background-color: var(--current-primary);
+      border-radius: 4px;
+    }
 
-#interests-certifications:hover {
-  width: 100%;  /* Ensure it expands fully on hover */
-  transition: width 0.3s ease;  /* Smooth transition effect */
-}
+    #interests-certifications:hover {
+      width: 100%;
+      transition: width 0.3s ease;
+    }
 
-        #interests-certifications,
-#interests-certifications ul,
-#interests-certifications p,
-#interests-certifications h3 {
-  text-align: left;
-  max-width: none;
-  margin-left: 0;
-}
+    #interests-certifications,
+    #interests-certifications ul,
+    #interests-certifications p,
+    #interests-certifications h3 {
+      text-align: left;
+      max-width: none;
+      margin-left: 0;
+    }
 
 
     #interests-certifications ul li i {
-  margin-right: 8px;
-  color: var(--primary);
-}
-
-
-
+      margin-right: 8px;
+      color: var(--current-primary);
+    }
   </style>
 </head>
 
 <body>
-<div id="snow-container" aria-hidden="true"></div>
-<audio id="clickSound" src="Sonic_Soundfx_TOYMisc_Building_Blocks_Detach_Single_Block_Base_01.wav" preload="auto"></audio>
+  <div id="snow-container" aria-hidden="true"></div>
+  <audio id="clickSound" src="Sonic_Soundfx_TOYMisc_Building_Blocks_Detach_Single_Block_Base_01.wav" preload="auto"></audio>
   <button id="darkModeToggle" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
-<button id="soundToggle" title="Toggle Sound" aria-pressed="true">
-  <i class="fas fa-volume-up"></i>
-</button>
+  <button id="soundToggle" title="Toggle Sound" aria-pressed="true">
+    <i class="fas fa-volume-up"></i>
+  </button>
 
 
   <div class="hill-bg" aria-hidden="true">
@@ -705,9 +666,9 @@
           class="fas fa-language"></i><span class="sr-only">Languages</span></button>
       <button onclick="showSection('journey')" role="tab" aria-selected="false" aria-controls="journey"><i
           class="fas fa-route"></i><span class="sr-only">Journey</span></button>
-         <button onclick="showSection('interests-certifications')" role="tab" aria-selected="false" aria-controls="interests-certifications"><i
-                 class="fas fa-heart"></i><span class="sr-only">Extra Interests</span>
-   </button>
+      <button onclick="showSection('interests-certifications')" role="tab" aria-selected="false"
+        aria-controls="interests-certifications"><i class="fas fa-heart"></i><span class="sr-only">Extra Interests</span>
+      </button>
     </nav>
 
     <div class="card-content">
@@ -719,37 +680,37 @@
           <li>Contact: <a href="mailto:emerennovena@gmail.com">emerennovena@gmail.com</a></li>
 
           <div class="socials">
-        <a href="https://github.com/emerennovena" target="blank" rel="noopener noreferrer" aria-label="GitHub">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="https://linkedin.com/in/emerennovena" target="blank" rel="noopener noreferrer" aria-label="LinkedIn">
-          <i class="fab fa-linkedin"></i>
-        </a>
-      </div>
+            <a href="https://github.com/emerennovena" target="blank" rel="noopener noreferrer" aria-label="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/emerennovena" target="blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </div>
 
         </ul>
       </section>
 
 
-<section id="skills" class="section" role="tabpanel" aria-labelledby="journey-tab" tabindex="0">
-  <h2>Skills</h2>
+      <section id="skills" class="section" role="tabpanel" aria-labelledby="journey-tab" tabindex="0">
+        <h2>Skills</h2>
 
-      <h3>Language Skills</h3>
-      <ul class="skills-list language-skills">
-      <li class="language-teaching">Language Teaching</li>
-      <li>Chinese-English Translation</li>
-      <li>Cross-cultural Communication</li>
-    </ul>
+        <h3>Language Skills</h3>
+        <ul class="skills-list language-skills">
+          <li class="language-teaching">Language Teaching</li>
+          <li>Chinese-English Translation</li>
+          <li>Cross-cultural Communication</li>
+        </ul>
 
-    <h3>Technical Skills</h3>
-    <ul class="skills-list">
-      <li>Java</li>
-      <li>Python</li>
-      <li>JavaScript</li>
-      <li>HTML/CSS</li>
-    </ul>
+        <h3>Technical Skills</h3>
+        <ul class="skills-list">
+          <li>Java</li>
+          <li>Python</li>
+          <li>JavaScript</li>
+          <li>HTML/CSS</li>
+        </ul>
 
-</section>
+      </section>
 
 
       <section id="languages" class="section" role="tabpanel" aria-labelledby="languages-tab" tabindex="0">
@@ -762,211 +723,188 @@
         </ul>
       </section>
 
-<section id="journey" class="section" role="tabpanel" aria-labelledby="journey-tab" tabindex="0">
-  <h2>Journey</h2>
+      <section id="journey" class="section" role="tabpanel" aria-labelledby="journey-tab" tabindex="0">
+        <h2>Journey</h2>
 
-  <small> "Growing up, I was into many things. Languages, Books, Arts. Everything. I started studying business, then I
-    switched to study foreign languages. Until finally I decided to study something else again - technology.
-    Then I realised being interested and curious in many things is not a weakness, especially in tech, and today's
-    globally ever-changing world."
-  </small>
-  <h3><i class="fas fa-graduation-cap"></i> Education</h3>
-  <ul class="timeline">
-    <li><strong>2024–2025:</strong> Master of Science in Information Technology</li>
-    <li><strong>2020–2024:</strong> Bachelor of Arts in Foreign Languages and Literature</li>
-  </ul>
+        <small> "Growing up, I had a diverse range of interests—languages, books, art, and beyond.
+          I initially pursued business, then switched to foreign languages, only to find myself
+          diving into technology. Along the way, I discovered that my curiosity and passion for
+          many fields wasn’t a hindrance. In fact, it’s a strength, especially in today’s
+          fast-paced, ever-evolving tech landscape."
+        </small>
+        <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+        <ul class="timeline">
+          <li><strong>2024–2025:</strong> Master of Science in Information Technology</li>
+          <li><strong>2020–2024:</strong> Bachelor of Arts in Foreign Languages and Literature</li>
+        </ul>
 
-  <h3><i class="fas fa-briefcase"></i> Experience</h3>
-  <ul class="timeline">
-    <li><strong>Sep 2022 – Jun 2024:</strong> Indonesian Language Teacher — Taiwan</li>
-    <li><strong>Sep 2021 – Jun 2024:</strong> Office Assistant — Feng Chia University</li>
-  </ul>
+        <h3><i class="fas fa-briefcase"></i> Experience</h3>
+        <ul class="timeline">
+          <li><strong>Sep 2022 – Jun 2024:</strong> Indonesian Language Teacher — Taiwan</li>
+          <li><strong>Sep 2021 – Jun 2024:</strong> Office Assistant — Feng Chia University</li>
+        </ul>
 
-  <h3><i class="fas fa-hands-helping"></i> Volunteer</h3>
-  <ul class="timeline">
-    <li><strong>Oct 2023:</strong> Event Staff — The 19th Graduation Play, Feng Chia University</li>
-    <li><strong>Apr 2021:</strong> Cultural Exchange Ambassador — Taichung Wen Hua Senior High School</li>
-  </ul>
-</section>
-
-
-<section id="interests-certifications" class="section" role="tabpanel" aria-labelledby="journey-tab" tabindex="0">
-  <h2>Extra Interests</h2>
-  <small> "Just some of my favorite things to do :)" </small>
-
-  <h3><i class="fas fa-certificate"></i> Certifications</h3>
-  <ul class="timeline">
-    <li class="cert-item">
-      <i class="fas fa-book-reader"></i><strong> Udemy</strong> – Librarian: Principles of Library Management
-      <div class="text-container">
-        <a href="https://www.udemy.com/certificate/UC-68886e7a-705a-40f5-b436-6c25da3a92a0/?trk=public_profile_certification-title" target="_blank" rel="noopener noreferrer">
-          View Certificate
-        </a>
-      </div>
-    </li>
-    <li class="cert-item">
-      <i class="fas fa-music"></i><strong> The Associated Board of the Royal Schools of Music </strong> – Piano Grade 5
-    </li>
-  </ul>
-
-  <h3><i class="fas fa-heart"></i> Personal Interests</h3>
-  <ul class="timeline">
-    <li><strong>Books & Literature:</strong> English Literature</li>
-    <li><strong>Music:</strong> Classical/ Playing Piano</li>
-  </ul>
-</section>
+        <h3><i class="fas fa-hands-helping"></i> Volunteer</h3>
+        <ul class="timeline">
+          <li><strong>Oct 2023:</strong> Event Staff — The 19th Graduation Play, Feng Chia University</li>
+          <li><strong>Apr 2021:</strong> Cultural Exchange Ambassador — Taichung Wen Hua Senior High School</li>
+        </ul>
+      </section>
 
 
+      <section id="interests-certifications" class="section" role="tabpanel" aria-labelledby="journey-tab" tabindex="0">
+        <h2>Extra Interests</h2>
+        <small> "Just some of my favorite things to do :)" </small>
 
+        <h3><i class="fas fa-certificate"></i> Certifications</h3>
+        <ul class="timeline">
+          <li class="cert-item">
+            <i class="fas fa-book-reader"></i><strong> Udemy</strong> – Librarian: Principles of Library Management
+            <div class="text-container">
+              <a href="https://www.udemy.com/certificate/UC-68886e7a-705a-40f5-b436-6c25da3a92a0/?trk=public_profile_certification-title"
+                target="_blank" rel="noopener noreferrer">
+                View Certificate
+              </a>
+            </div>
+          </li>
+          <li class="cert-item">
+            <i class="fas fa-music"></i><strong> The Associated Board of the Royal Schools of Music </strong> – Piano Grade 5
+          </li>
+        </ul>
 
-
+        <h3><i class="fas fa-heart"></i> Personal Interests</h3>
+        <ul class="timeline">
+          <li><strong>Books & Literature:</strong> Reading Classic/ English Literature</li>
+          <li><strong>Music:</strong> Classical/ Playing Piano</li>
+        </ul>
+      </section>
     </div>
   </div>
 
   <script>
-function showSection(id) {
-  const sections = document.querySelectorAll('.section');
-  const buttons = document.querySelectorAll('.icon-nav button');
+    function showSection(id) {
+      const sections = document.querySelectorAll('.section');
+      const buttons = document.querySelectorAll('.icon-nav button');
 
-  sections.forEach(section => {
-    const isActive = section.id === id;
-    section.classList.toggle('active', isActive);
-    section.setAttribute('aria-hidden', !isActive);
-  });
+      sections.forEach(section => {
+        const isActive = section.id === id;
+        section.classList.toggle('active', isActive);
+        section.setAttribute('aria-hidden', !isActive);
+      });
 
-  buttons.forEach(button => {
-    const controls = button.getAttribute('aria-controls');
-    const isActive = controls === id;
-    button.classList.toggle('active', isActive);
-    button.setAttribute('aria-selected', isActive);
-  });
+      buttons.forEach(button => {
+        const controls = button.getAttribute('aria-controls');
+        const isActive = controls === id;
+        button.classList.toggle('active', isActive);
+        button.setAttribute('aria-selected', isActive);
+      });
 
-  // Save active section in localStorage
-  localStorage.setItem('activeSection', id);
-}
+      // Save active section in localStorage
+      localStorage.setItem('activeSection', id);
+    }
 
+    window.addEventListener('DOMContentLoaded', () => {
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      const html = document.documentElement; // <html> element
+      const icon = darkModeToggle.querySelector('i');
+      const body = document.body; // Get the body element
 
+      // Function to update the icon based on dark mode state
+      function updateDarkModeIcon() {
+        if (html.classList.contains('dark-mode')) {
+          icon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+          icon.classList.replace('fa-sun', 'fa-moon');
+        }
+      }
 
-window.addEventListener('DOMContentLoaded', () => {
-// Get elements
-const darkModeToggle = document.getElementById('darkModeToggle');
-const html = document.documentElement; // <html>
-const body = document.body;
-const icon = darkModeToggle.querySelector('i');
+      // Initial icon update on DOMContentLoaded
+      updateDarkModeIcon();
 
-// Enable dark mode (add class to html and body, update localStorage, update icon)
-function enableDarkMode() {
-  html.classList.add('dark-mode');
-  body.classList.add('dark-mode');
-  localStorage.setItem('darkMode', 'enabled');
-  if (icon) icon.classList.replace('fa-moon', 'fa-sun');
-}
+      // Dark mode toggle button click
+      darkModeToggle.addEventListener('click', () => {
+        // Temporarily disable transitions on the body for an instant change
+        body.style.transition = 'none';
 
-// Disable dark mode (remove class from html and body, update localStorage, update icon)
-function disableDarkMode() {
-  html.classList.remove('dark-mode');
-  body.classList.remove('dark-mode');
-  localStorage.setItem('darkMode', 'disabled');
-  if (icon) icon.classList.replace('fa-sun', 'fa-moon');
-}
+        if (html.classList.contains('dark-mode')) {
+          html.classList.remove('dark-mode');
+          localStorage.setItem('darkMode', 'disabled');
+        } else {
+          html.classList.add('dark-mode');
+          localStorage.setItem('darkMode', 'enabled');
+        }
 
-// On page load, apply saved dark mode state
-if (localStorage.getItem('darkMode') === 'enabled') {
-  enableDarkMode();
-} else {
-  disableDarkMode();
-}
+        // Force a reflow/re-render to ensure the background updates immediately
+        // This is a common trick. Accessing offsetHeight forces the browser to calculate layout.
+        body.offsetHeight; // Do not remove this line!
 
-// Dark mode toggle button click
-darkModeToggle.addEventListener('click', () => {
-  if (document.documentElement.classList.contains('dark-mode')) {
-    document.documentElement.classList.remove('dark-mode');
-    document.body.classList.remove('dark-mode');
-    localStorage.setItem('darkMode', 'disabled');
-    darkModeToggle.querySelector('i').classList.replace('fa-sun', 'fa-moon');
-  } else {
-    document.documentElement.classList.add('dark-mode');
-    document.body.classList.add('dark-mode');
-    localStorage.setItem('darkMode', 'enabled');
-    darkModeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
-  }
-});
+        // Re-enable transitions after a very short delay (allowing the render to happen)
+        setTimeout(() => {
+          body.style.transition = 'background 0.3s ease, color 0.3s ease';
+        }, 10); // A small delay, 10ms is usually enough.
 
-});
-
+        updateDarkModeIcon(); // Update icon immediately after toggle
+      });
+    });
 
     // Get the audio element
-const clickSound = document.getElementById('clickSound');
+    const clickSound = document.getElementById('clickSound');
 
-// Play sound function with volume control and reset
-function playClickSound() {
-  const soundClone = clickSound.cloneNode();
-  soundClone.volume = 0.5;
-  soundClone.play();
-}
+    // Add click sound to all icon-nav buttons (top menu icons)
+    document.querySelectorAll('.icon-nav button').forEach(button => {
+      button.addEventListener('click', () => {
+        playClickSound();
+      });
+    });
 
+    let isMuted = false; // keep track of mute state
 
-// Add click sound to all icon-nav buttons (top menu icons)
-document.querySelectorAll('.icon-nav button').forEach(button => {
-  button.addEventListener('click', () => {
-    playClickSound();
-  });
-});
+    const soundToggle = document.getElementById('soundToggle');
 
-let isMuted = false;  // keep track of mute state
+    soundToggle.addEventListener('click', () => {
+      isMuted = !isMuted; // toggle mute state
 
-soundToggle.addEventListener('click', () => {
-  isMuted = !isMuted;  // toggle mute state
+      if (isMuted) {
+        soundToggle.querySelector('i').classList.replace('fa-volume-up', 'fa-volume-mute');
+        soundToggle.setAttribute('aria-pressed', 'false');
+      } else {
+        soundToggle.querySelector('i').classList.replace('fa-volume-mute', 'fa-volume-up');
+        soundToggle.setAttribute('aria-pressed', 'true');
+      }
+    });
 
-  if (isMuted) {
-    soundToggle.querySelector('i').classList.replace('fa-volume-up', 'fa-volume-mute');
-    soundToggle.setAttribute('aria-pressed', 'false');
-  } else {
-    soundToggle.querySelector('i').classList.replace('fa-volume-mute', 'fa-volume-up');
-    soundToggle.setAttribute('aria-pressed', 'true');
-  }
-});
+    // The playClickSound function also needs to check the `isMuted` state
+    function playClickSound() {
+      if (isMuted) return; // Don't play sound if muted
+      const soundClone = clickSound.cloneNode();
+      soundClone.volume = 0.5;
+      soundClone.play();
+    }
 
-function playClickSound() {
-  if (isMuted) return; // don't play sound if muted
-  const soundClone = clickSound.cloneNode();
-  soundClone.volume = 0.5;
-  soundClone.play();
-}
+    const snowContainer = document.getElementById('snow-container');
 
-  const snowContainer = document.getElementById('snow-container');
+    function createSnowflake() {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
 
-  function createSnowflake() {
-    const snowflake = document.createElement('div');
-    snowflake.classList.add('snowflake');
+      const size = Math.random() * 6 + 4;
+      snowflake.style.width = `${size}px`;
+      snowflake.style.height = `${size}px`;
 
-    // Random size between 4px and 10px
-    const size = Math.random() * 6 + 4;
-    snowflake.style.width = `${size}px`;
-    snowflake.style.height = `${size}px`;
+      snowflake.style.left = `${Math.random() * 100}vw`;
 
-    // Random horizontal start position
-    snowflake.style.left = `${Math.random() * 100}vw`;
+      const duration = Math.random() * 5 + 5;
+      snowflake.style.animationDuration = `${duration}s, ${duration / 2}s`;
+      snowflake.style.animationDelay = `0s, ${Math.random() * 2}s`;
 
-    // Random animation duration
-    const duration = Math.random() * 5 + 5; // 5s to 10s
-    snowflake.style.animationDuration = `${duration}s, ${duration / 2}s`;
+      snowContainer.appendChild(snowflake);
 
-    // Random sway delay to make them look natural
-    snowflake.style.animationDelay = `0s, ${Math.random() * 2}s`;
+      setTimeout(() => {
+        snowflake.remove();
+      }, duration * 1000);
+    }
 
-    snowContainer.appendChild(snowflake);
-
-    // Remove snowflake after it falls
-    setTimeout(() => {
-      snowflake.remove();
-    }, duration * 1000);
-  }
-
-  // Create a new snowflake every 150ms
-  setInterval(createSnowflake, 150);
-
-
+    setInterval(createSnowflake, 150);
   </script>
 </body>
 
