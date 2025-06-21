@@ -37,7 +37,7 @@
 
       /* NEW: Body background gradients defined as variables */
       --body-bg-light-gradient: linear-gradient(135deg, #e9f0f4, #f9f8f6);
-      --body-bg-dark-gradient: linear-gradient(135deg, #121212, #1f1f1f);
+      /* REMOVED --body-bg-dark-gradient as body background won't change */
 
 
       /* Dark mode specific color palette */
@@ -57,7 +57,8 @@
       --current-text-dark: var(--text-dark);
       --current-text-light: var(--text-light);
       --current-shadow-light: var(--shadow-light);
-      --current-body-bg: var(--body-bg-light-gradient); /* NEW: Default body background */
+      --current-body-bg: var(--body-bg-light-gradient);
+      /* This now ALWAYS uses the light gradient */
     }
 
     /*
@@ -73,7 +74,7 @@
       --current-text-dark: var(--dark-text-dark);
       --current-text-light: var(--dark-text-light);
       --current-shadow-light: var(--dark-shadow-light);
-      --current-body-bg: var(--body-bg-dark-gradient); /* NEW: Dark mode body background */
+      /* REMOVED: --current-body-bg override here, so body stays light */
     }
 
     * {
@@ -100,8 +101,9 @@
       box-sizing: border-box;
     }
 
+    /* UPDATED: Target hill SVG path directly for dark mode */
     html.dark-mode .hill-bg svg path {
-      fill: #2a3d45;
+      fill: #2a3d45; /* Dark color for the hill */
     }
 
     .hill-bg {
