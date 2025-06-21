@@ -62,6 +62,8 @@
       color: var(--text-dark);
       position: relative;
       transition: background 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+      box-sizing:border box;
     }
 
 
@@ -162,6 +164,8 @@
       box-shadow: var(--shadow-light);
       position: relative;
       z-index: 1;
+      overflow-x: hidden; /* Avoid horizontal overflow */
+
     }
 
     .icon-nav {
@@ -294,6 +298,11 @@
       min-height: 320px;
     }
 
+    section{
+      margin: 0;
+  padding:0;
+    }
+
 .section {
   display: none;
   animation: fadeIn 0.4s ease-in-out;
@@ -309,10 +318,11 @@
 
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 1.2rem;
       margin-top: 1rem;
       text-align: center;
+      max:100%;
     }
 
     .skill {
@@ -588,6 +598,79 @@
 }
 
 
+    * {
+  box-sizing: border-box;
+}
+
+    .text-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* To make sure the content doesn't overflow */
+}
+
+/* Align the certification and personal interest items to the left */
+#interests-certifications .timeline li {
+  text-align: left;  /* Ensure text is left-aligned */
+}
+
+/* Ensure proper spacing and alignment for the 'View Certificate' section */
+#interests-certifications .timeline li .text-container p,
+#interests-certifications .timeline li .text-container a {
+  text-align: left;  /* Align the description text and link */
+  display: block;  /* Ensure block display for better control */
+  margin-left: 0; /* Remove any left margin */
+}
+
+/* Make sure icons are still aligned properly next to text */
+#interests-certifications .timeline li i {
+  margin-right: 10px; /* Space between icon and text */
+}
+
+#interests-certifications {
+  max-height: 300px; /* or any fixed height you prefer */
+  overflow-y: auto;
+  padding-right: 1rem; /* optional: to avoid content hidden under scrollbar */
+  /* optional for better UX */
+  scrollbar-width: thin; /* Firefox */
+}
+
+#interests-certifications .text-container {
+  max-width: 100%; /* Ensure text container stretches too */
+}
+
+
+#interests-certifications::-webkit-scrollbar {
+  width: 8px;
+}
+
+#interests-certifications::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 4px;
+}
+
+#interests-certifications:hover {
+  width: 100%;  /* Ensure it expands fully on hover */
+  transition: width 0.3s ease;  /* Smooth transition effect */
+}
+
+        #interests-certifications,
+#interests-certifications ul,
+#interests-certifications p,
+#interests-certifications h3 {
+  text-align: left;
+  max-width: none;
+  margin-left: 0;
+}
+
+
+    #interests-certifications ul li i {
+  margin-right: 8px;
+  color: var(--primary);
+}
+
+
 
   </style>
 </head>
@@ -622,6 +705,9 @@
           class="fas fa-language"></i><span class="sr-only">Languages</span></button>
       <button onclick="showSection('journey')" role="tab" aria-selected="false" aria-controls="journey"><i
           class="fas fa-route"></i><span class="sr-only">Journey</span></button>
+         <button onclick="showSection('interests-certifications')" role="tab" aria-selected="false" aria-controls="interests-certifications"><i
+                 class="fas fa-heart"></i><span class="sr-only">Extra Interests</span>
+   </button>
     </nav>
 
     <div class="card-content">
@@ -677,17 +763,23 @@
       </section>
 
 <section id="journey" class="section" role="tabpanel" aria-labelledby="journey-tab" tabindex="0">
-  <h2>Timeline</h2>
+  <h2>Journey</h2>
+
+  <small> "Growing up, I was into many things. Languages, Books, Arts. Everything. I started studying business, then I
+    switched to study foreign languages. Until finally I decided to study something else again - technology.
+    Then I realised being interested and curious in many things is not a weakness, especially in tech, and today's
+    globally ever-changing world."
+  </small>
   <h3><i class="fas fa-graduation-cap"></i> Education</h3>
   <ul class="timeline">
     <li><strong>2024–2025:</strong> Master of Science in Information Technology</li>
     <li><strong>2020–2024:</strong> Bachelor of Arts in Foreign Languages and Literature</li>
   </ul>
 
-
   <h3><i class="fas fa-briefcase"></i> Experience</h3>
   <ul class="timeline">
     <li><strong>Sep 2022 – Jun 2024:</strong> Indonesian Language Teacher — Taiwan</li>
+    <li><strong>Sep 2021 – Jun 2024:</strong> Office Assistant — Feng Chia University</li>
   </ul>
 
   <h3><i class="fas fa-hands-helping"></i> Volunteer</h3>
@@ -695,18 +787,32 @@
     <li><strong>Oct 2023:</strong> Event Staff — The 19th Graduation Play, Feng Chia University</li>
     <li><strong>Apr 2021:</strong> Cultural Exchange Ambassador — Taichung Wen Hua Senior High School</li>
   </ul>
+</section>
 
-   <h3><i class="fas fa-certificate"></i> Certifications</h3>
+
+<section id="interests-certifications" class="section" role="tabpanel" aria-labelledby="journey-tab" tabindex="0">
+  <h2>Extra Interests</h2>
+  <small> "Just some of my favorite things to do :)" </small>
+
+  <h3><i class="fas fa-certificate"></i> Certifications</h3>
   <ul class="timeline">
-    <li>
-      <strong>Udemy</strong> – Librarian: Principles of Library Management
-      <br />
-      <em>Issued: June 2025</em>
-      <br />
-      <a href="https://www.udemy.com/certificate/UC-68886e7a-705a-40f5-b436-6c25da3a92a0/?trk=public_profile_certification-title" target="_blank" rel="noopener noreferrer">
-        View Certificate
-      </a>
+    <li class="cert-item">
+      <i class="fas fa-book-reader"></i><strong> Udemy</strong> – Librarian: Principles of Library Management
+      <div class="text-container">
+        <a href="https://www.udemy.com/certificate/UC-68886e7a-705a-40f5-b436-6c25da3a92a0/?trk=public_profile_certification-title" target="_blank" rel="noopener noreferrer">
+          View Certificate
+        </a>
+      </div>
     </li>
+    <li class="cert-item">
+      <i class="fas fa-music"></i><strong> The Associated Board of the Royal Schools of Music </strong> – Piano Grade 5
+    </li>
+  </ul>
+
+  <h3><i class="fas fa-heart"></i> Personal Interests</h3>
+  <ul class="timeline">
+    <li><strong>Books & Literature:</strong> English Literature</li>
+    <li><strong>Music:</strong> Classical/ Playing Piano</li>
   </ul>
 </section>
 
