@@ -15,7 +15,7 @@
     if (isDarkModeEnabledOnLoad) {
       document.documentElement.classList.add('dark-mode');
     }
-    // All background handling is now CSS-driven. No JavaScript for body background here.
+
   </script>
 
   <style>
@@ -481,26 +481,52 @@
       margin-bottom: 0.75rem;
       color: var(--current-primary);
     }
+.container {
+  max-width: 900px;
+  padding: 2rem 3rem;
+  margin: 2rem auto;
+  background: var(--current-bg-accent);
+  border-radius: var(--border-radius);
+  box-shadow: var(--current-shadow-light);
+}
 
-    .skills-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 1rem;
-      padding: 0;
-      margin: 0;
-      list-style: none;
-    }
+.skills-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
+  justify-content: center; /* center the grid items */
+  padding: 0;
+  margin: 0 auto;
+  list-style: none;
+  max-width: 100%;
+}
 
-    .skills-list li {
-      background-color: var(--current-primary);
-      color: #fff;
-      padding: 0.5rem 1rem;
-      border-radius: 30px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      text-align: center;
+.skills-list li {
+  background-color: var(--current-primary);
+  color: #fff;
+  padding: 0.7rem 1.2rem;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  cursor: default;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
 
-    }
+
+    .skills-list li:hover {
+  background-color: var(--current-bg-light);
+  color: var(--current-primary);
+}
+
+@media (max-width: 600px) {
+  .skills-list {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+  }
+}
+
 
 
     #about,
@@ -523,7 +549,7 @@
     }
 
     .language-skills li.language-teaching {
-      padding-top: 19px;
+      padding: 0.5rem 1rem;
     }
 
     #snow {
@@ -686,7 +712,7 @@
       <section id="about" class="section active" role="tabpanel" aria-labelledby="journey-tab">
         <img src="img.png" alt="Profile Picture" class="profile-img" />
         <h1>Emerentia Novena</h1>
-        <p>Language Teacher | Language × Tech</p>
+        <p>Language, Culture, and Learning Experience Design</p>
         <ul>
           <li>Contact: <a href="mailto:emerennovena@gmail.com">emerennovena@gmail.com</a></li>
 
@@ -711,15 +737,26 @@
           <li class="language-teaching">Language Teaching</li>
           <li>Chinese-English Translation</li>
           <li>Cross-cultural Communication</li>
+          <li>Storytelling & Content Creation</li>
         </ul>
 
-        <h3>Technical Skills</h3>
+        <h3>Professional Skills</h3>
         <ul class="skills-list">
-          <li>Java</li>
-          <li>Python</li>
-          <li>JavaScript</li>
-          <li>HTML/CSS</li>
+          <li>Project Management</li>
+          <li>User Experience (UX) Research</li>
+          <li>Educational Design</li>
+          <li>E-learning Development</li>
+          <li>Agile Methodologies</li>
         </ul>
+
+        <h3>Digital Skills</h3>
+          <ul class="skills-list">
+            <li>Figma</li>
+            <li>InkWriter</li>
+            <li>Canva</li>
+            <li>Trello</li>
+          </ul>
+
 
       </section>
 
@@ -731,7 +768,6 @@
           <li><strong>Indonesian</strong> - Native</li>
           <li><strong>Chinese</strong> - Advanced</li>
           <li><strong>Korean</strong> - Intermediate</li>
-          <li><strong>Japanese</strong> - Basic</li>
         </ul>
       </section>
 
@@ -740,14 +776,14 @@
 
         <h3><i class="fas fa-graduation-cap"></i> Education</h3>
         <ul class="timeline">
-          <li><strong>2024–2025:</strong> Master of Science in Information Technology</li>
-          <li><strong>2020–2024:</strong> Bachelor of Arts in Foreign Languages and Literature</li>
+          <li><strong>Sep 2024 – Sep 2025:</strong> Master of Science in Information Technology</li>
+          <li><strong>Sep 2020 – Jun 2024:</strong> Bachelor of Arts in Foreign Languages and Literature</li>
         </ul>
 
         <h3><i class="fas fa-briefcase"></i> Experience</h3>
         <ul class="timeline">
+          <li><strong>Jun 2025 – Sep 2025:</strong><b> Project Lead & Content Creator, LanguaTale </b>— University of Glasgow</li>
           <li><strong>Sep 2022 – Jun 2024:</strong><b> Indonesian Language Teacher </b>— Taiwan</li>
-          <li><strong>Sep 2021 – Jun 2024:</strong> <b> Office Assistant </b>— Feng Chia University</li>
         </ul>
 
         <h3><i class="fas fa-hands-helping"></i> Volunteer</h3>
