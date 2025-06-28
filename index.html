@@ -232,7 +232,7 @@
       margin: 0.7rem 0;
       font-weight: 500;
       font-size: 1.1rem;
-      cursor: pointer;
+      cursor: default;
       padding: 0.3rem 0.5rem;
       border-radius: 10px;
     }
@@ -697,6 +697,8 @@
     <nav class="icon-nav" role="tablist" aria-label="Main Navigation">
       <button onclick="showSection('about')" class="active" aria-selected="true" role="tab" aria-controls="about"><i
           class="fas fa-user"></i><span class="sr-only">About</span></button>
+      <button onclick="showSection('my-story')" role="tab" aria-selected="false" aria-controls="my-story">
+      <i class="fas fa-feather-alt"></i><span class="sr-only">My Story</span></button>
       <button onclick="showSection('skills')" role="tab" aria-selected="false" aria-controls="skills"><i
           class="fas fa-tools"></i><span class="sr-only">Skills</span></button>
       <button onclick="showSection('languages')" role="tab" aria-selected="false" aria-controls="languages"><i
@@ -712,21 +714,21 @@
       <section id="about" class="section active" role="tabpanel" aria-labelledby="journey-tab">
         <img src="img.png" alt="Profile Picture" class="profile-img" />
         <h1>Emerentia Novena</h1>
-        <p>Language, Culture, and Learning Experience Design</p>
+        <p><b>Language, Culture, and Learning Experience Design</b></p>
         <ul>
           <li>Contact: <a href="mailto:emerennovena@gmail.com">emerennovena@gmail.com</a></li>
-
-<!--          <div class="socials">-->
-<!--            <a href="https://github.com/emerennovena" target="blank" rel="noopener noreferrer" aria-label="GitHub">-->
-<!--              <i class="fab fa-github"></i>-->
-<!--            </a>-->
-<!--            <a href="https://linkedin.com/in/emerennovena" target="blank" rel="noopener noreferrer" aria-label="LinkedIn">-->
-<!--              <i class="fab fa-linkedin"></i>-->
-<!--            </a>-->
-<!--          </div>-->
-
         </ul>
       </section>
+
+      <section id="my-story" class="section" role="tabpanel" aria-labelledby="my-story-tab" tabindex="0">
+      <h2>My Story</h2>
+      <p>With a background in <strong>Foreign Languages & Literature</strong> and an MSc in <strong>Information Technology</strong>,
+         I blend storytelling, UX research, and educational design to create engaging, accessible digital content—especially for language learning.</p>
+      </br>
+      <p>I connect <strong>language, education, and tech</strong>.
+         Whether it's building a web app like <em>LanguaTale</em> or crafting immersive learning tools,
+         I enjoy turning ideas into purposeful, meaningful content that inspires.</p>
+    </section>
 
 
       <section id="skills" class="section" role="tabpanel" aria-labelledby="journey-tab" tabindex="0">
@@ -772,7 +774,7 @@
       </section>
 
       <section id="journey" class="section" role="tabpanel" aria-labelledby="journey-tab" tabindex="0">
-        <h2>Experience</h2>
+        <h2>Journey</h2>
 
         <h3><i class="fas fa-graduation-cap"></i> Education</h3>
         <ul class="timeline">
@@ -780,9 +782,13 @@
           <li><strong>Sep 2020 – Jun 2024:</strong> Bachelor of Arts in <b>Foreign Languages and Literature</b></li>
         </ul>
 
+        <h3><i class="fas fa-lightbulb"></i> Projects</h3>
+        <ul class="timeline">
+          <li><strong>Jun 2025 – Sep 2025:</strong><b> Project Lead & Content Creator, <em>LanguaTale </em></b>— A Story-based Language Learning Web App</li>
+        </ul>
+
         <h3><i class="fas fa-briefcase"></i> Experience</h3>
         <ul class="timeline">
-          <li><strong>Jun 2025 – Sep 2025:</strong><b> Project Lead & Content Creator, LanguaTale </b>— A Story-based Language Learning Web App (University of Glasgow) </li>
           <li><strong>Sep 2022 – Jun 2024:</strong><b> Indonesian Language Teacher </b>— Taiwan</li>
         </ul>
 
@@ -797,7 +803,7 @@
       <section id="interests-certifications" class="section" role="tabpanel" aria-labelledby="journey-tab" tabindex="0">
         <h2>Other Interests</h2>
 
-        <h3><i class="fas fa-certificate"></i> Certifications</h3>
+        <h3><i class="fas fa-award"></i> Certifications</h3>
         <ul class="timeline">
           <li class="cert-item">
             <i class="fas fa-book-reader"></i><strong> Udemy </strong> – Library Management
@@ -816,8 +822,8 @@
         <h3><i class="fas fa-heart"></i> Personal Interests</h3>
         <ul class="timeline">
           <li><strong>Language Learning</strong></li>
-          <li><strong>Music:</strong> Classical Piano</li>
-          <li><strong>Games:</strong> Cosy Cottagecore-themed games</li>
+          <li><strong>Classical Piano</strong></li>
+          <li><strong>Cosy Cottagecore-themed games</strong></li>
         </ul>
       </section>
     </div>
