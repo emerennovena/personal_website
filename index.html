@@ -43,7 +43,7 @@
       --current-text-dark: var(--text-dark);
       --current-text-light: var(--text-light);
       --current-shadow-light: var(--shadow-light);
-      --current-body-bg: var(--body-bg-light-gradient);
+      --current-body-bg: var(--body-bg-light-gradient); /* Default light background */
     }
 
     html.dark-mode {
@@ -54,6 +54,7 @@
       --current-text-dark: var(--dark-text-dark);
       --current-text-light: var(--dark-text-light);
       --current-shadow-light: var(--dark-shadow-light);
+      --current-body-bg: var(--dark-bg-light); /* Set body background to dark */
     }
 
     * {
@@ -64,7 +65,7 @@
       margin: 0;
       padding: 2rem 1rem;
       font-family: 'Merriweather', serif;
-      background: var(--current-body-bg);
+      background: var(--current-body-bg); /* Use the current body background variable */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -512,44 +513,7 @@
       padding: 0.5rem 1rem;
     }
 
-    #snow-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: -1;
-    }
-
-    .snowflake {
-      position: absolute;
-      top: -10px;
-      background: white;
-      border-radius: 50%;
-      opacity: 0.8;
-      filter: drop-shadow(0 0 2px #eef);
-      animation: fallAndSway linear infinite;
-    }
-
-    @keyframes fallAndSway {
-      0% {
-        transform: translate(0, 0);
-      }
-      25% {
-        transform: translate(5px, 25vh);
-      }
-      50% {
-        transform: translate(-5px, 50vh);
-      }
-      75% {
-        transform: translate(5px, 75vh);
-      }
-      100% {
-        transform: translate(0, 100vh);
-      }
-    }
+    /* Removed #snow-container and .snowflake CSS */
 
     .text-container {
       width: 100%;
@@ -615,9 +579,7 @@
   </style>
 </head>
 <body>
-  <div id="snow-container" aria-hidden="true"></div>
   <button id="darkModeToggle" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
-  </button>
 
   <div class="hill-bg" aria-hidden="true">
     <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
@@ -669,7 +631,7 @@
           <li><strong>Sep 2020 - Jun 2024: </strong>Bachelor of Arts in <b>Foreign Languages and Literature</b> at <a href="https://www.fcu.edu.tw/en/" target="_blank">FCU</a></li>
           <li><strong>Jan 2019 - Apr 2020: </strong>Diploma in <b>Business - Marketing</b> at <a href="https://humber.ca" target="_blank">Humber College</a></li>
         </ul>
-</section>
+      </section>
 
       <section id="skills" class="section" role="tabpanel" aria-labelledby="journey-tab" tabindex="0">
         <h2>Skills</h2>
@@ -765,60 +727,8 @@
       });
     });
 
-    const clickSound = document.getElementById('clickSound');
 
-    document.querySelectorAll('.icon-nav button').forEach(button => {
-      button.addEventListener('click', () => {
-        playClickSound();
-      });
-    });
 
-    let isMuted = false;
-
-    const soundToggle = document.getElementById('soundToggle');
-
-    soundToggle.addEventListener('click', () => {
-      isMuted = !isMuted;
-
-      if (isMuted) {
-        soundToggle.querySelector('i').classList.replace('fa-volume-up', 'fa-volume-mute');
-        soundToggle.setAttribute('aria-pressed', 'false');
-      } else {
-        soundToggle.querySelector('i').classList.replace('fa-volume-mute', 'fa-volume-up');
-        soundToggle.setAttribute('aria-pressed', 'true');
-      }
-    });
-
-    function playClickSound() {
-      if (isMuted) return;
-      const soundClone = clickSound.cloneNode();
-      soundClone.volume = 0.5;
-      soundClone.play();
-    }
-
-    const snowContainer = document.getElementById('snow-container');
-
-    function createSnowflake() {
-      const snowflake = document.createElement('div');
-      snowflake.classList.add('snowflake');
-
-      const size = Math.random() * 6 + 4;
-      snowflake.style.width = `${size}px`;
-      snowflake.style.height = `${size}px`;
-      snowflake.style.left = `${Math.random() * 100}vw`;
-
-      const duration = Math.random() * 5 + 5;
-      snowflake.style.animationDuration = `${duration}s, ${duration / 2}s`;
-      snowflake.style.animationDelay = `0s, ${Math.random() * 2}s`;
-
-      snowContainer.appendChild(snowflake);
-
-      setTimeout(() => {
-        snowflake.remove();
-      }, duration * 1000);
-    }
-
-    setInterval(createSnowflake, 150);
   </script>
 </body>
 </html>
