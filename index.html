@@ -7,12 +7,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script>
+    // Check for dark mode preference in localStorage and apply it before rendering
     const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
     if (isDarkMode) {
       document.documentElement.classList.add('dark-mode');
     }
   </script>
   <style>
+    /* Define CSS variables for light and dark themes */
     :root {
       /* Light Colors */
       --bg-light: #e9f0f4;
@@ -21,21 +23,21 @@
       --accent: #7b5e58;
       --text-dark: #2f2f2f;
       --text-light: #5a5a5a;
-      --shadow-light: 0 8px 24px rgba(43, 93, 104, 0.15);
+      --shadow-light: 0 8px 24px rgba(43, 93, 104, 0.1); /* Slightly softer shadow */
       --border-radius: 18px;
       --transition: 0.3s ease;
       --body-bg-light-gradient: linear-gradient(135deg, #e9f0f4, #f9f8f6);
 
       /* Dark Colors */
-      --dark-bg-light: #121212;
-      --dark-bg-accent: #1f1f1f;
+      --dark-bg-light: #1c2b36; /* Darker blue-grey for dark mode light bg */
+      --dark-bg-accent: #2a3d45; /* Darker blue-grey for dark mode accent bg */
       --dark-primary: #88c0d0;
       --dark-accent: #a3be8c;
       --dark-text-dark: #e0e0e0;
       --dark-text-light: #b0b0b0;
-      --dark-shadow-light: 0 8px 24px rgba(136, 192, 208, 0.3);
+      --dark-shadow-light: 0 8px 24px rgba(136, 192, 208, 0.15); /* Dark mode shadow */
 
-      /* Current Theme Colors */
+      /* Current Theme Colors - default to light */
       --current-bg-light: var(--bg-light);
       --current-bg-accent: var(--bg-accent);
       --current-primary: var(--primary);
@@ -46,6 +48,7 @@
       --current-body-bg: var(--body-bg-light-gradient); /* Default light background */
     }
 
+    /* Apply dark mode colors when 'dark-mode' class is present on html */
     html.dark-mode {
       --current-bg-light: var(--dark-bg-light);
       --current-bg-accent: var(--dark-bg-accent);
@@ -57,29 +60,34 @@
       --current-body-bg: var(--dark-bg-light); /* Set body background to dark */
     }
 
+    /* Universal box-sizing for consistent layout */
     * {
       box-sizing: border-box;
     }
 
-    body {
-      margin: 0;
-      padding: 2rem 1rem;
-      font-family: 'Merriweather', serif;
-      background: var(--current-body-bg); /* Use the current body background variable */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh; /* Ensure body takes full viewport height */
-      color: var(--current-text-dark);
-      position: relative;
-      transition: color var(--transition), background var(--transition);
-      overflow: hidden; /* Prevent body from scrolling */
-    }
+    /* Body styling: Centered content, responsive padding, background, and text color */
+body {
+  margin: 0;
+  padding: 1rem; /* Adjusted for full width container with slight margin */
+  font-family: 'Merriweather', serif;
+  background: var(--current-body-bg);
+  display: flex;
+  justify-content: center; /* Centers the container horizontally */
+  align-items: center; /* Centers the container vertically */
+  min-height: 100vh; /* Ensures the body always takes at least the full viewport height */
+  color: var(--current-text-dark);
+  position: relative;
+  transition: color var(--transition), background var(--transition);
+  /* REMOVE overflow-y: auto; from body to prevent it from scrolling */
+  overflow: hidden; /* Prevent body from scrolling */
+}
 
-    html.dark-mode .hill-bg svg path {
-      fill: #2a3d45;
-    }
+    /* Hill background styling for dark mode - REMOVED COLOR CHANGE */
+    /* html.dark-mode .hill-bg svg path {
+      fill: var(--dark-bg-light);
+    } */
 
+    /* Hill background positioning and size */
     .hill-bg {
       position: absolute;
       bottom: 0;
@@ -97,29 +105,37 @@
       height: 100%;
     }
 
-    .container {
-      width: 100%;
-      max-width: 830px;
-      background: var(--current-bg-accent);
-      border-radius: var(--border-radius);
-      padding: 1.5rem 2rem;
-      box-shadow: var(--current-shadow-light);
-      position: relative;
-      z-index: 1;
-      /* Removed height/max-height and overflow-y: auto from here */
-      overflow-x: hidden; /* Keep horizontal overflow hidden for the container */
-    }
+    /* Main container styling: Now centered with a max-width */
+.container {
+  width: 100%; /* Take full available width up to max-width */
+  max-width: 800px; /* Set a maximum width for the container */
+  margin: 0 auto; /* Center the container horizontally */
+  /* Define a max-height and overflow-y for the container itself to scroll */
+  max-height: 90vh; /* Set a maximum height for the container, e.g., 90% of viewport height */
+  overflow-y: auto; /* Make the container scrollable */
+  background: var(--current-bg-accent);
+  border-radius: var(--border-radius);
+  padding: 1.5rem 2rem;
+  box-shadow: var(--current-shadow-light);
+  position: relative;
+  z-index: 1;
+  /* REMOVE overflow: hidden; from container, as it's now handled by overflow-y: auto */
+  display: flex;
+  flex-direction: column;
+}
 
+    /* Icon navigation styling */
     .icon-nav {
       position: sticky;
       top: 0;
-      background: var(--current-bg-accent); /* Make background opaque for sticky nav */
+      background: var(--current-bg-accent);
       padding: 1rem 0;
       display: flex;
       justify-content: space-around;
-      border-bottom: 2px solid var(--current-bg-accent);
+      border-bottom: 2px solid var(--current-bg-light); /* Lighter border for separation */
       margin-bottom: 2rem;
       z-index: 10;
+      border-radius: var(--border-radius) var(--border-radius) 0 0; /* Match container border radius */
     }
 
     .icon-nav button {
@@ -137,7 +153,7 @@
     .icon-nav button:hover,
     .icon-nav button.active {
       color: var(--current-primary);
-      transform: scale(1.25);
+      transform: scale(1.1); /* Slightly smaller hover effect for subtlety */
       font-weight: 700;
     }
 
@@ -153,11 +169,12 @@
       border-radius: 3px;
     }
 
+    /* Profile image styling */
     .profile-img {
       width: 130px;
       height: 130px;
       border-radius: 50%;
-      border: 4px solid var(--current-accent);
+      border: 4px solid var(--current-primary); /* Changed to primary for prominence */
       object-fit: cover;
       display: block;
       margin: 0 auto 1.5rem;
@@ -170,37 +187,63 @@
     }
 
     .profile-img:hover {
-      transform: scale(1.05);
+      transform: scale(1.03); /* Subtle hover */
     }
 
+    /* Heading styles */
     h1,
     h2 {
       text-align: center;
-      color: var(--current-accent);
+      color: var(--current-primary); /* Changed to primary for headings */
       margin-bottom: 1rem;
     }
 
     h1 {
-      font-size: 2.4rem;
+      font-size: 2.6rem; /* Slightly larger */
+      margin-top: 0.5rem;
     }
 
     h2 {
-      font-size: 1.8rem;
+      font-size: 2rem; /* Slightly larger */
     }
 
+    h3 {
+      color: var(--current-accent);
+      margin-bottom: 1rem;
+      text-align: center; /* Default center for h3 */
+    }
+
+    /* Paragraph and list styling - MODIFIED FOR FULL WIDTH CONTENT */
     p,
     ul {
-      text-align: center;
+      /* Removed max-width and margin: auto to allow full width */
+      text-align: left; /* Default to left-align for general content */
       color: var(--current-text-light);
-      line-height: 1.5;
-      max-width: 600px;
-      margin: 0 auto;
+      line-height: 1.6; /* Increased line-height for readability */
+      margin: 0; /* Remove default margins that might interfere */
+      padding: 0; /* Remove default padding that might interfere */
       font-size: 1.05rem;
+    }
+
+
+    /* Specific adjustments for paragraphs within the about section to keep them centered */
+    #about p {
+      text-align: center; /* Keep text in about section centered */
+      max-width: 600px; /* Re-apply max-width for about section paragraphs */
+      margin: 0 auto; /* Re-center about section paragraphs */
+      margin-top: 1.5rem; /* Maintain original top margin */
+    }
+
+    /* NEW: Specific adjustments for ul within the about section to center it */
+    #about ul {
+      text-align: center; /* Center the text within the list items */
+      max-width: fit-content; /* Allow the ul to shrink to its content width */
+      margin: 0 auto; /* Center the ul element itself */
     }
 
     ul {
       list-style: none;
-      padding: 0;
+      /* padding: 0;  Already set above, but good to note */
     }
 
     ul li {
@@ -220,28 +263,32 @@
 
     ul li a {
       text-decoration: none;
-      color: var(--current-accent);
+      color: var(--current-primary); /* Changed link color to primary */
       font-weight: 700;
     }
 
+    /* Social icons styling */
     .socials {
       text-align: center;
-      margin-top: 0.5rem;
+      margin-top: 1.5rem; /* Increased margin */
     }
 
     .socials a {
       color: var(--current-accent);
-      font-size: 1.7rem;
-      margin: 0 10px;
+      font-size: 1.9rem; /* Slightly larger icons */
+      margin: 0 12px; /* Increased spacing */
       text-decoration: none;
+      transition: transform var(--transition);
     }
 
     .socials a:hover {
       color: var(--current-primary);
+      transform: translateY(-3px); /* Subtle lift on hover */
     }
 
+    /* Card content area */
     .card-content {
-      min-height: 320px; /* This sets the minimum height of the content area */
+      flex-grow: 1; /* Allows content area to expand */
     }
 
     section {
@@ -249,17 +296,16 @@
       padding: 0;
     }
 
-    /* Important: These styles on .section are what makes the *tabs* scrollable */
+    /* Section styling - HEIGHT ADJUSTED */
     .section {
       display: none;
       animation: fadeIn 0.4s ease-in-out;
-      max-height: 320px; /* This is the fixed height for each scrollable tab content */
-      overflow-y: auto; /* This makes each tab content scrollable */
-      padding-right: 1rem; /* Adds space for the scrollbar */
-      scrollbar-width: thin; /* For Firefox */
+      max-height: 300px; /* Adjusted to make container smaller */
+      overflow-y: auto;
+      padding-right: 1rem;
+      scrollbar-width: thin;
     }
 
-    /* Webkit scrollbar styles for sections */
     .section::-webkit-scrollbar {
       width: 8px;
     }
@@ -273,32 +319,55 @@
       display: block;
     }
 
-    .skills-grid {
+    /* Skills Masonry Layout */
+    .skills-masonry {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 1.2rem;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       text-align: center;
       max-width: 100%;
+      grid-auto-rows: minmax(auto, max-content); /* Ensures rows adjust to content */
     }
 
-    .skill {
-      background: var(--current-bg-accent);
-      border-radius: 15px;
-      padding: 1rem 1.2rem;
+    .skill-card {
+      background: var(--current-bg-light);
+      border-radius: var(--border-radius);
+      padding: 1.2rem;
       box-shadow: var(--current-shadow-light);
       font-weight: 600;
       color: var(--current-primary);
-      min-height: 70px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       font-size: 1.05rem;
+      text-align: center;
+      transition: background-color var(--transition), transform var(--transition);
     }
 
-    .skill:hover {
-      background-color: var(--current-bg-light);
+    .skill-card:hover {
+      background-color: var(--current-primary);
+      color: white;
+      transform: translateY(-3px);
     }
+
+    .skill-card i {
+      font-size: 2.2rem;
+      margin-bottom: 0.8rem;
+      color: var(--current-accent);
+      transition: color var(--transition);
+    }
+
+    .skill-card:hover i {
+      color: white;
+    }
+
+    /* Specific adjustment for skill-card within Languages to remove margin-bottom */
+    #skills .skills-masonry .skill-card:has(span) {
+        margin-bottom: 0; /* Remove margin-bottom if only text is present */
+    }
+
 
     @keyframes fadeIn {
       from {
@@ -347,13 +416,9 @@
       cursor: pointer;
       font-size: 1.5rem;
       color: var(--current-accent);
-      box-shadow: 0 4px 10px rgba(43, 93, 104, 0.15);
+      box-shadow: var(--current-shadow-light);
       z-index: 10;
-      transition: background var(--transition), color var(--transition);
-    }
-
-    html.dark-mode #darkModeToggle {
-      box-shadow: 0 4px 10px rgba(136, 192, 208, 0.15);
+      transition: background var(--transition), color var(--transition), box-shadow var(--transition);
     }
 
     #darkModeToggle:hover {
@@ -372,13 +437,9 @@
       cursor: pointer;
       font-size: 1.5rem;
       color: var(--current-accent);
-      box-shadow: 0 4px 10px rgba(43, 93, 104, 0.15);
+      box-shadow: var(--current-shadow-light);
       z-index: 10;
-      transition: background var(--transition), color var(--transition);
-    }
-
-    html.dark-mode #soundToggle {
-      box-shadow: 0 4px 10px rgba(136, 192, 208, 0.15);
+      transition: background var(--transition), color var(--transition), box-shadow var(--transition);
     }
 
     #soundToggle:hover {
@@ -386,183 +447,176 @@
       color: white;
     }
 
-    /* All specific section scroll properties were moved to the generic .section class */
-    /* Ensure no conflicting max-height/overflow-y rules remain on individual sections */
-    #journey,
-    #about,
-    #skills,
-    #interests-certifications {
-      /* These specific IDs no longer need max-height/overflow-y if .section handles it */
-      /* If you want different max-heights per section, override them here */
-      /* For consistency with the general .section, you can remove these specific overrides unless needed */
-      /* For now, assuming they inherit from .section */
-      scrollbar-width: thin; /* Retaining for these specific sections if they need it */
-    }
-
-    /* Webkit scrollbar for specific sections (if you want to target them explicitly) */
-    #journey::-webkit-scrollbar,
-    #about::-webkit-scrollbar,
-    #skills::-webkit-scrollbar,
-    #interests-certifications::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    #journey::-webkit-scrollbar-thumb,
-    #about::-webkit-scrollbar-thumb,
-    #skills::-webkit-scrollbar-thumb,
-    #interests-certifications::-webkit-scrollbar-thumb {
-      background-color: var(--current-primary);
-      border-radius: 4px;
-    }
-
-
-    #journey,
-    #journey ul,
-    #journey p,
-    #journey h3 {
+    /* Journey timeline styling */
+    #journey h3,
+    #extra-favorite h3 { /* Added #extra-favorite for consistent styling */
       text-align: left;
-      max-width: none;
-      margin-left: 0;
-    }
-
-    #journey ul li i {
-      margin-right: 8px;
-      color: var(--current-primary);
+      margin-left: 0; /* Align h3 to left, relative to container padding */
+      padding-left: 2rem; /* Add padding to align with timeline content */
     }
 
     .timeline {
       position: relative;
-      padding-left: 30px;
-      margin-left: 0;
+      padding-left: 0;
+      margin-left: 0.5rem; /* Removed margin to allow full width within container's padding */
+      margin-right: 0.5rem; /* Removed margin to allow full width within container's padding */
       list-style: none;
-      border-left: 3px solid var(--current-primary);
+      border-left: 3px solid var(--current-primary); /* This is the vertical line */
     }
 
     .timeline li {
       position: relative;
-      margin-bottom: 1.5rem;
-      padding-left: 20px;
+      margin-bottom: 2rem;
+      width: 100%; /* Ensure it fills the timeline's width */
+      /* Adjusted padding-left to make space for the dot and its positioning */
+      padding: 1rem 1.5rem 1rem 25px; /* Top, Right, Bottom, Left. Left padding increased. */
       font-weight: 500;
       cursor: default;
+      text-align: left; /* Ensure text is left-aligned */
+      color: var(--current-text-dark);
+      background: var(--current-bg-light);
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: transform var(--transition), background-color var(--transition);
+    }
+
+    .timeline li:hover {
+      transform: translateY(-2px);
+      background-color: var(--current-bg-accent);
     }
 
     .timeline li::before {
       content: '';
       position: absolute;
-      left: -11px;
-      top: 6px;
-      width: 14px;
-      height: 14px;
+      /* Adjusted to center the dot on the vertical line */
+      left: -13.5px; /* This is the fix for the dot being cut off */
+      top: 1.2rem;
+      width: 16px;
+      height: 16px;
       background-color: var(--current-primary);
-      border: 3px solid var(--current-bg-accent);
+      border: 4px solid var(--current-bg-accent);
       border-radius: 50%;
       box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+      z-index: 2;
     }
 
-    .skills-group {
-      background: var(--current-bg-accent);
-      border-radius: 15px;
-      padding: 1rem 1.5rem;
-      box-shadow: var(--current-shadow-light);
-      margin-bottom: 1.5rem;
-    }
-
-    .skills-group h3 {
-      margin-bottom: 0.75rem;
+    .timeline li strong {
       color: var(--current-primary);
     }
 
-    .container {
-      max-width: 900px;
-      padding: 2rem 3rem;
-      margin: 2rem auto;
-      background: var(--current-bg-accent);
-      border-radius: var(--border-radius);
-      box-shadow: var(--current-shadow-light);
-      /* These were already in your base .container, ensure they don't override the section's scrolling */
+    .timeline li i {
+      margin-right: 8px;
+      color: var(--current-accent);
     }
 
-    .skills-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1.5rem;
-      justify-content: center;
-      padding: 0;
-      margin: 0 auto;
-      list-style: none;
-      max-width: 100%;
-    }
+    /* Specific adjustments for about section */
+    /* #about p rule moved up to combine with general p, ul */
 
-    .skills-list li {
-      background-color: var(--current-primary);
-      color: #fff;
-      padding: 0.7rem 1.2rem;
-      border-radius: 30px;
-      font-weight: 600;
-      font-size: 1rem;
-      text-align: center;
-      cursor: default;
-      user-select: none;
-      transition: background-color var(--transition);
-    }
-
-    .skills-list li:hover {
-      background-color: var(--current-bg-light);
-      color: var(--current-primary);
-    }
-
-    @media (max-width: 600px) {
-      .skills-list {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 1rem;
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+        max-height: 85vh;
+      }
+      h1 {
+        font-size: 2.2rem;
+      }
+      h2 {
+        font-size: 1.7rem;
+      }
+      .icon-nav button {
+        font-size: 1.5rem;
+      }
+      .profile-img {
+        width: 110px;
+        height: 110px;
+      }
+      .cat-icon {
+        bottom: 70px;
+        right: 30px;
+        font-size: 2.2rem;
+      }
+      #darkModeToggle, #soundToggle {
+        font-size: 1.2rem;
+        padding: 0.4rem 0.6rem;
+      }
+      /* Responsive adjustments for timeline on smaller screens */
+      #journey h3,
+      #extra-favorite h3, /* Added #extra-favorite for consistent styling */
+      .timeline {
+        margin-left: 0; /* Ensure it's 0 for smaller screens too */
+        margin-right: 0; /* Ensure it's 0 for smaller screens too */
+      }
+      #journey h3,
+      #extra-favorite h3 { /* Added #extra-favorite for consistent styling */
+        padding-left: 1rem; /* Adjust padding for smaller screens */
       }
     }
 
-    .language-skills li.language-teaching {
-      padding: 0.5rem 1rem;
-    }
-
-    /* Removed #snow-container and .snowflake CSS */
-
-    .text-container {
-      width: 100%;
-      max-width: 100%;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-
-    #interests-certifications .timeline li {
-      text-align: left;
-    }
-
-    #interests-certifications .timeline li .text-container p,
-    #interests-certifications .timeline li .text-container a {
-      text-align: left;
-      display: block;
-      margin-left: 0;
-    }
-
-    #interests-certifications .timeline li i {
-      margin-right: 10px;
-    }
-
-    #interests-certifications:hover {
-      width: 100%;
-      transition: width var(--transition);
-    }
-
-    #interests-certifications ul,
-    #interests-certifications p,
-    #interests-certifications h3 {
-      text-align: left;
-      max-width: none;
-      margin-left: 0;
-    }
-
-    #interests-certifications ul li i {
-      margin-right: 8px;
-      color: var(--current-primary);
+    @media (max-width: 480px) {
+      body {
+        padding: 0.5rem; /* Reduced body padding further for very small screens */
+      }
+      .container {
+        padding: 1rem;
+        border-radius: 12px;
+        max-height: 80vh;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      .icon-nav {
+        padding: 0.8rem 0;
+        margin-bottom: 1.5rem;
+      }
+      .icon-nav button {
+        font-size: 1.3rem;
+      }
+      .profile-img {
+        width: 90px;
+        height: 90px;
+      }
+      .skills-masonry {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 0.8rem;
+      }
+      .skill-card {
+        padding: 1rem;
+        font-size: 0.9rem;
+      }
+      .skill-card i {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+      }
+      .timeline {
+        padding-left: 0;
+        margin-left: 0; /* Ensure it's 0 for very small screens too */
+        margin-right: 0; /* Ensure it's 0 for very small screens too */
+      }
+      .timeline li {
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+      }
+      .timeline li::before {
+        left: -10px; /* Adjusted for smaller screens */
+        top: 1rem;
+        width: 12px;
+        height: 12px;
+        border-width: 3px;
+      }
+      /* The .skills-list li rule was from before, but keeping it here for completeness */
+      .skills-list li {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+      }
+      .cat-icon {
+        font-size: 2rem;
+        bottom: 50px;
+        right: 20px;
+      }
     }
   </style>
 </head>
@@ -587,69 +641,115 @@
           class="fas fa-route"></i><span class="sr-only">Journey</span></button>
       <button onclick="showSection('skills')" role="tab" aria-selected="false" aria-controls="skills"><i
           class="fas fa-tools"></i><span class="sr-only">Skills</span></button>
-      <button onclick="showSection('interests-certifications')" role="tab" aria-selected="false"
-        aria-controls="interests-certifications"><i class="fas fa-heart"></i><span class="sr-only">Extra Interests</span>
+      <button onclick="showSection('extra-favorite')" role="tab" aria-selected="false"
+        aria-controls="extra-favorite"><i class="fas fa-heart"></i><span class="sr-only">Extra Favorite</span>
       </button>
     </nav>
 
     <div class="card-content">
-      <section id="about" class="section active" role="tabpanel" aria-labelledby="journey-tab">
+      <section id="about" class="section active" role="tabpanel" aria-labelledby="about-tab">
         <img src="img.png" alt="Profile Picture" class="profile-img" />
         <h1>Emerentia Novena</h1>
-        <ul>
+        <h3>Language Teacher</h3>
+           <ul>
           <li>Contact: <a href="mailto:emerennovena@gmail.com">emerennovena@gmail.com</a></li>
         </ul>
       </section>
 
       <section id="journey" class="section" role="tabpanel" aria-labelledby="journey-tab" tabindex="0">
-        <h2>About</h2>
+        <h2>Timeline</h2>
         <h3><i class="fas fa-briefcase"></i> Experience</h3>
         <ul class="timeline">
           <li>
-            <strong>Sep 2022 – Jun 2024: Indonesian Language Teacher at <a href="https://www.ri-asia.org" target="_blank">Radius Asia</a></strong>
+            <strong>Sep 2022 – Jun 2024: Indonesian Language Teacher at <a href="https://www.ri-asia.org" target="_blank">Radius Asia</a></strong><br>
+            <small><em>Key responsibilities included classroom instruction and student assessment.</em></small>
           </li>
           <li>
-            <strong>Sep 2021 – Jun 2024: Office Assistant at <a href="https://fll.fcu.edu.tw/en/" target="_blank">Feng Chia University</a></strong>
+            <strong>Sep 2021 – Jun 2024: Office Assistant at <a href="https://fll.fcu.edu.tw/en/" target="_blank">Feng Chia University</a></strong><br>
+            <small><em>Provided comprehensive administrative support, managed schedules, and organised documents.</em></small>
           </li>
         </ul>
 
         <h3><i class="fas fa-graduation-cap"></i> Education</h3>
         <ul class="timeline">
-          <li><strong>Sep 2024 - Sep 2025: </strong>Master of Science in <b>Information Technology</b> at <a href="https://www.gla.ac.uk" target="_blank">UofG</a></li>
-          <li><strong>Sep 2020 - Jun 2024: </strong>Bachelor of Arts in <b>Foreign Languages and Literature</b> at <a href="https://www.fcu.edu.tw/en/" target="_blank">FCU</a></li>
-          </ul>
+          <li><strong>Sep 2024 - Sep 2025: </strong>Master of Science in <b>Information Technology</b> at <a href="https://www.gla.ac.uk" target="_blank">University of Glasgow</a></li>
+          <li><strong>Sep 2020 - Jun 2024: </strong>Bachelor of Arts in <b>Foreign Languages and Literature</b> at <a href="https://www.fcu.edu.tw/en/" target="_blank">Feng Chia University</a></li>
+        </ul>
       </section>
 
-      <section id="skills" class="section" role="tabpanel" aria-labelledby="journey-tab" tabindex="0">
+      <section id="skills" class="section" role="tabpanel" aria-labelledby="skills-tab" tabindex="0">
         <h2>Skills</h2>
-        <h3>Professional</h3>
-        <ul class="skills-list">
-          <li>Language Teaching</li>
-          <li>Language Pedagogy</li>
-          <li>Cross-Cultural Communication</li>
-          <li>Administrative Support</li>
-        </ul>
+        <h3>Core Competencies</h3>
+        <div class="skills-masonry">
+          <div class="skill-card">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <span>Language Teaching</span>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-comments"></i>
+            <span>Language Pedagogy</span>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-handshake"></i>
+            <span>Cross-Cultural Communication</span>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-clipboard-list"></i>
+            <span>Administrative Support</span>
+          </div>
+        </div>
 
-        <h3>Tools</h3>
-        <ul class="skills-list">
-          <li>Figma</li>
-          <li>InkleWriter</li>
-          <li>Canva</li>
-          <li>Trello</li>
-          <li>Microsoft Office Suite</li>
-          <li>Google Workspace</li>
-        </ul>
+        <h3>Tools & Software</h3>
+        <div class="skills-masonry">
+          <div class="skill-card">
+            <i class="fab fa-figma"></i>
+            <span>Figma</span>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-book-open"></i>
+            <span>InkleWriter</span>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-paint-brush"></i>
+            <span>Canva</span>
+          </div>
+          <div class="skill-card">
+            <i class="fab fa-trello"></i>
+            <span>Trello</span>
+          </div>
+          <div class="skill-card">
+            <i class="fab fa-microsoft"></i>
+            <span>MS Office Suite</span>
+          </div>
+          <div class="skill-card">
+            <i class="fab fa-google"></i>
+            <span>Google Workspace</span>
+          </div>
+        </div>
 
         <h3>Languages</h3>
-        <ul class="skills-list">
-          <li>English</li>
-          <li>Indonesian</li>
-          <li>Chinese</li>
-          <li>Korean</li>
-        </ul>
+        <div class="skills-masonry">
+          <div class="skill-card">
+            <!-- Removed globe icon -->
+            <span>English</span>
+          </div>
+          <div class="skill-card">
+            <!-- Removed globe icon -->
+            <span>Indonesian</span>
+          </div>
+          <div class="skill-card">
+            <!-- Removed globe icon -->
+            <span>Chinese</span>
+          </div>
+          <div class="skill-card">
+            <!-- Removed globe icon -->
+            <span>Korean</span>
+          </div>
+        </div>
       </section>
 
-      <section id="interests-certifications" class="section" role="tabpanel" aria-labelledby="journey-tab" tabindex="0">
+      <!-- Extra Favorite Section -->
+      <section id="extra-favorite" class="section" role="tabpanel" aria-labelledby="extra-favorite-tab" tabindex="0">
         <h2>Other Interests</h2>
         <h3><i class="fas fa-award"></i> Certifications</h3>
         <ul class="timeline">
@@ -660,39 +760,53 @@
 
         <h3><i class="fas fa-heart"></i> Personal Interests</h3>
         <ul class="timeline">
-          <li><strong>Language Learning</strong></li>
-          <li><strong>Classical Piano</strong></li>
-          <li><strong>Cosy Cottagecore-themed games</strong></li>
+          <li><strong>Language Learning</strong><br></li>
+          <li><strong>Classical Piano</strong><br></li>
+          <li><strong>Cosy Cottagecore-themed games</strong><br></li>
         </ul>
       </section>
     </div>
   </div>
 
   <script>
+    /**
+     * Controls the visibility of sections and updates active navigation buttons.
+     * Stores the active section in localStorage.
+     * @param {string} id The ID of the section to show.
+     */
     function showSection(id) {
       const sections = document.querySelectorAll('.section');
       const buttons = document.querySelectorAll('.icon-nav button');
 
+      // Hide all sections and mark them as aria-hidden
       sections.forEach(section => {
         const isActive = section.id === id;
         section.classList.toggle('active', isActive);
         section.setAttribute('aria-hidden', !isActive);
       });
 
+      // Update active state for navigation buttons and aria-selected
       buttons.forEach(button => {
         const controls = button.getAttribute('aria-controls');
         const isActive = controls === id;
         button.classList.toggle('active', isActive);
         button.setAttribute('aria-selected', isActive);
       });
+
+      // Save the active section to localStorage
       localStorage.setItem('activeSection', id);
     }
 
+    /**
+     * Initializes the dark mode toggle and sets the initial active section
+     * based on localStorage or defaults to 'about'.
+     */
     window.addEventListener('DOMContentLoaded', () => {
       const darkModeToggle = document.getElementById('darkModeToggle');
       const html = document.documentElement;
       const icon = darkModeToggle.querySelector('i');
 
+      // Function to update the dark mode icon (sun/moon)
       function updateDarkModeIcon() {
         if (html.classList.contains('dark-mode')) {
           icon.classList.replace('fa-moon', 'fa-sun');
@@ -700,18 +814,27 @@
           icon.classList.replace('fa-sun', 'fa-moon');
         }
       }
-      updateDarkModeIcon();
+      updateDarkModeIcon(); // Set initial icon based on current mode
 
+      // Event listener for dark mode toggle button
       darkModeToggle.addEventListener('click', () => {
         if (html.classList.contains('dark-mode')) {
           html.classList.remove('dark-mode');
-          localStorage.setItem('darkMode', 'disabled');
+          localStorage.setItem('darkMode', 'disabled'); // Save preference
         } else {
           html.classList.add('dark-mode');
-          localStorage.setItem('darkMode', 'enabled');
+          localStorage.setItem('darkMode', 'enabled'); // Save preference
         }
-        updateDarkModeIcon();
+        updateDarkModeIcon(); // Update icon after toggle
       });
+
+      // Initialize active section from localStorage or default to 'about'
+      const savedActiveSection = localStorage.getItem('activeSection');
+      if (savedActiveSection) {
+        showSection(savedActiveSection);
+      } else {
+        showSection('about'); // Default active section is now 'about'
+      }
     });
   </script>
 </body>
