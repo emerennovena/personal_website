@@ -213,6 +213,8 @@ body {
       text-align: center; /* Default center for h3 */
     }
 
+
+
     /* Paragraph and list styling - MODIFIED FOR FULL WIDTH CONTENT */
     p,
     ul {
@@ -266,6 +268,7 @@ body {
       color: var(--current-primary); /* Changed link color to primary */
       font-weight: 700;
     }
+
 
     /* Social icons styling */
     .socials {
@@ -699,16 +702,10 @@ body {
       }
     }
 
-.radius-link {
-  color: #004080; /* Default for light mode */
-  text-decoration: underline;
+lu a {
+  color: #80bfff;
   font-weight: bold;
-}
-
-@media (prefers-color-scheme: dark) {
-  .radius-link {
-    color: #80bfff; /* Light blue for dark mode */
-  }
+  text-decoration: underline;
 }
 
   </style>
@@ -740,17 +737,12 @@ body {
       <section id="about" class="section active" role="tabpanel" aria-labelledby="about-tab">
         <img src="img.png" alt="Profile Picture" class="profile-img" />
         <h1>Emerentia Novena</h1>
-        <h3>Learning Experience Designer<br/><strong>Former Language Teacher at <a href="https://www.ri-asia.org" target="_blank" class="radius-link">Radius Asia</a></strong></h3>
-
-<ul class="timeline">
-           <h3><i class="fas fa-graduation-cap"></i> Education</h3>
-          <li>Master of Science in <b>Information Technology</b></li>
-          <li>Bachelor of Arts in <b>Foreign Languages and Literature</b></li>
-</ul>
+        <h3><lu>Learning Experience Designer </br> Former Language Teacher at <a href="https://www.ri-asia.org" target="_blank">Radius Asia</a></lu></h3>
 
            <ul>
           <li>Contact: <a href="mailto:emerennovena@gmail.com">emerennovena@gmail.com</a></li>
         </ul>
+
       </section>
 
       <section id="projects" class="section" role="tabpanel" aria-labelledby="projects-tab" tabindex="0">
@@ -920,6 +912,7 @@ body {
         showSection('about'); // Default active section is now 'about'
       }
     });
+
   </script>
 </body>
 </html>
