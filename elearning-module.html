@@ -33,7 +33,7 @@
       --dark-bg-accent: #2a3d45; /* Darker blue-grey for dark mode accent bg */
       --dark-primary: #88c0d0;
       --dark-accent: #a3be8c;
-      --dark-text-dark: #FFFFFF; /* Changed to pure white for maximum contrast in dark mode */
+      --dark-text-dark: #e0e0e0;
       --dark-text-light: #b0b0b0;
       --dark-shadow-light: 0 8px 24px rgba(136, 192, 208, 0.15); /* Dark mode shadow */
 
@@ -54,7 +54,7 @@
       --current-bg-accent: var(--dark-bg-accent);
       --current-primary: var(--dark-primary);
       --current-accent: var(--dark-accent);
-      --current-text-dark: var(--dark-text-dark); /* This will now be #FFFFFF */
+      --current-text-dark: var(--dark-text-dark);
       --current-text-light: var(--dark-text-light);
       --current-shadow-light: var(--dark-shadow-light);
       --current-body-bg: var(--dark-bg-light); /* Set body background to dark */
@@ -97,11 +97,6 @@
       display: block;
       width: 100%;
       height: 100%;
-    }
-
-    /* NEW: Dark mode specific fill for the hill */
-    html.dark-mode .hill-bg svg path {
-      fill: var(--dark-bg-light); /* Make hill dark in dark mode */
     }
 
     /* Wrapper for project content to mimic container's centering and max-width */
@@ -160,14 +155,22 @@
     /* Paragraph and list styling */
     p, ul {
       text-align: left;
-      color: var(--current-text-dark); /* Ensures readability, now using pure white in dark mode */
+      color: var(--current-text-dark); /* Ensures readability */
       line-height: 1.6;
       margin: 0;
       padding: 0;
       font-size: 1.05rem;
     }
 
-    /* Removed text-shadow as hill color adapts */
+    /* Added text-shadow for readability over background */
+    .project-detail-content p,
+    .project-detail-content ul li {
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow for light text over light background */
+    }
+    html.dark-mode .project-detail-content p,
+    html.dark-mode .project-detail-content ul li {
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.2); /* Subtle shadow for dark text over dark background */
+    }
 
 
     ul {
@@ -189,9 +192,9 @@
       font-weight: 700;
     }
 
-    /* Specific styles for the project content - NO BACKGROUND/SHADOW/BORDER-RADIUS HERE */
+    /* Specific styles for the project content - NO BACKGROUND/SHADOW/BORDER-RADIUS */
     .project-detail-content {
-        padding: 2rem; /* Padding within the content block */
+        padding: 2rem;
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
