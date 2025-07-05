@@ -162,6 +162,17 @@
       font-size: 1.05rem;
     }
 
+    /* Added text-shadow for readability over background */
+    .project-detail-content p,
+    .project-detail-content ul li {
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow for light text over light background */
+    }
+    html.dark-mode .project-detail-content p,
+    html.dark-mode .project-detail-content ul li {
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.2); /* Subtle shadow for dark text over dark background */
+    }
+
+
     ul {
       list-style: none;
     }
@@ -363,9 +374,10 @@
 
       <h3 class="project-section-heading">Technologies Used</h3>
       <div class="project-info-grid">
-          <div class="info-item"><strong>Frontend:</strong> HTML, CSS, JavaScript</div>
-          <div class="info-item"><strong>Backend:</strong> Django</div>
-          <div class="info-item"><strong>Database:</strong> SQLite</div>
+          <div class="info-item"><strong>Frontend:</strong> HTML5, CSS3, JavaScript (React.js)</div>
+          <div class="info-item"><strong>Backend:</strong> Node.js, Express.js</div>
+          <div class="info-item"><strong>Database:</strong> MongoDB</div>
+          <div class="info-item"><strong>Styling:</strong> Tailwind CSS</div>
           <div class="info-item"><strong>Story Logic:</strong> Ink (InkleWriter integration)</div>
           <div class="info-item"><strong>Version Control:</strong> Git, GitHub</div>
       </div>
