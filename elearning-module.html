@@ -99,6 +99,11 @@
       height: 100%;
     }
 
+    /* NEW: Dark mode specific fill for the hill */
+    html.dark-mode .hill-bg svg path {
+      fill: var(--dark-bg-light); /* Make hill dark in dark mode */
+    }
+
     /* Wrapper for project content to mimic container's centering and max-width */
     .project-page-wrapper {
         width: 100%;
@@ -162,15 +167,7 @@
       font-size: 1.05rem;
     }
 
-    /* Added text-shadow for readability over background */
-    .project-detail-content p,
-    .project-detail-content ul li {
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow for light text over light background */
-    }
-    html.dark-mode .project-detail-content p,
-    html.dark-mode .project-detail-content ul li {
-        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.2); /* Subtle shadow for dark text over dark background */
-    }
+    /* Removed text-shadow as hill color adapts */
 
 
     ul {
@@ -192,9 +189,9 @@
       font-weight: 700;
     }
 
-    /* Specific styles for the project content - NO BACKGROUND/SHADOW/BORDER-RADIUS */
+    /* Specific styles for the project content - NO BACKGROUND/SHADOW/BORDER-RADIUS HERE */
     .project-detail-content {
-        padding: 2rem;
+        padding: 2rem; /* Padding within the content block */
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
