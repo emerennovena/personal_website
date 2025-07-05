@@ -108,10 +108,10 @@ body {
     /* Main container styling: Now centered with a max-width */
 .container {
   width: 100%; /* Take full available width up to max-width */
-  max-width: 800px; /* Set a maximum width for the container */
+  max-width: 910px; /* Set a maximum width for the container */
   margin: 0 auto; /* Center the container horizontally */
   /* Define a max-height and overflow-y for the container itself to scroll */
-  max-height: 90vh; /* Set a maximum height for the container, e.g., 90% of viewport height */
+  max-height: 95vh; /* Set a maximum height for the container, e.g., 90% of viewport height */
   overflow-y: auto; /* Make the container scrollable */
   background: var(--current-bg-accent);
   border-radius: var(--border-radius);
@@ -319,6 +319,82 @@ body {
       display: block;
     }
 
+    /* Project Grid Styling (New) */
+    .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem; /* Added spacing at the bottom */
+    }
+
+    .project-card {
+        background: var(--current-bg-light);
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        box-shadow: var(--current-shadow-light);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-decoration: none;
+        color: inherit; /* Inherit text color from parent */
+        display: flex;
+        flex-direction: column; /* Allows content inside to stack */
+    }
+
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .project-card h3 {
+        margin-top: 0;
+        margin-bottom: 0.8rem;
+        color: var(--current-primary);
+        text-align: left; /* Align project title to left */
+        font-size: 1.4rem;
+    }
+
+    .project-card p {
+        color: var(--current-text-light);
+        font-size: 0.95rem;
+        flex-grow: 1; /* Allows paragraph to take available space */
+        text-align: left; /* Align project description to left */
+        margin-bottom: 1rem;
+    }
+
+    .project-card .tags {
+        margin-top: 0.8rem;
+        display: flex;
+        flex-wrap: wrap; /* Allow tags to wrap to next line */
+        gap: 0.5rem;
+    }
+
+    .project-card .tag {
+        background: var(--current-accent);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .project-card .project-links {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: flex-start;
+        gap: 1rem;
+    }
+
+    .project-card .project-link {
+        color: var(--current-primary);
+        font-size: 1.1rem;
+        text-decoration: none;
+        transition: color var(--transition);
+    }
+
+    .project-card .project-link:hover {
+        color: var(--current-accent);
+    }
+
     /* Skills Masonry Layout */
     .skills-masonry {
       display: grid;
@@ -516,7 +592,7 @@ body {
     @media (max-width: 768px) {
       .container {
         padding: 1.5rem;
-        max-height: 85vh;
+        max-height: 90vh;
       }
       h1 {
         font-size: 2.2rem;
@@ -551,6 +627,10 @@ body {
       #extra-favorite h3 { /* Added #extra-favorite for consistent styling */
         padding-left: 1rem; /* Adjust padding for smaller screens */
       }
+      .project-grid {
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 1rem;
+      }
     }
 
     @media (max-width: 480px) {
@@ -560,7 +640,7 @@ body {
       .container {
         padding: 1rem;
         border-radius: 12px;
-        max-height: 80vh;
+        max-height: 85vh;
       }
       h1 {
         font-size: 1.8rem;
@@ -637,6 +717,8 @@ body {
     <nav class="icon-nav" role="tablist" aria-label="Main Navigation">
       <button onclick="showSection('about')" class="active" aria-selected="true" role="tab" aria-controls="about"><i
           class="fas fa-user"></i><span class="sr-only">About</span></button>
+      <button onclick="showSection('projects')" role="tab" aria-selected="false" aria-controls="projects"><i
+          class="fas fa-folder-open"></i><span class="sr-only">Projects</span></button>
       <button onclick="showSection('journey')" role="tab" aria-selected="false" aria-controls="journey"><i
           class="fas fa-route"></i><span class="sr-only">Journey</span></button>
       <button onclick="showSection('skills')" role="tab" aria-selected="false" aria-controls="skills"><i
@@ -647,11 +729,43 @@ body {
       <section id="about" class="section active" role="tabpanel" aria-labelledby="about-tab">
         <img src="img.png" alt="Profile Picture" class="profile-img" />
         <h1>Emerentia Novena</h1>
+        <h3>Learning Experience Designer</h3>
            <ul>
           <li>Contact: <a href="mailto:emerennovena@gmail.com">emerennovena@gmail.com</a></li>
         </ul>
       </section>
 
+      <section id="projects" class="section" role="tabpanel" aria-labelledby="projects-tab" tabindex="0">
+          <h2>Projects</h2>
+          <div class="project-grid">
+              <a href="story-language-app.html" class="project-card">
+                  <h3>Story-Based Language Learning Web App</h3>
+                  <p>A web application designed to teach languages through interactive storytelling.</p>
+                  <div class="tags">
+                      <span class="tag">Learning Experience Design</span>
+                      <span class="tag">UX/UI Design</span>
+                      <span class="tag">Education</span>
+                  </div>
+                  <div class="project-links">
+                      <i class="fas fa-external-link-alt"></i> View Project
+                  </div>
+              </a>
+
+             <a href="elearning-module.html" class="project-card">
+                  <h3>E-learning Module on Literature</h3>
+                  <p>An engaging online learning module covering English Literature, featuring interactive quizzes.</p>
+                  <div class="tags">
+                      <span class="tag">Instructional Design</span>
+                      <span class="tag">Content Creation</span>
+                      <span class="tag">E-learning</span>
+                  </div>
+                  <div class="project-links">
+                      <i class="fas fa-external-link-alt"></i> View Module
+                  </div>
+              </a>
+
+          </div>
+      </section>
       <section id="journey" class="section" role="tabpanel" aria-labelledby="journey-tab" tabindex="0">
         <h2>Timeline</h2>
         <h3><i class="fas fa-briefcase"></i> Experience</h3>
@@ -659,10 +773,6 @@ body {
           <li>
             <strong>Sep 2022 – Jun 2024: Indonesian Language Teacher at <a href="https://www.ri-asia.org" target="_blank">Radius Asia</a></strong><br>
             <small><em>Key responsibilities included classroom instruction and student assessment.</em></small>
-          </li>
-          <li>
-            <strong>Sep 2021 – Jun 2024: Office Assistant at <a href="https://fll.fcu.edu.tw/en/" target="_blank">Feng Chia University</a></strong><br>
-            <small><em>Assisted staff, students, and teaching assistants within the office.</em></small>
           </li>
         </ul>
 
@@ -722,27 +832,21 @@ body {
         <h3>Languages</h3>
         <div class="skills-masonry">
           <div class="skill-card">
-            <!-- Removed globe icon -->
             <span>English</span>
           </div>
           <div class="skill-card">
-            <!-- Removed globe icon -->
             <span>Indonesian</span>
           </div>
           <div class="skill-card">
-            <!-- Removed globe icon -->
             <span>Chinese</span>
           </div>
           <div class="skill-card">
-            <!-- Removed globe icon -->
             <span>Korean</span>
           </div>
         </div>
       </section>
 
-      <!-- Extra Favorite Section -->
-
-    </div>
+      </div>
   </div>
 
   <script>

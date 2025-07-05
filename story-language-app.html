@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Story-Based Language Learning App - Emerentia Novena Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script>
+    // Check for dark mode preference in localStorage and apply it before rendering
+    const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark-mode');
+    }
+  </script>
+  <style>
+    /* Define CSS variables for light and dark themes (copied from main portfolio) */
+    :root {
+      /* Light Colors */
+      --bg-light: #e9f0f4;
+      --bg-accent: #f9f8f6;
+      --primary: #2b5d68;
+      --accent: #7b5e58;
+      --text-dark: #2f2f2f;
+      --text-light: #5a5a5a;
+      --shadow-light: 0 8px 24px rgba(43, 93, 104, 0.1); /* Slightly softer shadow */
+      --border-radius: 18px;
+      --transition: 0.3s ease;
+      --body-bg-light-gradient: linear-gradient(135deg, #e9f0f4, #f9f8f6);
+
+      /* Dark Colors */
+      --dark-bg-light: #1c2b36; /* Darker blue-grey for dark mode light bg */
+      --dark-bg-accent: #2a3d45; /* Darker blue-grey for dark mode accent bg */
+      --dark-primary: #88c0d0;
+      --dark-accent: #a3be8c;
+      --dark-text-dark: #e0e0e0;
+      --dark-text-light: #b0b0b0;
+      --dark-shadow-light: 0 8px 24px rgba(136, 192, 208, 0.15); /* Dark mode shadow */
+
+      /* Current Theme Colors - default to light */
+      --current-bg-light: var(--bg-light);
+      --current-bg-accent: var(--bg-accent);
+      --current-primary: var(--primary);
+      --current-accent: var(--accent);
+      --current-text-dark: var(--text-dark);
+      --current-text-light: var(--text-light);
+      --current-shadow-light: var(--shadow-light);
+      --current-body-bg: var(--body-bg-light-gradient); /* Default light background */
+    }
+
+    /* Apply dark mode colors when 'dark-mode' class is present on html */
+    html.dark-mode {
+      --current-bg-light: var(--dark-bg-light);
+      --current-bg-accent: var(--dark-bg-accent);
+      --current-primary: var(--dark-primary);
+      --current-accent: var(--dark-accent);
+      --current-text-dark: var(--dark-text-dark);
+      --current-text-light: var(--dark-text-light);
+      --current-shadow-light: var(--dark-shadow-light);
+      --current-body-bg: var(--dark-bg-light); /* Set body background to dark */
+    }
+
+    /* Universal box-sizing for consistent layout */
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Body styling: Centered content, responsive padding, background, and text color (copied from main portfolio) */
+    body {
+      margin: 0;
+      padding: 1rem;
+      font-family: 'Merriweather', serif;
+      background: var(--current-body-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: var(--current-text-dark);
+      position: relative;
+      transition: color var(--transition), background var(--transition);
+      overflow: hidden; /* Prevent body from scrolling */
+    }
+
+    /* Hill background styling and positioning (copied from main portfolio) */
+    .hill-bg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 200px;
+      min-height: 200px;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .hill-bg svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Wrapper for project content to mimic container's centering and max-width */
+    .project-page-wrapper {
+        width: 100%;
+        max-width: 910px; /* MATCHES index.html container max-width */
+        margin: 0 auto; /* Center horizontally */
+        padding: 1.5rem 2rem; /* Matches your main portfolio's padding */
+        position: relative; /* For z-index if needed */
+        z-index: 1;
+        overflow-y: auto; /* Allows content within this wrapper to scroll if it exceeds viewport height */
+        max-height: 95vh; /* MATCHES index.html container max-height */
+
+        /* Custom scrollbar for Firefox */
+        scrollbar-width: thin;
+        scrollbar-color: var(--current-primary) transparent;
+    }
+
+    /* Custom scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+    .project-page-wrapper::-webkit-scrollbar {
+        width: 8px; /* Width of the scrollbar */
+    }
+
+    .project-page-wrapper::-webkit-scrollbar-track {
+        background: transparent; /* Color of the scrollbar track */
+    }
+
+    .project-page-wrapper::-webkit-scrollbar-thumb {
+        background-color: var(--current-primary); /* Color of the scroll thumb */
+        border-radius: 4px; /* Roundness of the scroll thumb */
+        border: 2px solid var(--current-body-bg); /* Space around scroll thumb */
+    }
+
+
+    /* Heading styles */
+    h1, h2, h3 {
+      text-align: center;
+      color: var(--current-primary);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      margin-top: 0.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    h3 {
+      color: var(--current-accent);
+      margin-bottom: 1rem;
+    }
+
+    /* Paragraph and list styling */
+    p, ul {
+      text-align: left;
+      color: var(--current-text-dark); /* Ensures readability */
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      font-size: 1.05rem;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    ul li {
+      margin: 0.7rem 0;
+      font-weight: 500;
+      font-size: 1.1rem;
+      cursor: default;
+      padding: 0.3rem 0.5rem;
+      border-radius: 10px;
+    }
+
+    ul li a {
+      text-decoration: none;
+      color: var(--current-primary);
+      font-weight: 700;
+    }
+
+    /* Specific styles for the project content - REMOVED BACKGROUND/SHADOW/BORDER-RADIUS */
+    .project-detail-content {
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        /* Removed: background, border-radius, box-shadow */
+    }
+
+    .project-detail-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: var(--border-radius);
+        box-shadow: var(--current-shadow-light); /* Kept shadow for image for depth */
+        margin: 1rem auto; /* Center image */
+        display: block; /* Ensure block for margin auto to work */
+    }
+
+    .project-section-heading {
+        color: var(--current-primary);
+        font-size: 1.6rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.8rem;
+        text-align: left;
+        border-bottom: 2px solid var(--current-bg-light);
+        padding-bottom: 0.5rem;
+    }
+
+    .project-info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .info-item {
+        background: var(--current-bg-light); /* Kept background for info items for readability */
+        border-radius: 10px;
+        padding: 1rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        color: var(--current-text-dark);
+    }
+
+    .info-item strong {
+        color: var(--current-primary);
+        display: block;
+        margin-bottom: 0.3rem;
+    }
+
+    .project-links-detail {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .project-links-detail a {
+        background: var(--current-primary);
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: background var(--transition), transform var(--transition);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .project-links-detail a:hover {
+        background: var(--current-accent);
+        transform: translateY(-2px);
+    }
+
+    .back-button {
+        display: block;
+        width: fit-content;
+        margin: 2rem auto 0;
+        background: var(--current-accent);
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: background var(--transition), transform var(--transition);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .back-button:hover {
+        background: var(--current-primary);
+        transform: translateY(-2px);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .project-page-wrapper {
+        padding: 1rem; /* Adjust padding for smaller screens */
+        max-height: 90vh; /* MATCHES index.html container media query */
+      }
+      .project-detail-content {
+        padding: 1.5rem; /* Adjusted padding within content block */
+      }
+      h1 {
+        font-size: 2.2rem;
+      }
+      h2 {
+        font-size: 1.7rem;
+      }
+      .project-links-detail a, .back-button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 0.5rem;
+      }
+      .project-page-wrapper {
+        padding: 0.5rem; /* Further reduced padding for very small screens */
+        max-height: 85vh; /* MATCHES index.html container media query */
+      }
+      .project-detail-content {
+        padding: 1rem; /* Adjusted padding within content block */
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      .project-section-heading {
+        font-size: 1.4rem;
+      }
+      .project-links-detail {
+        flex-direction: column; /* Stack links vertically on small screens */
+        align-items: center;
+      }
+      .project-links-detail a, .back-button {
+        width: 90%; /* Make buttons wider */
+        justify-content: center; /* Center text in buttons */
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- The dark mode toggle button is intentionally removed from this page
+       as per your previous request. The page will inherit the mode from localStorage. -->
+
+  <div class="hill-bg" aria-hidden="true">
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path fill="#c8dadf" fill-opacity="1"
+        d="M0,256L80,245.3C160,235,320,213,480,186.7C640,160,800,128,960,122.7C1120,117,1280,139,1360,149.3L1440,160L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z">
+      </path>
+    </svg>
+  </div>
+
+  <div class="project-page-wrapper">
+    <div class="project-detail-content">
+      <h1>Story-Based Language Learning Web App</h1>
+
+      <img src="https://placehold.co/800x450/2b5d68/ffffff?text=App+Screenshot" alt="Story-Based Language Learning App Screenshot" class="project-detail-image" onerror="this.onerror=null;this.src='https://placehold.co/800x450/cccccc/333333?text=Image+Not+Found';" />
+
+      <p>This innovative web application revolutionizes language acquisition by immersing users in interactive, branching narratives. Instead of traditional drills, learners progress through engaging stories, making choices that influence the plot and unlock new vocabulary and grammar concepts contextually. The app adapts to the user's progress, offering personalized challenges and feedback.</p>
+
+      <h3 class="project-section-heading">Key Features</h3>
+      <ul>
+        <li>Interactive branching storylines for immersive learning.</li>
+        <li>Contextual vocabulary and grammar explanations.</li>
+        <li>Personalized learning paths based on user performance.</li>
+        <li>Progress tracking and achievement badges.</li>
+        <li>Multi-language support (expandable).</li>
+      </ul>
+
+      <h3 class="project-section-heading">Technologies Used</h3>
+      <div class="project-info-grid">
+          <div class="info-item"><strong>Frontend:</strong> HTML, CSS, JavaScript</div>
+          <div class="info-item"><strong>Backend:</strong> Django</div>
+          <div class="info-item"><strong>Database:</strong> SQLite</div>
+          <div class="info-item"><strong>Story Logic:</strong> Ink (InkleWriter integration)</div>
+          <div class="info-item"><strong>Version Control:</strong> Git, GitHub</div>
+      </div>
+
+      <h3 class="project-section-heading">Challenges & Solutions</h3>
+      <p>One primary challenge was designing a robust branching narrative system that could handle complex story logic while remaining intuitive for users. We overcame this by integrating Ink (InkleWriter), a powerful narrative scripting language, which allowed for flexible story creation and dynamic content delivery. Another challenge was ensuring responsive design across various devices, which was addressed through a mobile-first approach and extensive use of media queries.</p>
+
+      <h3 class="project-section-heading">Outcome & Impact</h3>
+      <p>The app successfully provides an engaging and effective alternative to traditional language learning methods. Early user feedback indicates higher retention rates and increased motivation due to the interactive and story-driven approach. It has proven particularly effective for learners who struggle with conventional rote memorization techniques.</p>
+
+      <div class="project-links-detail">
+          <a href="https://your-live-demo-link.com" target="_blank" class="project-link">
+              <i class="fas fa-play-circle"></i> Live Demo
+          </a>
+          <a href="https://github.com/yourusername/story-language-app" target="_blank" class="project-link">
+              <i class="fab fa-github"></i> GitHub Repo
+          </a>
+      </div>
+
+      <a href="index.html" class="back-button">
+          <i class="fas fa-arrow-left"></i> Back to Portfolio
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Dark mode application (without toggle button)
+    window.addEventListener('DOMContentLoaded', () => {
+      const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+      if (isDarkMode) {
+        document.documentElement.classList.add('dark-mode');
+      }
+    });
+  </script>
+</body>
+</html>
