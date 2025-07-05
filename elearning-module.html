@@ -33,7 +33,7 @@
       --dark-bg-accent: #2a3d45; /* Darker blue-grey for dark mode accent bg */
       --dark-primary: #88c0d0;
       --dark-accent: #a3be8c;
-      --dark-text-dark: #e0e0e0;
+      --dark-text-dark: #FFFFFF; /* Changed to pure white for maximum contrast in dark mode */
       --dark-text-light: #b0b0b0;
       --dark-shadow-light: 0 8px 24px rgba(136, 192, 208, 0.15); /* Dark mode shadow */
 
@@ -54,7 +54,7 @@
       --current-bg-accent: var(--dark-bg-accent);
       --current-primary: var(--dark-primary);
       --current-accent: var(--dark-accent);
-      --current-text-dark: var(--dark-text-dark);
+      --current-text-dark: var(--dark-text-dark); /* This will now be #FFFFFF */
       --current-text-light: var(--dark-text-light);
       --current-shadow-light: var(--dark-shadow-light);
       --current-body-bg: var(--dark-bg-light); /* Set body background to dark */
@@ -160,7 +160,7 @@
     /* Paragraph and list styling */
     p, ul {
       text-align: left;
-      color: var(--current-text-dark); /* Ensures readability */
+      color: var(--current-text-dark); /* Ensures readability, now using pure white in dark mode */
       line-height: 1.6;
       margin: 0;
       padding: 0;
