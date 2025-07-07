@@ -79,6 +79,10 @@
       position: relative;
       transition: color var(--transition), background var(--transition);
       overflow: hidden; /* Prevent body from scrolling */
+        user-select: none; /* Prevents text selection/highlighting */
+  -webkit-user-select: none; /* For Safari */
+  -moz-user-select: none; /* For Firefox */
+  -ms-user-select: none; /* For Internet Explorer/Edge */
     }
 
     /* Hill background styling and positioning (copied from main portfolio) */

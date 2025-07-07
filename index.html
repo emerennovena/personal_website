@@ -80,6 +80,10 @@ body {
   transition: color var(--transition), background var(--transition);
   /* REMOVE overflow-y: auto; from body to prevent it from scrolling */
   overflow: hidden; /* Prevent body from scrolling */
+    user-select: none; /* Prevents text selection/highlighting */
+  -webkit-user-select: none; /* For Safari */
+  -moz-user-select: none; /* For Firefox */
+  -ms-user-select: none; /* For Internet Explorer/Edge */
 }
 
     /* Hill background styling for dark mode - REMOVED COLOR CHANGE */
@@ -528,7 +532,8 @@ body {
 
     /* Journey timeline styling */
     #journey h3,
-    #extra-favorite h3 { /* Added #extra-favorite for consistent styling */
+    #extra-favorite h3, /* Added #extra-favorite for consistent styling */
+    #education h3 { /* Added for consistent styling */
       text-align: left;
       margin-left: 0; /* Align h3 to left, relative to container padding */
       padding-left: 2rem; /* Add padding to align with timeline content */
@@ -622,12 +627,14 @@ body {
       /* Responsive adjustments for timeline on smaller screens */
       #journey h3,
       #extra-favorite h3, /* Added #extra-favorite for consistent styling */
+      #education h3, /* Added for consistent styling */
       .timeline {
         margin-left: 0; /* Ensure it's 0 for smaller screens too */
         margin-right: 0; /* Ensure it's 0 for smaller screens too */
       }
       #journey h3,
-      #extra-favorite h3 { /* Added #extra-favorite for consistent styling */
+      #extra-favorite h3, /* Added #extra-favorite for consistent styling */
+      #education h3 { /* Added for consistent styling */
         padding-left: 1rem; /* Adjust padding for smaller screens */
       }
       .project-grid {
@@ -727,6 +734,8 @@ lu a {
     <nav class="icon-nav" role="tablist" aria-label="Main Navigation">
       <button onclick="showSection('about')" class="active" aria-selected="true" role="tab" aria-controls="about"><i
           class="fas fa-user"></i><span class="sr-only">About</span></button>
+      <button onclick="showSection('education')" role="tab" aria-selected="false" aria-controls="education"><i
+          class="fas fa-graduation-cap"></i><span class="sr-only">Education</span></button>
       <button onclick="showSection('projects')" role="tab" aria-selected="false" aria-controls="projects"><i
           class="fas fa-folder-open"></i><span class="sr-only">Projects</span></button>
       <button onclick="showSection('skills')" role="tab" aria-selected="false" aria-controls="skills"><i
@@ -746,6 +755,22 @@ lu a {
 
       </section>
 
+      <section id="education" class="section" role="tabpanel" aria-labelledby="education-tab" tabindex="0">
+        <h2>Education</h2>
+        <ul class="timeline">
+            <li>
+                <strong>Master of Science in Information Technology</strong><br>
+                University of Glasgow, <em>Glasgow, Scotland</em><br>
+                <i class="far fa-calendar-alt"></i> 2024 - 2025
+            </li>
+            <li>
+                <strong>Bachelor of Arts in Foreign Languages and Literature</strong><br>
+                Feng Chia University, <em>Taichung, Taiwan</em><br>
+                <i class="far fa-calendar-alt"></i> 2020 - 2024
+            </li>
+
+        </ul>
+      </section>
       <section id="projects" class="section" role="tabpanel" aria-labelledby="projects-tab" tabindex="0">
           <h2>Projects</h2>
           <div class="project-grid">
