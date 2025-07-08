@@ -272,6 +272,7 @@
       font-size: 2.5rem; /* Slightly larger */
       margin-top: 2rem;
       text-shadow: 0 3px 8px rgba(0,0,0,0.1);
+
     }
 
     h2 {
@@ -311,6 +312,7 @@
       max-width: 600px; /* Re-apply max-width for about section paragraphs */
       margin: 0 auto; /* Re-center about section paragraphs */
       margin-top: 1.2rem; /* Maintain original top margin */
+      cursor: none;
     }
 
     /* NEW: Specific adjustments for ul within the about section to center it */
@@ -323,16 +325,17 @@
     ul {
       list-style: none;
       /* padding: 0;  Already set above, but good to note */
+      cursor: none;
     }
 
     ul li {
       margin: 0.7rem 0;
       font-weight: 500;
       font-size: 1.1rem;
-      cursor: default;
+      cursor: none;
       padding: 0.3rem 0.5rem;
       border-radius: 10px;
-       transition: background var(--transition), color var(--transition);
+      transition: background var(--transition), color var(--transition);
       color: var(--current-text-dark);
     }
 
