@@ -17,25 +17,34 @@
     /* Define CSS variables for light and dark themes */
     :root {
       /* Light Colors */
-      --bg-light: #e9f0f4;
-      --bg-accent: #f9f8f6;
-      --primary: #2b5d68;
-      --accent: #7b5e58;
-      --text-dark: #2f2f2f;
-      --text-light: #5a5a5a;
-      --shadow-light: 0 8px 24px rgba(43, 93, 104, 0.1); /* Slightly softer shadow */
+      --bg-light: #f0f4f8;
+      --bg-accent: #ffffff;
+      --primary: #2c7da0;
+      --accent: #e67f0f;
+      --text-dark: #333d42;
+      --text-light: #6a7178;
+      --shadow-light: 0 10px 30px rgba(44, 125, 160, 0.1); /* Enhanced shadow */
       --border-radius: 18px;
       --transition: 0.3s ease;
-      --body-bg-light-gradient: linear-gradient(135deg, #e9f0f4, #f9f8f6);
+      --body-bg-light-gradient: linear-gradient(135deg, #e0eafc, #cfdef3);
+
+      /* Hill Colors - Specific to the Story Page's aesthetic */
+      --hill-light-main: #8fd3f4; /* Main hill color for light mode */
+      --hill-light-darker: #47aaff; /* Darker hill color for light mode */
+
 
       /* Dark Colors */
-      --dark-bg-light: #1c2b36; /* Darker blue-grey for dark mode light bg */
-      --dark-bg-accent: #2a3d45; /* Darker blue-grey for dark mode accent bg */
-      --dark-primary: #88c0d0;
-      --dark-accent: #a3be8c;
-      --dark-text-dark: #e0e0e0;
-      --dark-text-light: #b0b0b0;
-      --dark-shadow-light: 0 8px 24px rgba(136, 192, 208, 0.15); /* Dark mode shadow */
+      --dark-bg-light: #1a202c; /* Darker background */
+      --dark-bg-accent: #2d3748; /* Darker main content background */
+      --dark-primary: #90cdf4; /* Lighter blue for dark mode primary */
+      --dark-accent: #f6ad55; /* Lighter orange for dark mode accent */
+      --dark-text-dark: #e2e8f0; /* Lighter text for dark mode */
+      --dark-text-light: #a0aec0; /* Softer secondary text for dark mode */
+      --dark-shadow-light: 0 10px 30px rgba(144, 205, 244, 0.15); /* Dark mode shadow */
+
+      /* Dark Mode Hill Colors */
+      --hill-dark-main: #2F3B45; /* Darker shade for main hill in dark mode */
+      --hill-dark-darker: #1A202C; /* Even darker shade for layered hills */
 
       /* Current Theme Colors - default to light */
       --current-bg-light: var(--bg-light);
@@ -45,7 +54,9 @@
       --current-text-dark: var(--text-dark);
       --current-text-light: var(--text-light);
       --current-shadow-light: var(--shadow-light);
-      --current-body-bg: var(--body-bg-light-gradient); /* Default light background */
+      --current-body-bg: var(--body-bg-light-gradient);
+      --current-hill-main: var(--hill-light-main); /* Current hill main color */
+      --current-hill-darker: var(--hill-light-darker); /* Current hill darker color */
     }
 
     /* Apply dark mode colors when 'dark-mode' class is present on html */
@@ -66,41 +77,55 @@
     }
 
     /* Body styling: Centered content, responsive padding, background, and text color */
-body {
-  margin: 0;
-  padding: 1rem; /* Adjusted for full width container with slight margin */
-  font-family: 'Merriweather', serif;
-  background: var(--current-body-bg);
-  display: flex;
-  justify-content: center; /* Centers the container horizontally */
-  align-items: center; /* Centers the container vertically */
-  min-height: 100vh; /* Ensures the body always takes at least the full viewport height */
-  color: var(--current-text-dark);
-  position: relative;
-  transition: color var(--transition), background var(--transition);
-  /* REMOVE overflow-y: auto; from body to prevent it from scrolling */
-  overflow: hidden; /* Prevent body from scrolling */
-    user-select: none; /* Prevents text selection/highlighting */
-  -webkit-user-select: none; /* For Safari */
-  -moz-user-select: none; /* For Firefox */
-  -ms-user-select: none; /* For Internet Explorer/Edge */
-}
+    body {
+      margin: 0;
+      padding: 1rem; /* Adjusted for full width container with slight margin */
+      font-family: 'Inter', sans-serif;
+      /* REMOVED: background: var(--current-body-bg); This will now be handled by .story-background */
+      background: transparent; /* Ensure body background is transparent */
+      display: flex;
+      justify-content: center; /* Centers the container horizontally */
+      align-items: center; /* Centers the container vertically */
+      min-height: 100vh; /* Ensures the body always takes at least the full viewport height */
+      color: var(--current-text-dark);
+      position: relative;
+      transition: color var(--transition), background var(--transition);
+      overflow: hidden; /* Prevent body from scrolling */
+      user-select: none; /* Prevents text selection/highlighting */
+      -webkit-user-select: none; /* For Safari */
+      -moz-user-select: none; /* For Firefox */
+      -ms-user-select: none; /* For Internet Explorer/Edge */
+    }
+
+    /* New .story-background for full page background and hill container */
+    .story-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Send it to the back */
+        overflow: hidden;
+        background: var(--current-body-bg); /* Applies the gradient or dark background */
+        transition: background var(--transition);
+    }
+
 
     /* Hill background styling for dark mode - REMOVED COLOR CHANGE */
     /* html.dark-mode .hill-bg svg path {
       fill: var(--dark-bg-light);
     } */
 
-    /* Hill background positioning and size */
+    /* --- Background Elements --- */
     .hill-bg {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 200px;
-      min-height: 200px;
-      overflow: hidden;
+      height: 200px; /* Taller hill, adjusted for the new SVG */
       z-index: 0;
+      filter: drop-shadow(0 -8px 6px rgba(0,0,0,0.08)); /* Stronger shadow */
+      overflow: hidden; /* Ensure hills don't overflow */
     }
 
     .hill-bg svg {
@@ -109,31 +134,63 @@ body {
       height: 100%;
     }
 
+        .hill-bg path {
+        fill: url(#paint0_linear); /* Ensure fill is applied */
+        transition: fill 0s; /* No transition on fill for path as gradient stops change */
+    }
+
+    /* Styles for the individual hill layers */
+    .hill-bg .hill-layer-1 {
+        fill: var(--current-hill-main); /* Use the new CSS variable for the main hill */
+        transition: fill var(--transition);
+    }
+
+    .hill-bg .hill-layer-2 {
+        fill: var(--current-hill-darker); /* Use the new CSS variable for the darker hill */
+        transition: fill var(--transition);
+    }
+
+
     /* Main container styling: Now centered with a max-width */
-.container {
-  width: 100%; /* Take full available width up to max-width */
-  max-width: 910px; /* Set a maximum width for the container */
-  margin: 0 auto; /* Center the container horizontally */
-  /* Define a max-height and overflow-y for the container itself to scroll */
-  max-height: 95vh; /* Set a maximum height for the container, e.g., 90% of viewport height */
-  overflow-y: auto; /* Make the container scrollable */
-  background: var(--current-bg-accent);
-  border-radius: var(--border-radius);
-  padding: 1.5rem 2rem;
-  box-shadow: var(--current-shadow-light);
-  position: relative;
-  z-index: 1;
-  /* REMOVE overflow: hidden; from container, as it's now handled by overflow-y: auto */
-  display: flex;
-  flex-direction: column;
-}
+    .container {
+      width: 100%; /* Take full available width up to max-width */
+      max-width: 930px; /* Set a maximum width for the container */
+      margin: 0 auto; /* Center the container horizontally */
+      /* Define a max-height and overflow-y for the container itself to scroll */
+      max-height: 95vh; /* Set a maximum height for the container, e.g., 90% of viewport height */
+      overflow-y: auto; /* Make the container scrollable */
+      background: var(--current-bg-accent);
+      border-radius: var(--border-radius);
+      padding: 2.5rem 3rem;
+      box-shadow: var(--current-shadow-light);
+      position: relative;
+      z-index: 1;
+      /* REMOVE overflow: hidden; from container, as it's now handled by overflow-y: auto */
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Scrollbar Styling for container */
+    .container::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .container::-webkit-scrollbar-thumb {
+      background-color: var(--current-primary);
+      border-radius: 5px;
+      border: 3px solid var(--current-bg-accent);
+    }
 
     /* Icon navigation styling */
     .icon-nav {
       position: sticky;
       top: 0;
       background: var(--current-bg-accent);
-      padding: 1rem 0;
+      padding: 1.2rem 0;
       display: flex;
       justify-content: space-around;
       border-bottom: 2px solid var(--current-bg-light); /* Lighter border for separation */
@@ -167,8 +224,8 @@ body {
       bottom: -6px;
       left: 50%;
       transform: translateX(-50%);
-      width: 50%;
-      height: 3px;
+      width: 60%;
+      height: 4px;
       background: var(--current-primary);
       border-radius: 3px;
     }
@@ -194,6 +251,15 @@ body {
       transform: scale(1.03); /* Subtle hover */
     }
 
+       h1, h2, h3 {
+      font-family: 'Merriweather', serif; /* Merriweather for all headings */
+      text-align: center;
+      color: var(--current-primary);
+      margin-bottom: 1rem;
+      letter-spacing: 1px; /* Subtle letter spacing */
+    }
+
+
     /* Heading styles */
     h1,
     h2 {
@@ -203,12 +269,19 @@ body {
     }
 
     h1 {
-      font-size: 2.6rem; /* Slightly larger */
-      margin-top: 0.5rem;
+      font-size: 2.5rem; /* Slightly larger */
+      margin-top: 2rem;
+      text-shadow: 0 3px 8px rgba(0,0,0,0.1);
     }
 
     h2 {
-      font-size: 2rem; /* Slightly larger */
+      font-size: 1.7rem; /* Consistent with project page section headings */
+      margin-top: 1rem; /* Increased top margin for section headings */
+      margin-bottom: 1rem; /* Increased bottom margin */
+      text-transform: uppercase; /* Consistent with project page */
+      letter-spacing: 0.08em; /* Consistent with project page */
+      color: var(--current-accent); /* Consistent with project page */
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
     }
 
     h3 {
@@ -237,7 +310,7 @@ body {
       text-align: center; /* Keep text in about section centered */
       max-width: 600px; /* Re-apply max-width for about section paragraphs */
       margin: 0 auto; /* Re-center about section paragraphs */
-      margin-top: 1.5rem; /* Maintain original top margin */
+      margin-top: 1.2rem; /* Maintain original top margin */
     }
 
     /* NEW: Specific adjustments for ul within the about section to center it */
@@ -259,6 +332,8 @@ body {
       cursor: default;
       padding: 0.3rem 0.5rem;
       border-radius: 10px;
+       transition: background var(--transition), color var(--transition);
+      color: var(--current-text-dark);
     }
 
     ul li:hover,
@@ -296,6 +371,7 @@ body {
     /* Card content area */
     .card-content {
       flex-grow: 1; /* Allows content area to expand */
+      padding-top: 0.5rem;
     }
 
     section {
@@ -306,7 +382,7 @@ body {
     /* Section styling - HEIGHT ADJUSTED */
     .section {
       display: none;
-      animation: fadeIn 0.4s ease-in-out;
+      animation: fadeIn 0.5s ease-in-out;
       max-height: 300px; /* Adjusted to make container smaller */
       overflow-y: auto;
       padding-right: 1rem;
@@ -329,8 +405,8 @@ body {
     /* Project Grid Styling (New) */
     .project-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
         margin-top: 2rem;
         margin-bottom: 1rem; /* Added spacing at the bottom */
     }
@@ -345,6 +421,7 @@ body {
         color: inherit; /* Inherit text color from parent */
         display: flex;
         flex-direction: column; /* Allows content inside to stack */
+         justify-content: space-between;
     }
 
     .project-card:hover {
@@ -463,15 +540,6 @@ body {
       }
     }
 
-    .cat-icon {
-      position: absolute;
-      bottom: 90px;
-      right: 60px;
-      font-size: 2.7rem;
-      color: var(--current-accent);
-      z-index: 2;
-      animation: walk 3s infinite linear;
-    }
 
     @keyframes walk {
       0%, 100% {
@@ -586,11 +654,21 @@ body {
 
     .timeline li strong {
       color: var(--current-primary);
+      font-size: 1.2rem; /* Larger title in timeline */
+      display: block; /* Make it a block for better spacing */
+      margin-bottom: 0.01rem;
     }
 
     .timeline li i {
       margin-right: 8px;
       color: var(--current-accent);
+    }
+
+    .timeline li em {
+        color: var(--current-text-light); /* Softer color for location/institution */
+        display: block;
+        font-style: normal; /* Remove italics for better readability */
+        margin-bottom: 0.02rem;
     }
 
     /* Specific adjustments for about section */
@@ -702,33 +780,28 @@ body {
         padding: 0.5rem 1rem;
         font-size: 0.85rem;
       }
-      .cat-icon {
-        font-size: 2rem;
-        bottom: 50px;
-        right: 20px;
-      }
     }
 
-lu a {
-  color: #80bfff;
-  font-weight: bold;
-  text-decoration: underline;
-}
+    lu a {
+      color: #80bfff;
+      font-weight: bold;
+      text-decoration: underline;
+    }
 
   </style>
 </head>
 <body>
   <button id="darkModeToggle" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
 
-  <div class="hill-bg" aria-hidden="true">
-    <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
-      <path fill="#c8dadf" fill-opacity="1"
-        d="M0,256L80,245.3C160,235,320,213,480,186.7C640,160,800,128,960,122.7C1120,117,1280,139,1360,149.3L1440,160L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z">
-      </path>
-    </svg>
+  <div class="story-background" aria-hidden="true">
+    <div class="hill-bg">
+      <svg viewBox="0 0 1440 350" preserveAspectRatio="none">
+        <path class="hill-layer-1" d="M0,192L80,186.7C160,181,320,171,480,181.3C640,192,800,224,960,224C1120,224,1280,192,1360,176L1440,160L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+        <path class="hill-layer-2" d="M0,224L80,218.7C160,213,320,203,480,186.7C640,171,800,149,960,149.3C1120,149,1280,171,1360,181.3L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+      </svg>
+    </div>
   </div>
 
-  <div class="cat-icon"><i class="fas fa-cat"></i></div>
 
   <div class="container">
     <nav class="icon-nav" role="tablist" aria-label="Main Navigation">
@@ -760,12 +833,12 @@ lu a {
         <ul class="timeline">
             <li>
                 <strong>Master of Science in Information Technology</strong><br>
-                University of Glasgow, <em>Glasgow, Scotland</em><br>
+                University of Glasgow <em>Glasgow, Scotland</em>
                 <i class="far fa-calendar-alt"></i> 2024 - 2025
             </li>
             <li>
                 <strong>Bachelor of Arts in Foreign Languages and Literature</strong><br>
-                Feng Chia University, <em>Taichung, Taiwan</em><br>
+                Feng Chia University <em>Taichung, Taiwan</em>
                 <i class="far fa-calendar-alt"></i> 2020 - 2024
             </li>
 

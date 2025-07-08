@@ -4,40 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Story-Based Language Learning App - Emerentia Novena Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script>
-    // Check for dark mode preference in localStorage and apply it before rendering
+    // Immediately apply dark mode if enabled, before the page renders
     const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
     if (isDarkMode) {
       document.documentElement.classList.add('dark-mode');
     }
   </script>
   <style>
-    /* Define CSS variables for light and dark themes (copied from main portfolio) */
+    /* --- CSS Variables and Global Styles --- */
     :root {
-      /* Light Colors */
-      --bg-light: #e9f0f4;
-      --bg-accent: #f9f8f6;
-      --primary: #2b5d68;
-      --accent: #7b5e58;
-      --text-dark: #2f2f2f;
-      --text-light: #5a5a5a;
-      --shadow-light: 0 8px 24px rgba(43, 93, 104, 0.1); /* Slightly softer shadow */
-      --border-radius: 18px;
-      --transition: 0.3s ease;
-      --body-bg-light-gradient: linear-gradient(135deg, #e9f0f4, #f9f8f6);
+      /* Light Mode Colors */
+      --bg-light: #f0f4f8; /* Softer background */
+      --bg-accent: #ffffff; /* Pure white for main content */
+      --primary: #2c7da0; /* Deeper blue for primary elements */
+      --accent: #e67f0f; /* Warm orange for accents */
+      --text-dark: #333d42; /* Darker text for contrast */
+      --text-light: #6a7178; /* Softer secondary text */
+      --shadow-light: 0 10px 30px rgba(44, 125, 160, 0.1); /* Enhanced shadow */
+      --body-bg-light-gradient: linear-gradient(135deg, #e0eafc, #cfdef3); /* More vibrant gradient */
 
-      /* Dark Colors */
-      --dark-bg-light: #1c2b36; /* Darker blue-grey for dark mode light bg */
-      --dark-bg-accent: #2a3d45; /* Darker blue-grey for dark mode accent bg */
-      --dark-primary: #88c0d0;
-      --dark-accent: #a3be8c;
-      --dark-text-dark: #e0e0e0;
-      --dark-text-light: #b0b0b0;
-      --dark-shadow-light: 0 8px 24px rgba(136, 192, 208, 0.15); /* Dark mode shadow */
+      /* Dark Mode Colors */
+      --dark-bg-light: #1a202c; /* Darker background */
+      --dark-bg-accent: #2d3748; /* Darker main content background */
+      --dark-primary: #90cdf4; /* Lighter blue for dark mode primary */
+      --dark-accent: #f6ad55; /* Lighter orange for dark mode accent */
+      --dark-text-dark: #e2e8f0; /* Lighter text for dark mode */
+      --dark-text-light: #a0aec0; /* Softer secondary text for dark mode */
+      --dark-shadow-light: 0 10px 30px rgba(144, 205, 244, 0.15); /* Dark mode shadow */
 
-      /* Current Theme Colors - default to light */
+      /* General Variables */
+      --border-radius: 16px; /* Slightly refined border radius */
+      --transition: 0.4s ease-in-out; /* Smoother transitions */
+
+      /* Current Theme Variables (Dynamic) */
       --current-bg-light: var(--bg-light);
       --current-bg-accent: var(--bg-accent);
       --current-primary: var(--primary);
@@ -45,10 +47,10 @@
       --current-text-dark: var(--text-dark);
       --current-text-light: var(--text-light);
       --current-shadow-light: var(--shadow-light);
-      --current-body-bg: var(--body-bg-light-gradient); /* Default light background */
+      --current-body-bg: var(--body-bg-light-gradient);
     }
 
-    /* Apply dark mode colors when 'dark-mode' class is present on html */
+    /* Dark Mode Overrides */
     html.dark-mode {
       --current-bg-light: var(--dark-bg-light);
       --current-bg-accent: var(--dark-bg-accent);
@@ -57,19 +59,18 @@
       --current-text-dark: var(--dark-text-dark);
       --current-text-light: var(--dark-text-light);
       --current-shadow-light: var(--dark-shadow-light);
-      --current-body-bg: var(--dark-bg-light); /* Set body background to dark */
+      --current-body-bg: var(--dark-bg-light); /* Solid dark background */
     }
 
-    /* Universal box-sizing for consistent layout */
-    * {
+    /* Base Styles */
+    *, *::before, *::after {
       box-sizing: border-box;
     }
 
-    /* Body styling: Centered content, responsive padding, background, and text color (copied from main portfolio) */
     body {
       margin: 0;
-      padding: 1rem;
-      font-family: 'Merriweather', serif;
+      padding: 2rem; /* Increased padding */
+      font-family: 'Lato', sans-serif; /* Lato for body text, Merriweather for headings */
       background: var(--current-body-bg);
       display: flex;
       justify-content: center;
@@ -78,23 +79,29 @@
       color: var(--current-text-dark);
       position: relative;
       transition: color var(--transition), background var(--transition);
-      overflow: hidden; /* Prevent body from scrolling */
-        user-select: none; /* Prevents text selection/highlighting */
-  -webkit-user-select: none; /* For Safari */
-  -moz-user-select: none; /* For Firefox */
-  -ms-user-select: none; /* For Internet Explorer/Edge */
+      overflow-x: hidden; /* Prevent horizontal scroll */
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.7; /* Improved readability */
+      user-select: none; /* Prevents text selection/highlighting */
+      -webkit-user-select: none; /* For Safari */
+      -moz-user-select: none; /* For Firefox */
+      -ms-user-select: none; /* For Internet Explorer/Edge */
     }
+   /* html.dark-mode .hill-bg svg path {
+      fill: var(--dark-bg-light);
+    } */
 
-    /* Hill background styling and positioning (copied from main portfolio) */
     .hill-bg {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 200px;
-      min-height: 200px;
-      overflow: hidden;
+      height: 200px; /* Taller hill, adjusted for the new SVG */
       z-index: 0;
+      filter: drop-shadow(0 -8px 6px rgba(0,0,0,0.08)); /* Stronger shadow */
+      overflow: hidden; /* Ensure hills don't overflow */
     }
 
     .hill-bg svg {
@@ -103,309 +110,354 @@
       height: 100%;
     }
 
-    /* Wrapper for project content to mimic container's centering and max-width */
-    .project-page-wrapper {
-        width: 100%;
-        max-width: 910px; /* MATCHES index.html container max-width */
-        margin: 0 auto; /* Center horizontally */
-        padding: 1.5rem 2rem; /* Matches your main portfolio's padding */
-        position: relative; /* For z-index if needed */
-        z-index: 1;
-        overflow-y: auto; /* Allows content within this wrapper to scroll if it exceeds viewport height */
-        max-height: 95vh; /* MATCHES index.html container max-height */
-
-        /* Custom scrollbar for Firefox */
-        scrollbar-width: thin;
-        scrollbar-color: var(--current-primary) transparent;
+        .hill-bg path {
+        fill: url(#paint0_linear); /* Ensure fill is applied */
+        transition: fill 0s; /* No transition on fill for path as gradient stops change */
     }
 
-    /* Custom scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+    /* Styles for the individual hill layers */
+    .hill-bg .hill-layer-1 {
+        fill: var(--current-hill-main); /* Use the new CSS variable for the main hill */
+        transition: fill var(--transition);
+    }
+
+    .hill-bg .hill-layer-2 {
+        fill: var(--current-hill-darker); /* Use the new CSS variable for the darker hill */
+        transition: fill var(--transition);
+    }
+
+    /* --- Main Content Wrapper --- */
+    .project-page-wrapper {
+      width: 100%;
+      max-width: 960px; /* Slightly wider */
+      margin: 0 auto;
+      padding: 2.5rem 3.5rem; /* More generous padding */
+      background: var(--current-bg-accent);
+      border-radius: var(--border-radius);
+      box-shadow: var(--current-shadow-light);
+      position: relative;
+      z-index: 1;
+      max-height: 90vh; /* Keep it within viewport */
+      overflow-y: auto; /* Scrollable content */
+
+      scrollbar-width: thin;
+      scrollbar-color: var(--current-primary) transparent;
+      transition: background var(--transition), box-shadow var(--transition);
+    }
+
     .project-page-wrapper::-webkit-scrollbar {
-        width: 8px; /* Width of the scrollbar */
+      width: 10px; /* Wider scrollbar */
     }
 
     .project-page-wrapper::-webkit-scrollbar-track {
-        background: transparent; /* Color of the scrollbar track */
+      background: transparent;
     }
 
     .project-page-wrapper::-webkit-scrollbar-thumb {
-        background-color: var(--current-primary); /* Color of the scroll thumb */
-        border-radius: 4px; /* Roundness of the scroll thumb */
-        border: 2px solid var(--current-body-bg); /* Space around scroll thumb */
+      background-color: var(--current-primary);
+      border-radius: 5px; /* Rounder thumb */
+      border: 3px solid var(--current-bg-accent); /* Border matches accent background */
     }
 
-
-    /* Heading styles */
-    h1, h2, h3 {
-      text-align: center;
-      color: var(--current-primary);
-      margin-bottom: 1rem;
-    }
-
+    /* --- Typography --- */
     h1 {
-      font-size: 2.6rem;
-      margin-top: 0.5rem;
+      text-align: center;
+      font-size: 2.5rem; /* Larger heading */
+      margin: 0 0 1.5rem;
+      color: var(--current-primary);
+      letter-spacing: 1.5px; /* Increased letter spacing */
+      font-weight: 700;
+      text-shadow: 0 3px 8px rgba(0,0,0,0.1); /* Deeper shadow */
+      font-family: 'Merriweather', serif; /* Merriweather for headings */
     }
 
-    h2 {
-      font-size: 2rem;
+    p {
+      font-size: 1.15rem; /* Slightly larger paragraph text */
+      max-width: 760px; /* Wider paragraphs */
+      margin: 0 auto 2rem;
+      color: var(--current-text-light); /* Lighter text for body paragraphs */
+      text-align: center;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05); /* Softer text shadow */
     }
-
-    h3 {
-      color: var(--current-accent);
-      margin-bottom: 1rem;
-    }
-
-    /* Paragraph and list styling */
-    p, ul {
-      text-align: left;
-      color: var(--current-text-dark); /* Ensures readability */
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-      font-size: 1.05rem;
-    }
-
-    /* Added text-shadow for readability over background */
-    .project-detail-content p,
-    .project-detail-content ul li {
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow for light text over light background */
-    }
-    html.dark-mode .project-detail-content p,
-    html.dark-mode .project-detail-content ul li {
-        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.2); /* Subtle shadow for dark text over dark background */
-    }
-
 
     ul {
       list-style: none;
+      padding: 0;
+      max-width: 760px;
+      margin: 0 auto 2.5rem;
     }
 
     ul li {
-      margin: 0.7rem 0;
-      font-weight: 500;
+      font-weight: 400; /* Regular weight */
       font-size: 1.1rem;
+      padding: 0.8rem 1.5rem; /* More padding */
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--current-primary) 15%, var(--current-accent) 85%); /* Refined gradient */
+      color: white;
+      margin-bottom: 1rem; /* More spacing between items */
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform var(--transition), box-shadow var(--transition);
       cursor: default;
-      padding: 0.3rem 0.5rem;
-      border-radius: 10px;
+      user-select: none;
     }
 
-    ul li a {
-      text-decoration: none;
-      color: var(--current-primary);
-      font-weight: 700;
-    }
-
-    /* Specific styles for the project content - REMOVED BACKGROUND/SHADOW/BORDER-RADIUS */
-    .project-detail-content {
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        /* Removed: background, border-radius, box-shadow */
-    }
-
-    .project-detail-image {
-        max-width: 100%;
-        height: auto;
-        border-radius: var(--border-radius);
-        box-shadow: var(--current-shadow-light); /* Kept shadow for image for depth */
-        margin: 1rem auto; /* Center image */
-        display: block; /* Ensure block for margin auto to work */
+    ul li:hover {
+      transform: translateY(-5px); /* More pronounced lift */
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     }
 
     .project-section-heading {
-        color: var(--current-primary);
-        font-size: 1.6rem;
-        margin-top: 1.5rem;
-        margin-bottom: 0.8rem;
-        text-align: left;
-        padding-bottom: 0.5rem;
+      font-size: 1.7rem; /* Larger section headings */
+      color: var(--current-accent);
+      margin: 3rem 0 1.5rem 0; /* More vertical spacing */
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 0.08em; /* Increased letter spacing */
+      text-transform: uppercase;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15); /* Stronger text shadow */
+      font-family: 'Merriweather', serif; /* Merriweather for headings */
     }
 
+    /* --- Project Info Grid --- */
     .project-info-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
-        margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Larger min width */
+      gap: 2rem; /* Increased gap */
+      max-width: 800px; /* Wider grid */
+      margin: 0 auto 3rem;
     }
 
     .info-item {
-        background: var(--current-bg-light); /* Kept background for info items for readability */
-        border-radius: 10px;
-        padding: 1rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        color: var(--current-text-dark);
+      background: var(--current-bg-light);
+      border-radius: 16px;
+      padding: 1.5rem 1.8rem; /* More padding */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      color: var(--current-text-dark);
+      font-weight: 500;
+      transition: transform var(--transition), box-shadow var(--transition);
+      cursor: default;
+      user-select: text;
     }
 
     .info-item strong {
-        color: var(--current-primary);
-        display: block;
-        margin-bottom: 0.3rem;
+      color: var(--current-primary);
+      display: block;
+      margin-bottom: 0.6rem;
+      font-weight: 700;
+      font-size: 1.2rem; /* Larger strong text */
+      letter-spacing: 0.05em;
     }
 
+    .info-item:hover {
+      transform: translateY(-6px); /* More pronounced lift */
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.18);
+    }
+
+    /* --- Images --- */
+    .project-detail-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--border-radius);
+      box-shadow: var(--current-shadow-light);
+      margin: 3rem auto; /* More margin */
+      display: block;
+      transition: transform var(--transition), box-shadow var(--transition);
+      user-select: none;
+    }
+
+    .project-detail-image:hover {
+      transform: scale(1.02); /* Slightly less aggressive scale */
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+    }
+
+    /* --- Links and Buttons --- */
     .project-links-detail {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1.5rem;
-        margin-top: 2rem;
-        margin-bottom: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem; /* Increased gap */
+      margin: 3rem 0 2.5rem; /* More vertical spacing */
+      flex-wrap: wrap;
     }
 
     .project-links-detail a {
-        background: var(--current-primary);
-        color: white;
-        padding: 0.8rem 1.5rem;
-        border-radius: 12px;
-        text-decoration: none;
-        font-weight: 700;
-        transition: background var(--transition), transform var(--transition);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
+      background: var(--current-primary);
+      color: white;
+      padding: 1.1rem 2.5rem; /* More padding */
+      border-radius: 25px; /* Rounder buttons */
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1.15rem; /* Slightly larger text */
+      box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+      display: flex;
+      align-items: center;
+      gap: 1rem; /* More space for icon */
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
     }
 
     .project-links-detail a:hover {
-        background: var(--current-accent);
-        transform: translateY(-2px);
+      background: var(--current-accent);
+      transform: translateY(-4px); /* More pronounced lift */
+      box-shadow: 0 14px 35px rgba(0,0,0,0.25);
     }
 
     .back-button {
-        display: block;
-        width: fit-content;
-        margin: 2rem auto 0;
-        background: var(--current-accent);
-        color: white;
-        padding: 0.8rem 1.5rem;
-        border-radius: 12px;
-        text-decoration: none;
-        font-weight: 700;
-        transition: background var(--transition), transform var(--transition);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
+      display: inline-flex;
+      margin: 2.5rem auto 0; /* More margin */
+      background: var(--current-accent);
+      color: white;
+      padding: 1.1rem 2.5rem; /* Consistent padding */
+      border-radius: 25px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1.15rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+      align-items: center;
+      gap: 1rem;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      cursor: pointer;
+      user-select: none;
     }
 
     .back-button:hover {
-        background: var(--current-primary);
-        transform: translateY(-2px);
+      background: var(--current-primary);
+      transform: translateY(-4px);
+      box-shadow: 0 14px 35px rgba(0,0,0,0.25);
     }
 
-    /* Responsive adjustments */
+    i.fas, i.fab {
+      font-size: 1.4rem; /* Larger icons */
+      line-height: 1;
+      transition: transform var(--transition);
+    }
+
+    .back-button:hover i.fas {
+      transform: translateX(-8px); /* More pronounced slide */
+    }
+
+
+
+
+    /* --- Responsive Adjustments --- */
     @media (max-width: 768px) {
-      .project-page-wrapper {
-        padding: 1rem; /* Adjust padding for smaller screens */
-        max-height: 90vh; /* MATCHES index.html container media query */
+      body {
+        padding: 1.5rem;
       }
-      .project-detail-content {
-        padding: 1.5rem; /* Adjusted padding within content block */
+      .project-page-wrapper {
+        padding: 2rem 2rem;
+        max-width: 100%;
+      }
+      h1 {
+        font-size: 2.8rem;
+      }
+      p {
+        font-size: 1.05rem;
+        margin-bottom: 1.5rem;
+      }
+      .project-section-heading {
+        font-size: 1rem;
+        margin: 2.5rem 0 1rem;
+      }
+      .project-info-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .project-links-detail {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .project-links-detail a, .back-button {
+        width: 80%; /* Make buttons take more width */
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center; /* Center content */
+        padding: 1rem 2rem;
+        font-size: 1.05rem;
+      }
+    }
+
+
+    @media (max-width: 480px) {
+      body {
+        padding: 1rem;
+      }
+      .project-page-wrapper {
+        padding: 1.5rem;
       }
       h1 {
         font-size: 2.2rem;
       }
-      h2 {
-        font-size: 1.7rem;
-      }
-      .project-links-detail a, .back-button {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.9rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: 0.5rem;
-      }
-      .project-page-wrapper {
-        padding: 0.5rem; /* Further reduced padding for very small screens */
-        max-height: 85vh; /* MATCHES index.html container media query */
-      }
-      .project-detail-content {
-        padding: 1rem; /* Adjusted padding within content block */
-      }
-      h1 {
-        font-size: 1.8rem;
-      }
-      h2 {
-        font-size: 1.5rem;
-      }
       .project-section-heading {
-        font-size: 1.4rem;
+        font-size: 1rem;
       }
-      .project-links-detail {
-        flex-direction: column; /* Stack links vertically on small screens */
-        align-items: center;
-      }
-      .project-links-detail a, .back-button {
-        width: 90%; /* Make buttons wider */
-        justify-content: center; /* Center text in buttons */
+      ul li {
+        padding: 0.6rem 1rem;
+        font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <!-- The dark mode toggle button is intentionally removed from this page
-       as per your previous request. The page will inherit the mode from localStorage. -->
 
   <div class="hill-bg" aria-hidden="true">
-    <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
-      <path fill="#c8dadf" fill-opacity="1"
-        d="M0,256L80,245.3C160,235,320,213,480,186.7C640,160,800,128,960,122.7C1120,117,1280,139,1360,149.3L1440,160L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z">
-      </path>
+    <svg viewBox="0 0 800 250" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 150C50 170 100 160 160 200C220 240 280 190 350 150C420 110 520 200 620 180C700 170 750 120 800 150V250H0V150Z" fill="url(#paint0_linear)" />
+      <defs>
+        <linearGradient id="paint0_linear" x1="0" y1="150" x2="800" y2="250" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#8fd3f4"/> <stop offset="1" stop-color="#47aaff" /> </linearGradient>
+      </defs>
     </svg>
   </div>
 
-  <div class="project-page-wrapper">
-    <div class="project-detail-content">
-      <h1>Story-Based Language Learning Web App</h1>
+  <main class="project-page-wrapper" role="main" aria-label="Story-Based Language Learning App project details">
+    <h1>Story-Based Language Learning App</h1>
+    <p>Designed to immerse users in engaging stories that naturally teach language skills, combining narrative with effective learning techniques.</p>
 
-      <img src="StoryApp.png" alt="Story-Based Language Learning App Screenshot" class="project-detail-image" onerror="this.onerror=null;this.src='https://placehold.co/800x450/cccccc/333333?text=Image+Not+Found';" />
+    <section aria-labelledby="project-overview">
+      <h2 id="project-overview" class="project-section-heading">Project Overview</h2>
+      <p>This app helps learners improve their language skills through interactive stories. By focusing on context and storytelling, users build vocabulary and grammar naturally.</p>
+    </section>
 
-      <p>This interactive language-learning platform immerses users in branching stories that adapt to their choices. Each decision introduces new vocabulary in a natural, contextual way—blending
-        storytelling with education to create an intuitive and emotionally engaging experience.</p>
-
-      <h3 class="project-section-heading">Key Features</h3>
+    <section aria-labelledby="highlights">
+      <h2 id="highlights" class="project-section-heading">Key Features</h2>
       <ul>
-        <li>• Interactive branching storylines for immersive learning</li>
-        <li>• Progress tracking</li>
-        <li>• Multi-language support (expandable)</li>
+        <li>Immersive storytelling to enhance language retention</li>
+        <li>Integrated audio and text for better pronunciation</li>
       </ul>
+    </section>
 
-      <h3 class="project-section-heading">Design Tools Used</h3>
+    <section aria-labelledby="details">
+      <h2 id="details" class="project-section-heading">Project Details</h2>
       <div class="project-info-grid">
-          <div class="info-item"><strong>Figma:</strong>UX flows, wireframes, visual design</div>
-          <div class="info-item"><strong>InkleWriter:</strong> Story logic prototyping</div>
+        <div class="info-item">
+          <strong>Role:</strong> UX Designer & Developer
+        </div>
+        <div class="info-item">
+          <strong>Timeline:</strong> 2 months
+        </div>
+        <div class="info-item">
+          <strong>Tools Used:</strong> Figma, InkleWriter
+        </div>
+        <div class="info-item">
+          <strong>Platform:</strong> Web Application
+        </div>
       </div>
+    </section>
 
-      <h3 class="project-section-heading">Outcome & Impact</h3>
-      <p>The app successfully provides an engaging and effective alternative to traditional language learning methods.
-        Early user feedback indicates higher retention rates and increased motivation due to the interactive
-        and story-driven approach. It has proven particularly effective for learners who struggle with
-        conventional rote memorisation techniques.</p>
+    <img src="StoryApp.png" alt="Screenshot of the language learning app interface" class="project-detail-image" />
 
+    <section aria-label="Project links">
       <div class="project-links-detail">
-          <a href="https://your-live-demo-link.com" target="_blank" class="project-link">
-              <i class="fas fa-play-circle"></i> Live Demo
-          </a>
+        <a href="https://example.com/live-demo" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-external-link-alt"></i> Live Demo
+        </a>
       </div>
+    </section>
 
-      <a href="index.html" class="back-button">
-          <i class="fas fa-arrow-left"></i> Back to Portfolio
-      </a>
-    </div>
-  </div>
+    <button class="back-button" onclick="window.history.back()" aria-label="Go back to portfolio overview">
+      <i class="fas fa-arrow-left"></i> Back to Portfolio
+    </button>
+  </main>
 
-  <script>
-    // Dark mode application (without toggle button)
-    window.addEventListener('DOMContentLoaded', () => {
-      const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
-      if (isDarkMode) {
-        document.documentElement.classList.add('dark-mode');
-      }
-    });
-  </script>
+
 </body>
 </html>
