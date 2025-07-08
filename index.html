@@ -257,6 +257,7 @@
       color: var(--current-primary);
       margin-bottom: 1rem;
       letter-spacing: 1px; /* Subtle letter spacing */
+      cursor: default;
     }
 
 
@@ -289,6 +290,7 @@
       color: var(--current-accent);
       margin-bottom: 1rem;
       text-align: center; /* Default center for h3 */
+      cursor: default;
     }
 
 
@@ -325,14 +327,14 @@
     ul {
       list-style: none;
       /* padding: 0;  Already set above, but good to note */
-      cursor: none;
+      cursor: default;
     }
 
     ul li {
       margin: 0.7rem 0;
       font-weight: 500;
       font-size: 1.1rem;
-      cursor: none;
+      cursor: default;
       padding: 0.3rem 0.5rem;
       border-radius: 10px;
       transition: background var(--transition), color var(--transition);
@@ -529,6 +531,7 @@
     /* Specific adjustment for skill-card within Languages to remove margin-bottom */
     #skills .skills-masonry .skill-card:has(span) {
         margin-bottom: 0; /* Remove margin-bottom if only text is present */
+        cursor:default;
     }
 
 
