@@ -16,6 +16,11 @@
   <style>
     /* Define CSS variables for light and dark themes */
     :root {
+      -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
       /* Light Colors */
       --bg-light: #e9f0f4;
       --bg-accent: #f9f8f6;
@@ -67,6 +72,8 @@
 
     /* Body styling: Centered content, responsive padding, background, and text color */
 body {
+  cursor: default;
+  user-select: none;
   margin: 0;
   padding: 1rem; /* Adjusted for full width container with slight margin */
   font-family: 'Merriweather', serif;
@@ -193,6 +200,8 @@ body {
     /* Heading styles */
     h1,
     h2 {
+      user-select: none;
+      cursor: default;
       text-align: center;
       color: var(--current-primary); /* Changed to primary for headings */
       margin-bottom: 1rem;
@@ -208,6 +217,7 @@ body {
     }
 
     h3 {
+      cursor: default;
       color: var(--current-accent);
       margin-bottom: 1rem;
       text-align: center; /* Default center for h3 */
@@ -218,6 +228,7 @@ body {
     /* Paragraph and list styling - MODIFIED FOR FULL WIDTH CONTENT */
     p,
     ul {
+      cursor: default;
       /* Removed max-width and margin: auto to allow full width */
       text-align: left; /* Default to left-align for general content */
       color: var(--current-text-light);
@@ -230,6 +241,7 @@ body {
 
     /* Specific adjustments for paragraphs within the about section to keep them centered */
     #about p {
+      cursor: default;
       text-align: center; /* Keep text in about section centered */
       max-width: 600px; /* Re-apply max-width for about section paragraphs */
       margin: 0 auto; /* Re-center about section paragraphs */
@@ -238,17 +250,20 @@ body {
 
     /* NEW: Specific adjustments for ul within the about section to center it */
     #about ul {
+      cursor: default;
       text-align: center; /* Center the text within the list items */
       max-width: fit-content; /* Allow the ul to shrink to its content width */
       margin: 0 auto; /* Center the ul element itself */
     }
 
     ul {
+      cursor: default;
       list-style: none;
       /* padding: 0;  Already set above, but good to note */
     }
 
     ul li {
+      cursor: default;
       margin: 0.7rem 0;
       font-weight: 500;
       font-size: 1.1rem;
@@ -267,26 +282,6 @@ body {
       text-decoration: none;
       color: var(--current-primary); /* Changed link color to primary */
       font-weight: 700;
-    }
-
-
-    /* Social icons styling */
-    .socials {
-      text-align: center;
-      margin-top: 1.5rem; /* Increased margin */
-    }
-
-    .socials a {
-      color: var(--current-accent);
-      font-size: 1.9rem; /* Slightly larger icons */
-      margin: 0 12px; /* Increased spacing */
-      text-decoration: none;
-      transition: transform var(--transition);
-    }
-
-    .socials a:hover {
-      color: var(--current-primary);
-      transform: translateY(-3px); /* Subtle lift on hover */
     }
 
     /* Card content area */
@@ -662,39 +657,7 @@ body {
         width: 90px;
         height: 90px;
       }
-      .skills-masonry {
-        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-        gap: 0.8rem;
-      }
-      .skill-card {
-        padding: 1rem;
-        font-size: 0.9rem;
-      }
-      .skill-card i {
-        font-size: 1.8rem;
-        margin-bottom: 0.5rem;
-      }
-      .timeline {
-        padding-left: 0;
-        margin-left: 0; /* Ensure it's 0 for very small screens too */
-        margin-right: 0; /* Ensure it's 0 for very small screens too */
-      }
-      .timeline li {
-        padding: 0.8rem 1rem;
-        font-size: 1rem;
-      }
-      .timeline li::before {
-        left: -10px; /* Adjusted for smaller screens */
-        top: 1rem;
-        width: 12px;
-        height: 12px;
-        border-width: 3px;
-      }
-      /* The .skills-list li rule was from before, but keeping it here for completeness */
-      .skills-list li {
-        padding: 0.5rem 1rem;
-        font-size: 0.85rem;
-      }
+
       .cat-icon {
         font-size: 2rem;
         bottom: 50px;
@@ -729,8 +692,6 @@ lu a {
           class="fas fa-user"></i><span class="sr-only">About</span></button>
       <button onclick="showSection('projects')" role="tab" aria-selected="false" aria-controls="projects"><i
           class="fas fa-folder-open"></i><span class="sr-only">Projects</span></button>
-      <button onclick="showSection('skills')" role="tab" aria-selected="false" aria-controls="skills"><i
-          class="fas fa-tools"></i><span class="sr-only">Skills</span></button>
     </nav>
 
     <div class="card-content">
@@ -780,69 +741,6 @@ lu a {
           </div>
       </section>
 
-
-      <section id="skills" class="section" role="tabpanel" aria-labelledby="skills-tab" tabindex="0">
-        <h2>Skills</h2>
-          <h3>Development</h3>
-        <div class="skills-masonry">
-          <div class="skill-card">
-            <i class="fab fa-java"></i>
-            <span>Java</span>
-          </div>
-            <div class="skill-card">
-            <i class="fab fa-python"></i>
-            <span>Python</span>
-          </div>
-             <div class="skill-card">
-            <i class="fab fa-html5"></i>
-            <span>HTML</span>
-          </div>
-             <div class="skill-card">
-            <i class="fab fa-js"></i>
-            <span>JavaScript</span>
-          </div>
-        </div>
-
-
-
-        <h3>Tools & Software</h3>
-        <div class="skills-masonry">
-          <div class="skill-card">
-            <i class="fab fa-figma"></i>
-            <span>Figma</span>
-          </div>
-          <div class="skill-card">
-            <i class="fas fa-book-open"></i>
-            <span>InkleWriter</span>
-          </div>
-          <div class="skill-card">
-            <i class="fas fa-paint-brush"></i>
-            <span>Canva</span>
-          </div>
-          <div class="skill-card">
-            <i class="fab fa-trello"></i>
-            <span>Trello</span>
-          </div>
-        </div>
-
-        <h3>Languages</h3>
-        <div class="skills-masonry">
-          <div class="skill-card">
-            <span>English</span>
-          </div>
-          <div class="skill-card">
-            <span>Indonesian</span>
-          </div>
-          <div class="skill-card">
-            <span>Chinese</span>
-          </div>
-          <div class="skill-card">
-            <span>Korean</span>
-          </div>
-        </div>
-      </section>
-
-      </div>
   </div>
 
   <script>
