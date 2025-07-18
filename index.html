@@ -1,109 +1,920 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-<title>Emerentia Novena</title>
-<style>
-  * {
-    font-family: "Winky Rough", sans-serif;
-    font-optical-sizing: auto;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  body {
-    cursor: default;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    background: #000;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    min-height: 100vh;
-    padding: 3rem 1rem;
-    line-height: 1.6;
-    font-size: 1.6rem;
-  }
-  a {
-    color: #1DA1F2;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s ease;
-  }
-  h1 {
-    font-weight: 800;
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-  .contact {
-    margin-bottom: 2.5rem;
-    font-size: 1.1rem;
-  }
-  .contact a {
-    margin-right: 1.5rem;
-  }
-  .projects {
-    width: 100%;
-    max-width: 500px;
-  }
-  .projects h2 {
-    font-weight: 700;
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    border-left: 4px solid #1DA1F2;
-    padding-left: 0.5rem;
-  }
-  ul {
-    list-style: none;
-    font-size: 1.3rem;
-  }
-  ul li {
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    background: #111;
-    margin-bottom: 0.8rem;
-    padding: 0.75rem 1rem;
-    border-radius: 6px;
-    transition: background 0.3s ease;
-  }
-  ul li:hover {
-    background: #1DA1F2;
-    cursor: default;
-  }
-  ul li:hover a{
-    color: white;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Emerentia Novena</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script>
+    // Check for dark mode preference in localStorage and apply it before rendering
+    const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark-mode');
+    }
+  </script>
+  <style>
+    /* Define CSS variables for light and dark themes */
+    :root {
+      /* Light Colors */
+      --bg-light: #e9f0f4;
+      --bg-accent: #f9f8f6;
+      --primary: #2b5d68;
+      --accent: #7b5e58;
+      --text-dark: #2f2f2f;
+      --text-light: #5a5a5a;
+      --shadow-light: 0 8px 24px rgba(43, 93, 104, 0.1); /* Slightly softer shadow */
+      --border-radius: 18px;
+      --transition: 0.3s ease;
+      --body-bg-light-gradient: linear-gradient(135deg, #e9f0f4, #f9f8f6);
+
+      /* Dark Colors */
+      --dark-bg-light: #1c2b36; /* Darker blue-grey for dark mode light bg */
+      --dark-bg-accent: #2a3d45; /* Darker blue-grey for dark mode accent bg */
+      --dark-primary: #88c0d0;
+      --dark-accent: #a3be8c;
+      --dark-text-dark: #e0e0e0;
+      --dark-text-light: #b0b0b0;
+      --dark-shadow-light: 0 8px 24px rgba(136, 192, 208, 0.15); /* Dark mode shadow */
+
+      /* Current Theme Colors - default to light */
+      --current-bg-light: var(--bg-light);
+      --current-bg-accent: var(--bg-accent);
+      --current-primary: var(--primary);
+      --current-accent: var(--accent);
+      --current-text-dark: var(--text-dark);
+      --current-text-light: var(--text-light);
+      --current-shadow-light: var(--shadow-light);
+      --current-body-bg: var(--body-bg-light-gradient); /* Default light background */
+    }
+
+    /* Apply dark mode colors when 'dark-mode' class is present on html */
+    html.dark-mode {
+      --current-bg-light: var(--dark-bg-light);
+      --current-bg-accent: var(--dark-bg-accent);
+      --current-primary: var(--dark-primary);
+      --current-accent: var(--dark-accent);
+      --current-text-dark: var(--dark-text-dark);
+      --current-text-light: var(--dark-text-light);
+      --current-shadow-light: var(--dark-shadow-light);
+      --current-body-bg: var(--dark-bg-light); /* Set body background to dark */
+    }
+
+    /* Universal box-sizing for consistent layout */
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Body styling: Centered content, responsive padding, background, and text color */
+body {
+  margin: 0;
+  padding: 1rem; /* Adjusted for full width container with slight margin */
+  font-family: 'Merriweather', serif;
+  background: var(--current-body-bg);
+  display: flex;
+  justify-content: center; /* Centers the container horizontally */
+  align-items: center; /* Centers the container vertically */
+  min-height: 100vh; /* Ensures the body always takes at least the full viewport height */
+  color: var(--current-text-dark);
+  position: relative;
+  transition: color var(--transition), background var(--transition);
+  /* REMOVE overflow-y: auto; from body to prevent it from scrolling */
+  overflow: hidden; /* Prevent body from scrolling */
+}
+
+    /* Hill background styling for dark mode - REMOVED COLOR CHANGE */
+    /* html.dark-mode .hill-bg svg path {
+      fill: var(--dark-bg-light);
+    } */
+
+    /* Hill background positioning and size */
+    .hill-bg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 200px;
+      min-height: 200px;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .hill-bg svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Main container styling: Now centered with a max-width */
+.container {
+  width: 100%; /* Take full available width up to max-width */
+  max-width: 910px; /* Set a maximum width for the container */
+  margin: 0 auto; /* Center the container horizontally */
+  /* Define a max-height and overflow-y for the container itself to scroll */
+  max-height: 95vh; /* Set a maximum height for the container, e.g., 90% of viewport height */
+  overflow-y: auto; /* Make the container scrollable */
+  background: var(--current-bg-accent);
+  border-radius: var(--border-radius);
+  padding: 1.5rem 2rem;
+  box-shadow: var(--current-shadow-light);
+  position: relative;
+  z-index: 1;
+  /* REMOVE overflow: hidden; from container, as it's now handled by overflow-y: auto */
+  display: flex;
+  flex-direction: column;
+}
+
+    /* Icon navigation styling */
+    .icon-nav {
+      position: sticky;
+      top: 0;
+      background: var(--current-bg-accent);
+      padding: 1rem 0;
+      display: flex;
+      justify-content: space-around;
+      border-bottom: 2px solid var(--current-bg-light); /* Lighter border for separation */
+      margin-bottom: 2rem;
+      z-index: 10;
+      border-radius: var(--border-radius) var(--border-radius) 0 0; /* Match container border radius */
+    }
+
+    .icon-nav button {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: var(--current-accent);
+      cursor: pointer;
+      padding: 0.3rem 0.5rem;
+      border-radius: 12px;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .icon-nav button:hover,
+    .icon-nav button.active {
+      color: var(--current-primary);
+      transform: scale(1.1); /* Slightly smaller hover effect for subtlety */
+      font-weight: 700;
+    }
+
+    .icon-nav button.active::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50%;
+      height: 3px;
+      background: var(--current-primary);
+      border-radius: 3px;
+    }
+
+    /* Profile image styling */
+    .profile-img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 4px solid var(--current-primary); /* Changed to primary for prominence */
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform var(--transition);
+    }
+
+    html.dark-mode .profile-img {
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+    }
+
+    .profile-img:hover {
+      transform: scale(1.03); /* Subtle hover */
+    }
+
+    /* Heading styles */
+    h1,
+    h2 {
+      text-align: center;
+      color: var(--current-primary); /* Changed to primary for headings */
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2.6rem; /* Slightly larger */
+      margin-top: 0.5rem;
+    }
+
+    h2 {
+      font-size: 2rem; /* Slightly larger */
+    }
+
+    h3 {
+      color: var(--current-accent);
+      margin-bottom: 1rem;
+      text-align: center; /* Default center for h3 */
+    }
+
+
+
+    /* Paragraph and list styling - MODIFIED FOR FULL WIDTH CONTENT */
+    p,
+    ul {
+      /* Removed max-width and margin: auto to allow full width */
+      text-align: left; /* Default to left-align for general content */
+      color: var(--current-text-light);
+      line-height: 1.6; /* Increased line-height for readability */
+      margin: 0; /* Remove default margins that might interfere */
+      padding: 0; /* Remove default padding that might interfere */
+      font-size: 1.05rem;
+    }
+
+
+    /* Specific adjustments for paragraphs within the about section to keep them centered */
+    #about p {
+      text-align: center; /* Keep text in about section centered */
+      max-width: 600px; /* Re-apply max-width for about section paragraphs */
+      margin: 0 auto; /* Re-center about section paragraphs */
+      margin-top: 1.5rem; /* Maintain original top margin */
+    }
+
+    /* NEW: Specific adjustments for ul within the about section to center it */
+    #about ul {
+      text-align: center; /* Center the text within the list items */
+      max-width: fit-content; /* Allow the ul to shrink to its content width */
+      margin: 0 auto; /* Center the ul element itself */
+    }
+
+    ul {
+      list-style: none;
+      /* padding: 0;  Already set above, but good to note */
+    }
+
+    ul li {
+      margin: 0.7rem 0;
+      font-weight: 500;
+      font-size: 1.1rem;
+      cursor: default;
+      padding: 0.3rem 0.5rem;
+      border-radius: 10px;
+    }
+
+    ul li:hover,
+    ul li a:hover {
+      color: var(--current-primary);
+      background: var(--current-bg-light);
+    }
+
+    ul li a {
+      text-decoration: none;
+      color: var(--current-primary); /* Changed link color to primary */
+      font-weight: 700;
+    }
+
+
+    /* Social icons styling */
+    .socials {
+      text-align: center;
+      margin-top: 1.5rem; /* Increased margin */
+    }
+
+    .socials a {
+      color: var(--current-accent);
+      font-size: 1.9rem; /* Slightly larger icons */
+      margin: 0 12px; /* Increased spacing */
+      text-decoration: none;
+      transition: transform var(--transition);
+    }
+
+    .socials a:hover {
+      color: var(--current-primary);
+      transform: translateY(-3px); /* Subtle lift on hover */
+    }
+
+    /* Card content area */
+    .card-content {
+      flex-grow: 1; /* Allows content area to expand */
+    }
+
+    section {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Section styling - HEIGHT ADJUSTED */
+    .section {
+      display: none;
+      animation: fadeIn 0.4s ease-in-out;
+      max-height: 300px; /* Adjusted to make container smaller */
+      overflow-y: auto;
+      padding-right: 1rem;
+      scrollbar-width: thin;
+    }
+
+    .section::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .section::-webkit-scrollbar-thumb {
+      background-color: var(--current-primary);
+      border-radius: 4px;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    /* Project Grid Styling (New) */
+    .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem; /* Added spacing at the bottom */
+    }
+
+    .project-card {
+        background: var(--current-bg-light);
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        box-shadow: var(--current-shadow-light);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-decoration: none;
+        color: inherit; /* Inherit text color from parent */
+        display: flex;
+        flex-direction: column; /* Allows content inside to stack */
+    }
+
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .project-card h3 {
+        margin-top: 0;
+        margin-bottom: 0.8rem;
+        color: var(--current-primary);
+        text-align: left; /* Align project title to left */
+        font-size: 1.4rem;
+    }
+
+    .project-card p {
+        color: var(--current-text-light);
+        font-size: 0.95rem;
+        flex-grow: 1; /* Allows paragraph to take available space */
+        text-align: left; /* Align project description to left */
+        margin-bottom: 1rem;
+    }
+
+    .project-card .tags {
+        margin-top: 0.8rem;
+        display: flex;
+        flex-wrap: wrap; /* Allow tags to wrap to next line */
+        gap: 0.5rem;
+    }
+
+    .project-card .tag {
+        background: var(--current-accent);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .project-card .project-links {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: flex-start;
+        gap: 1rem;
+    }
+
+    .project-card .project-link {
+        color: var(--current-primary);
+        font-size: 1.1rem;
+        text-decoration: none;
+        transition: color var(--transition);
+    }
+
+    .project-card .project-link:hover {
+        color: var(--current-accent);
+    }
+
+    /* Skills Masonry Layout */
+    .skills-masonry {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+      text-align: center;
+      max-width: 100%;
+      grid-auto-rows: minmax(auto, max-content); /* Ensures rows adjust to content */
+    }
+
+    .skill-card {
+      background: var(--current-bg-light);
+      border-radius: var(--border-radius);
+      padding: 1.2rem;
+      box-shadow: var(--current-shadow-light);
+      font-weight: 600;
+      color: var(--current-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+      text-align: center;
+      transition: background-color var(--transition), transform var(--transition);
+    }
+
+    .skill-card:hover {
+      background-color: var(--current-primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .skill-card i {
+      font-size: 2.2rem;
+      margin-bottom: 0.8rem;
+      color: var(--current-accent);
+      transition: color var(--transition);
+    }
+
+    .skill-card:hover i {
+      color: white;
+    }
+
+    /* Specific adjustment for skill-card within Languages to remove margin-bottom */
+    #skills .skills-masonry .skill-card:has(span) {
+        margin-bottom: 0; /* Remove margin-bottom if only text is present */
+    }
+
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .cat-icon {
+      position: absolute;
+      bottom: 90px;
+      right: 60px;
+      font-size: 2.7rem;
+      color: var(--current-accent);
+      z-index: 2;
+      animation: walk 3s infinite linear;
+    }
+
+    @keyframes walk {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      25% {
+        transform: translateY(-2px);
+      }
+      50% {
+        transform: translateY(1px);
+      }
+      75% {
+        transform: translateY(-1px);
+      }
+    }
+
+    #darkModeToggle {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      background: var(--current-bg-accent);
+      border: none;
+      border-radius: 12px;
+      padding: 0.5rem 0.7rem;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--current-accent);
+      box-shadow: var(--current-shadow-light);
+      z-index: 10;
+      transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+    }
+
+    #darkModeToggle:hover {
+      background: var(--current-primary);
+      color: white;
+    }
+
+    #soundToggle {
+      position: fixed;
+      top: 12px;
+      left: 60px;
+      background: var(--current-bg-accent);
+      border: none;
+      border-radius: 12px;
+      padding: 0.5rem 0.7rem;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--current-accent);
+      box-shadow: var(--current-shadow-light);
+      z-index: 10;
+      transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+    }
+
+    #soundToggle:hover {
+      background: var(--current-primary);
+      color: white;
+    }
+
+    /* Journey timeline styling */
+    #journey h3,
+    #extra-favorite h3 { /* Added #extra-favorite for consistent styling */
+      text-align: left;
+      margin-left: 0; /* Align h3 to left, relative to container padding */
+      padding-left: 2rem; /* Add padding to align with timeline content */
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 0;
+      margin-left: 0.5rem; /* Removed margin to allow full width within container's padding */
+      margin-right: 0.5rem; /* Removed margin to allow full width within container's padding */
+      list-style: none;
+      border-left: 3px solid var(--current-primary); /* This is the vertical line */
+    }
+
+    .timeline li {
+      position: relative;
+      margin-bottom: 2rem;
+      width: 100%; /* Ensure it fills the timeline's width */
+      /* Adjusted padding-left to make space for the dot and its positioning */
+      padding: 1rem 1.5rem 1rem 25px; /* Top, Right, Bottom, Left. Left padding increased. */
+      font-weight: 500;
+      cursor: default;
+      text-align: left; /* Ensure text is left-aligned */
+      color: var(--current-text-dark);
+      background: var(--current-bg-light);
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: transform var(--transition), background-color var(--transition);
+    }
+
+    .timeline li:hover {
+      transform: translateY(-2px);
+      background-color: var(--current-bg-accent);
+    }
+
+    .timeline li::before {
+      content: '';
+      position: absolute;
+      /* Adjusted to center the dot on the vertical line */
+      left: -13.5px; /* This is the fix for the dot being cut off */
+      top: 1.2rem;
+      width: 16px;
+      height: 16px;
+      background-color: var(--current-primary);
+      border: 4px solid var(--current-bg-accent);
+      border-radius: 50%;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+      z-index: 2;
+    }
+
+    .timeline li strong {
+      color: var(--current-primary);
+    }
+
+    .timeline li i {
+      margin-right: 8px;
+      color: var(--current-accent);
+    }
+
+    /* Specific adjustments for about section */
+    /* #about p rule moved up to combine with general p, ul */
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+        max-height: 90vh;
+      }
+      h1 {
+        font-size: 2.2rem;
+      }
+      h2 {
+        font-size: 1.7rem;
+      }
+      .icon-nav button {
+        font-size: 1.5rem;
+      }
+      .profile-img {
+        width: 110px;
+        height: 110px;
+      }
+      .cat-icon {
+        bottom: 70px;
+        right: 30px;
+        font-size: 2.2rem;
+      }
+      #darkModeToggle, #soundToggle {
+        font-size: 1.2rem;
+        padding: 0.4rem 0.6rem;
+      }
+      /* Responsive adjustments for timeline on smaller screens */
+      #journey h3,
+      #extra-favorite h3, /* Added #extra-favorite for consistent styling */
+      .timeline {
+        margin-left: 0; /* Ensure it's 0 for smaller screens too */
+        margin-right: 0; /* Ensure it's 0 for smaller screens too */
+      }
+      #journey h3,
+      #extra-favorite h3 { /* Added #extra-favorite for consistent styling */
+        padding-left: 1rem; /* Adjust padding for smaller screens */
+      }
+      .project-grid {
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 0.5rem; /* Reduced body padding further for very small screens */
+      }
+      .container {
+        padding: 1rem;
+        border-radius: 12px;
+        max-height: 85vh;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      .icon-nav {
+        padding: 0.8rem 0;
+        margin-bottom: 1.5rem;
+      }
+      .icon-nav button {
+        font-size: 1.3rem;
+      }
+      .profile-img {
+        width: 90px;
+        height: 90px;
+      }
+      .skills-masonry {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 0.8rem;
+      }
+      .skill-card {
+        padding: 1rem;
+        font-size: 0.9rem;
+      }
+      .skill-card i {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+      }
+      .timeline {
+        padding-left: 0;
+        margin-left: 0; /* Ensure it's 0 for very small screens too */
+        margin-right: 0; /* Ensure it's 0 for very small screens too */
+      }
+      .timeline li {
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+      }
+      .timeline li::before {
+        left: -10px; /* Adjusted for smaller screens */
+        top: 1rem;
+        width: 12px;
+        height: 12px;
+        border-width: 3px;
+      }
+      /* The .skills-list li rule was from before, but keeping it here for completeness */
+      .skills-list li {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+      }
+      .cat-icon {
+        font-size: 2rem;
+        bottom: 50px;
+        right: 20px;
+      }
+    }
+
+lu a {
+  color: #80bfff;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+  </style>
 </head>
 <body>
+  <button id="darkModeToggle" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
 
-<h1>Emerentia Novena</h1>
+  <div class="hill-bg" aria-hidden="true">
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path fill="#c8dadf" fill-opacity="1"
+        d="M0,256L80,245.3C160,235,320,213,480,186.7C640,160,800,128,960,122.7C1120,117,1280,139,1360,149.3L1440,160L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z">
+      </path>
+    </svg>
+  </div>
 
-<div class="contact">
-  <a href="https://github.com/emerennovena" target="_blank" rel="noopener noreferrer">GitHub</a>
-  <a href="mailto:emerennovena@gmail.com">Email</a>
-</div>
+  <div class="cat-icon"><i class="fas fa-cat"></i></div>
 
-<div class="projects">
-  <h2>Projects</h2>
-  <ul>
-    <li><a href="story.html">Story-based Language Learning Web App</a></li>
-  </ul>
-</div>
+  <div class="container">
+    <nav class="icon-nav" role="tablist" aria-label="Main Navigation">
+      <button onclick="showSection('about')" class="active" aria-selected="true" role="tab" aria-controls="about"><i
+          class="fas fa-user"></i><span class="sr-only">About</span></button>
+      <button onclick="showSection('projects')" role="tab" aria-selected="false" aria-controls="projects"><i
+          class="fas fa-folder-open"></i><span class="sr-only">Projects</span></button>
+      <button onclick="showSection('skills')" role="tab" aria-selected="false" aria-controls="skills"><i
+          class="fas fa-tools"></i><span class="sr-only">Skills</span></button>
+    </nav>
 
+    <div class="card-content">
+      <section id="about" class="section active" role="tabpanel" aria-labelledby="about-tab">
+          </br>
+        <img src="img.png" alt="Profile Picture" class="profile-img" />
+        <h1>Emerentia Novena</h1>
+        <h3><lu>Former Language Teacher at <a href="https://www.ri-asia.org" target="_blank">Radius Asia</a></lu></h3>
+
+           <ul>
+          <li>Contact: <a href="mailto:emerennovena@gmail.com">emerennovena@gmail.com</a></li>
+        </ul>
+
+      </section>
+
+      <section id="projects" class="section" role="tabpanel" aria-labelledby="projects-tab" tabindex="0">
+          <h2>Projects</h2>
+          <div class="project-grid">
+              <a href="story-language-app.html" class="project-card">
+                  <h3>Story-Based Language Learning Web App</h3>
+                  <p>A web application designed to teach languages through interactive storytelling.</p>
+                  <div class="tags">
+                      <span class="tag">Learning Experience Design</span>
+                      <span class="tag">UX/UI Design</span>
+                      <span class="tag">Education</span>
+                      <span class="tag">Language Learning</span>
+                  </div>
+                  <div class="project-links">
+                      <i class="fas fa-external-link-alt"></i> View Project
+                  </div>
+              </a>
+
+             <a href="title.html" class="project-card">
+                  <h3>Project #2</h3>
+                  <p>Explanation</p>
+                  <div class="tags">
+                      <span class="tag">Skill 1</span>
+                      <span class="tag">Skill 2</span>
+                      <span class="tag">Skill 3</span>
+                  </div>
+                  <div class="project-links">
+                      <i class="fas fa-external-link-alt"></i> View Module
+                  </div>
+              </a>
+
+          </div>
+      </section>
+
+
+      <section id="skills" class="section" role="tabpanel" aria-labelledby="skills-tab" tabindex="0">
+        <h2>Skills</h2>
+        <h3>Core Competencies</h3>
+        <div class="skills-masonry">
+          <div class="skill-card">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <span>Language Teaching</span>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-comments"></i>
+            <span>Language Pedagogy</span>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-handshake"></i>
+            <span>Cross-Cultural Communication</span>
+          </div>
+        </div>
+
+        <h3>Tools & Software</h3>
+        <div class="skills-masonry">
+          <div class="skill-card">
+            <i class="fab fa-figma"></i>
+            <span>Figma</span>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-book-open"></i>
+            <span>InkleWriter</span>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-paint-brush"></i>
+            <span>Canva</span>
+          </div>
+          <div class="skill-card">
+            <i class="fab fa-trello"></i>
+            <span>Trello</span>
+          </div>
+          <div class="skill-card">
+            <i class="fab fa-microsoft"></i>
+            <span>MS Office Suite</span>
+          </div>
+          <div class="skill-card">
+            <i class="fab fa-google"></i>
+            <span>Google Workspace</span>
+          </div>
+        </div>
+
+        <h3>Languages</h3>
+        <div class="skills-masonry">
+          <div class="skill-card">
+            <span>English</span>
+          </div>
+          <div class="skill-card">
+            <span>Indonesian</span>
+          </div>
+          <div class="skill-card">
+            <span>Chinese</span>
+          </div>
+          <div class="skill-card">
+            <span>Korean</span>
+          </div>
+        </div>
+      </section>
+
+      </div>
+  </div>
+
+  <script>
+    /**
+     * Controls the visibility of sections and updates active navigation buttons.
+     * Stores the active section in localStorage.
+     * @param {string} id The ID of the section to show.
+     */
+    function showSection(id) {
+      const sections = document.querySelectorAll('.section');
+      const buttons = document.querySelectorAll('.icon-nav button');
+
+      // Hide all sections and mark them as aria-hidden
+      sections.forEach(section => {
+        const isActive = section.id === id;
+        section.classList.toggle('active', isActive);
+        section.setAttribute('aria-hidden', !isActive);
+      });
+
+      // Update active state for navigation buttons and aria-selected
+      buttons.forEach(button => {
+        const controls = button.getAttribute('aria-controls');
+        const isActive = controls === id;
+        button.classList.toggle('active', isActive);
+        button.setAttribute('aria-selected', isActive);
+      });
+
+      // Save the active section to localStorage
+      localStorage.setItem('activeSection', id);
+    }
+
+    /**
+     * Initializes the dark mode toggle and sets the initial active section
+     * based on localStorage or defaults to 'about'.
+     */
+    window.addEventListener('DOMContentLoaded', () => {
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      const html = document.documentElement;
+      const icon = darkModeToggle.querySelector('i');
+
+      // Function to update the dark mode icon (sun/moon)
+      function updateDarkModeIcon() {
+        if (html.classList.contains('dark-mode')) {
+          icon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+          icon.classList.replace('fa-sun', 'fa-moon');
+        }
+      }
+      updateDarkModeIcon(); // Set initial icon based on current mode
+
+      // Event listener for dark mode toggle button
+      darkModeToggle.addEventListener('click', () => {
+        if (html.classList.contains('dark-mode')) {
+          html.classList.remove('dark-mode');
+          localStorage.setItem('darkMode', 'disabled'); // Save preference
+        } else {
+          html.classList.add('dark-mode');
+          localStorage.setItem('darkMode', 'enabled'); // Save preference
+        }
+        updateDarkModeIcon(); // Update icon after toggle
+      });
+
+      // Initialize active section from localStorage or default to 'about'
+      const savedActiveSection = localStorage.getItem('activeSection');
+      if (savedActiveSection) {
+        showSection(savedActiveSection);
+      } else {
+        showSection('about'); // Default active section is now 'about'
+      }
+    });
+
+  </script>
 </body>
 </html>
